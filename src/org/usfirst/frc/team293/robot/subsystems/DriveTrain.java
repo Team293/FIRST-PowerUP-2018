@@ -136,69 +136,7 @@ public class DriveTrain extends Subsystem {
     	//double leftRate=leftEncoder.getRate()/1000;
     	//double rightRate=-rightEncoder.getRate()/1000;
     }
-    /**
-     * Method for driving the robot based on 2 joystick inputs
-     * using cumulative sums of proportional feedback with a hard limit
-     * @param leftStick Output from left joystick processed within TankDriveDefault
-     * @param rightStick Output from right joystick processed within TankDriveDefault
-     */
-    public void encoderDrive(double leftStick ,double rightStick){	
-    	
-    	double leftRate = leftEncoder.getRate();
-    	double rightRate = rightEncoder.getRate();
-    	SmartDashboard.putNumber("leftEncoder", leftRate);
-    	SmartDashboard.putNumber("rightEncoder", rightRate);
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	SmartDashboard.putNumber("Pigeon", imu.getFusedHeading(fusionStatus));
-    	//SmartDashboard.putNumber("rightEncoderdpp", rightEncoder.getDistancePerPulse());
-    	//SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
-    	if (Math.abs(leftStick) < .1){
-    		leftRateSetpoint= 0; //125
-    	}
-    	else{
-    		leftRateSetpoint=leftStick*12; //125
-    	}
-    	if (Math.abs(rightStick) < .1){
-    		rightRateSetpoint= 0; //125
-    	}
-    	else{
-    		rightRateSetpoint=rightStick*12; //125
-    	}
-    	
-    	SmartDashboard.putNumber("leftRateSetpoint", leftRateSetpoint);
-    	
-    	
-    	SmartDashboard.putNumber("rightRateSetpoint", rightRateSetpoint);
-    	double rightpowerOffset = (rightRateSetpoint-rightRate)*0.002;
-    	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.002;
-    	SmartDashboard.putNumber("leftoffset", leftpowerOffset);
-    	SmartDashboard.putNumber("rightoffset", rightpowerOffset);
-    	if (Math.abs(leftpowerOffset+leftPowerinitial)>1) {
-    		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1) {
-    			leftPower = 1;
-    		} else {
-    			leftPower = -1;	
-    		}	
-		} else{
-			leftPower = leftpowerOffset+leftPowerinitial;
-		}
-    	if (Math.abs(rightpowerOffset+rightPowerinitial)>1){
-    		if (Math.signum(rightpowerOffset+rightPowerinitial) == 1){
-    		rightPower = 1;
-    		}
-    		else{
-    		rightPower = -1;	
-    		}
-    		
-    		}
-    	else{
-    		rightPower = rightpowerOffset+rightPowerinitial;
-    	}
-    	drive.tankDrive(leftStick,rightStick);
-    	leftPowerinitial = leftPower;
-    	rightPowerinitial = rightPower;
-    }
-    	//drive.tankDrive(-(leftRateSetpoint-leftRate)*0.319,-(rightRateSetpoint-rightRate)*0.319);
+
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
     	double leftRate=leftEncoder.getRate();
     	double rightRate=rightEncoder.getRate();
@@ -255,11 +193,7 @@ public class DriveTrain extends Subsystem {
     	else{
     		rightPower = rightpowerOffset+rightPowerinitial;
     	}
-    	drive.tankDrive(leftPower,rightPower);
-    	//leftPowerinitial = leftPower;
-    	//rightPowerinitial = rightPower;
-    	//drive.tankDrive(-(leftRateSetpoint-leftRate)*0.319,-(rightRateSetpoint-rightRate)*0.319);
-    	
+    	drive.tankDrive(leftPower,rightPower);    	
     }
 //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
