@@ -31,19 +31,5 @@ public class RobotMap {
 			leftCylinderClose = 1,
 			rightCylinderOpen = 2,
 			rightcylinderClose = 3;
-	//public static int PinchPhotoSwitch = 5;
-	
-	
-	
-	//public static int Release = 0;	
-	
-	public static int 
-			L_Feeder = 7,		//Feeder motors
-			R_Feeder = 4,
-			Angle_Feeder = 6;
-	
-	public static int L_Shooter = 3,
-			R_Shooter = 5;
-
 }
 
