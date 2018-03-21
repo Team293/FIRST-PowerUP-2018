@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The autologger class logs the data we need to play back an auto
  */
 public class autoLogger extends Subsystem {
 
@@ -35,6 +35,9 @@ public class autoLogger extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     	
     }
+    /*
+     * Write file header
+     */
     public void writeFileStart() {
     	//initTime = time.get();
     	try {
@@ -58,6 +61,9 @@ public class autoLogger extends Subsystem {
 			e.printStackTrace();
 		}
     }
+    /**
+     * Write data 
+     */
     public void writeFileLine() {
     	try {
 			writer.append(Double.toString(timestamp));
@@ -87,6 +93,9 @@ public class autoLogger extends Subsystem {
 			e.printStackTrace();
 		}
     }
+    /**
+     * Closes the file and catches if an error occurs
+     */
     public void closeFile() {
     	try {
     		writer.close();

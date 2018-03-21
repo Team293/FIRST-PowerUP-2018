@@ -26,7 +26,7 @@ public class TurnInPlace extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isFinished = Robot.driveTrain.newGyroTurnInPlace(deltaTheta);
+    //	isFinished = Robot.driveTrain.newGyroTurnInPlace(deltaTheta);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -114,8 +114,6 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("rightEncoder", rightRate);
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	SmartDashboard.putNumber("Pigeon", imu.getFusedHeading(fusionStatus));
-    	//SmartDashboard.putNumber("rightEncoderdpp", rightEncoder.getDistancePerPulse());
-    	//SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
     	double leftRateSetpoint=-leftStick*130; //125
     	SmartDashboard.putNumber("leftRateSetpoint", -leftStick*125);
     	
@@ -299,51 +297,20 @@ public class DriveTrain extends Subsystem {
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (imu.getState() != PigeonIMU.PigeonState.NoComm);
     	if (imuStatus) {
-     	angle=imu.getFusedHeading(fusionStatus);
-     	
-    	error=(angle-setpoint);
-        
-        finalPower=speed+(error*pValue);
-        drive.tankDrive(-speed,-finalPower);
- 
+	     	angle = imu.getFusedHeading(fusionStatus);
+	     	
+	    	error = (angle-setpoint);
+	        
+	        finalPower=speed+(error*pValue);
+	        drive.tankDrive(-speed,-finalPower); 
     	}
     	else {
     		tankdrive(speed,speed);
     	}
     }
 
-    public boolean gyroTurn(double speed, double angle, double rate){
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	angle=imu.getFusedHeading(fusionStatus);
-    	
-    	setpoint+=rate;
-    	error=(angle-setpoint);
-        
-        finalPower=speed+(error*pValue);
-        drive.tankDrive(speed,finalPower);
-        if (Math.abs(setpoint)>=Math.abs(angle)){
-        	turning=true;
-        }
-        
-        
-        return turning;
-    }
-    public boolean newGyroTurnInPlace(double setangle){//assuming left forwards = -1 and backwards = 1
-    	inPosition = false;    	
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	angle=imu.getFusedHeading(fusionStatus);
-    	offset = (setangle - angle)*.01;
-    	drive.tankDrive(initialL-offset, initialR+offset);
-    	initialL = initialL+offset;
-    	initialR = initialR+offset;
-    	if (Math.abs(angle-setangle)<6){
-    		inPosition = true;
-    	}
-    		
-    	return inPosition;
-    }
     public boolean gyroTurnInPlace(double setangle, double rate){
-    	turning=false;
+    	turning = false;
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	angle=imu.getFusedHeading(fusionStatus); ///Gets the angle
     	setpoint+=rate;  //adds the rate into the setpoint to gradually change it
@@ -352,22 +319,21 @@ public class DriveTrain extends Subsystem {
         finalPower=(error*pValue);
         drive.tankDrive(finalPower,-finalPower);
         if (Math.abs(angle)>=Math.abs(setangle)){
-        	turning=true;
+        	turning = true;
         }
-
         return turning;
     }
  
   //////////// ^Gyro Stuff  Encoder stuff--->>>  
     
-	public void resetEnc(){
+	public void resetEnc() {
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
 	
-	public double[] readEnc(){
-		double leftDistance= Math.abs((leftEncoder.getRaw()*3.14*4)/1024);
-		double rightDistance=Math.abs((rightEncoder.getRaw()*3.14*4)/1024);
+	public double[] readEnc() {
+		double leftDistance = Math.abs((leftEncoder.getRaw()*3.14*4)/1024);
+		double rightDistance = Math.abs((rightEncoder.getRaw()*3.14*4)/1024);
 		double[] encoders= {(leftDistance+rightDistance)/2,leftDistance, rightDistance};
 		return encoders;
 	}
