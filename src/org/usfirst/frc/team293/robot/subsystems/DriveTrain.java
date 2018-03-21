@@ -137,11 +137,12 @@ public class DriveTrain extends Subsystem {
     	//double leftRate=leftEncoder.getRate()/1000;
     	//double rightRate=-rightEncoder.getRate()/1000;
     }
+  
     /**
      * Method for driving the robot based using 2 joystick inputs
-     * using cumulative sums of proportional feedback with a hard limit
-     * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1
-     * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1
+     * using proportional feedback from encoders
+     * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
+     * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
      */
 
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
@@ -198,6 +199,7 @@ public class DriveTrain extends Subsystem {
     		rightPower = rightpowerOffset+rightPowerinitial;
     	}    	
     	drive.tankDrive(leftPower,rightPower);	
+
     }
 //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
