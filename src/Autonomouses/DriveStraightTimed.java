@@ -11,11 +11,11 @@ public class DriveStraightTimed extends TimedCommand {
 
     public DriveStraightTimed(double timeout) {
         super(timeout);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(Robot.TrainofDriving);
     }
 
+    
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	
