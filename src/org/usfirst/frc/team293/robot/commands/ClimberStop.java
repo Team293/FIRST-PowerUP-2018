@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopClimbing extends Command {
+public class ClimberStop extends Command {
 
-    public StopClimbing() {
+    public ClimberStop() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.Climber);
     }

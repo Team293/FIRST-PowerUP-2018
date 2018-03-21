@@ -57,6 +57,6 @@ public class FeederThrottle extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		new StopFeeder();
+		new FeederStop();
 	}
 }

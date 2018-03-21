@@ -27,9 +27,9 @@ import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.MoveServoJoystick;
 import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
 import org.usfirst.frc.team293.robot.commands.StopAngle;
-import org.usfirst.frc.team293.robot.commands.StopClimbing;
-import org.usfirst.frc.team293.robot.commands.StopFeeder;
-import org.usfirst.frc.team293.robot.commands.Unclimb;
+import org.usfirst.frc.team293.robot.commands.ClimberStop;
+import org.usfirst.frc.team293.robot.commands.FeederStop;
+import org.usfirst.frc.team293.robot.commands.ClimberReverse;
 //import org.usfirst.frc.team293.robot.commands.TankDriveAutoReplay;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -152,22 +152,22 @@ public class OI {
 
 		//button3.whileHeld(new FeedToUpperPosition());
 		launch1[3].whileHeld(new FeederRelease(-.5));
-		launch1[3].whenReleased(new StopFeeder());
+		launch1[3].whenReleased(new FeederStop());
 
 		launch1[4].whenPressed(new FeederFullDown());
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
-		launch1[5].whenReleased(new StopFeeder());
+		launch1[5].whenReleased(new FeederStop());
 
 		launch1[6].whenPressed(new FeederFullUp());
 		
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
-		launch1[7].whileHeld(new Unclimb());
-		launch1[7].whenReleased(new StopClimbing());
+		launch1[7].whileHeld(new ClimberReverse());
+		launch1[7].whenReleased(new ClimberStop());
 
 		launch1[8].whileHeld(new Climb());	
-		launch1[8].whenReleased(new StopClimbing());
+		launch1[8].whenReleased(new ClimberStop());
 
 		launch1[9].whenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());

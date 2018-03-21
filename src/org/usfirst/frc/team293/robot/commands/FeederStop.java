@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopFeeder extends Command {
+public class FeederStop extends Command {
 
-    public StopFeeder() {
+    public FeederStop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.feeder);

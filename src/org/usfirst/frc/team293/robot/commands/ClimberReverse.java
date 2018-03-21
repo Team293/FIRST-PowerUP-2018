@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Unclimb extends Command {
+public class ClimberReverse extends Command {
 
-    public Unclimb() {
+    public ClimberReverse() {
     	requires(Robot.Climber);
     }
 
