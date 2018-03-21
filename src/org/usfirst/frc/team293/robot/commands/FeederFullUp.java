@@ -15,8 +15,8 @@ public class FeederFullUp extends Command {
     public FeederFullUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
-    	requires(Robot.Pinchy);
+    	requires(Robot.feeder);
+    	requires(Robot.pincher);
     }
 
     // Called just before this Command runs the first time
@@ -27,16 +27,16 @@ public class FeederFullUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.Feeder.calibrate();
-    	Robot.Feeder.Angle_motor.set(ControlMode.PercentOutput, 0.6);	
-    	Robot.Pinchy.unpinch();
+    	Robot.feeder.angleMotor.set(ControlMode.PercentOutput, 0.6);	
+    	Robot.pincher.unpinch();
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (Robot.Feeder.upperlimit.get() == false){
+        if (Robot.feeder.upperLimit.get() == false){
         //Robot.Feeder.Angle_motor.set(ControlMode.Position, Robot.Feeder.Angle_motor.getSelectedSensorPosition(0));
-        	Robot.Feeder.Angle_motor.set(ControlMode.PercentOutput, .05);
+        	Robot.feeder.angleMotor.set(ControlMode.PercentOutput, .05);
     	return (true);
         }
         return (false);
@@ -44,7 +44,7 @@ public class FeederFullUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Feeder.calibrate(true);
+    	Robot.feeder.calibrate(true);
     //	SmartDashboard.putBoolean("Calibrating", false);
     }
 

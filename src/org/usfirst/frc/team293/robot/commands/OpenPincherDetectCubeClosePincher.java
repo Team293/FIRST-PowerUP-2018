@@ -12,13 +12,13 @@ public class OpenPincherDetectCubeClosePincher extends Command {
     public OpenPincherDetectCubeClosePincher() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Pinchy);
+    	requires(Robot.pincher);
     	requires(Robot.FeedSensors);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.Pinchy.unpinch();
+    	Robot.pincher.unpinch();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,7 +34,7 @@ public class OpenPincherDetectCubeClosePincher extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Pinchy.pinch();
+    	Robot.pincher.pinch();
     }
 
     // Called when another command which requires one or more of the same

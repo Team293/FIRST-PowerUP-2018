@@ -13,7 +13,7 @@ public class MoveAnglePower extends Command {
     public MoveAnglePower() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
+    	requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class MoveAnglePower extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.moveAnglePower(OI.launchpad2.getY());
+    	Robot.feeder.moveAnglePower(OI.launchpad2.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

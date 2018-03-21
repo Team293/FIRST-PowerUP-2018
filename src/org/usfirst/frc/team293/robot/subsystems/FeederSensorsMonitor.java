@@ -13,9 +13,9 @@ public class FeederSensorsMonitor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	DigitalInput Feederlimit;
-	//DigitalInput PinchPhotoSwitch;
+	
 	public FeederSensorsMonitor(){
-		Feederlimit = new DigitalInput(RobotMap.FeederLimit);
+		Feederlimit = new DigitalInput(7);
 	//	PinchPhotoSwitch = new DigitalInput(RobotMap.PinchPhotoSwitch);
 	}
 

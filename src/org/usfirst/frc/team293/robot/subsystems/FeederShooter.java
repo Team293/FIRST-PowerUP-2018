@@ -12,134 +12,122 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * This subsystem controls the Feeder shooter arm as well as the feeder motors themselves?
+ * TBH I'm not sure how this robot works somebody help me here.
  */
 public class FeederShooter extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private TalonSRX L_motor, R_motor;
-	public TalonSRX Angle_motor;
-	public DigitalInput upperlimit;
-	public DigitalInput lowerlimit;
+	private TalonSRX lMotor, rMotor;
+	public TalonSRX angleMotor;
+	public DigitalInput upperLimit;
+	public DigitalInput lowerLimit;
 	private double positionTarget;
-	private int absoluteUpperBound;
 	private int upperBoundReset = ((int)((1.0*105.0*2048.0/360.0)+.5));
-	//private TalonSRX L_motor, R_motor;
 	
 	public FeederShooter() {
-		upperlimit = new DigitalInput(9);
-		lowerlimit = new DigitalInput(8);
-		L_motor = new TalonSRX(0);
-		L_motor.setSensorPhase(true);
-		R_motor = new TalonSRX(1);
-		R_motor.setSensorPhase(false);
-		Angle_motor = new TalonSRX(5);
-		L_motor.config_kF(0, .08, 10);
-		L_motor.config_kP(0, 0.1, 10);
-		L_motor.config_kI(0, 0.05 , 10);
-		L_motor.config_kD(0, 0.5, 10);
+		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);
+		lowerLimit = new DigitalInput(RobotMap.feederLowerLimit);
+		lMotor = new TalonSRX(RobotMap.feederShooterLeft);
+		lMotor.setSensorPhase(true);
+		rMotor = new TalonSRX(RobotMap.feederShooterRight);
+		rMotor.setSensorPhase(false);
+		angleMotor = new TalonSRX(RobotMap.feederShooterAngle);
+		lMotor.config_kF(0, .08, 10);
+		lMotor.config_kP(0, 0.1, 10);
+		lMotor.config_kI(0, 0.05 , 10);
+		lMotor.config_kD(0, 0.5, 10);
 		
-		L_motor.config_IntegralZone(0, 20, 10);
-		L_motor.configMaxIntegralAccumulator(0, 400, 10);
+		lMotor.config_IntegralZone(0, 20, 10);
+		lMotor.configMaxIntegralAccumulator(0, 400, 10);
 		
-		R_motor.config_kF(0, .084, 10);
-		R_motor.config_kP(0, 0.1, 10);
-		R_motor.config_kI(0, .05 , 10);
-		R_motor.config_kD(0, .5, 10);
+		rMotor.config_kF(0, .084, 10);
+		rMotor.config_kP(0, 0.1, 10);
+		rMotor.config_kI(0, .05 , 10);
+		rMotor.config_kD(0, .5, 10);
 		
-		R_motor.config_IntegralZone(0, 20, 10);
-		R_motor.configMaxIntegralAccumulator(0, 400, 10);
+		rMotor.config_IntegralZone(0, 20, 10);
+		rMotor.configMaxIntegralAccumulator(0, 400, 10);
 		
 		//Set up angle motor for closed loop position control
-		Angle_motor.config_kF(0, 0.0, 10);
-		Angle_motor.config_kP(0, 0.4, 10);
-		Angle_motor.config_kI(0, 0, 10);
-		Angle_motor.config_kD(0, 0.0, 10);
+		angleMotor.config_kF(0, 0.0, 10);
+		angleMotor.config_kP(0, 0.4, 10);
+		angleMotor.config_kI(0, 0, 10);
+		angleMotor.config_kD(0, 0.0, 10);
 		
-		Angle_motor.config_IntegralZone(0, 30, 10);
-		Angle_motor.configMaxIntegralAccumulator(0, 100, 10);
+		angleMotor.config_IntegralZone(0, 30, 10);
+		angleMotor.configMaxIntegralAccumulator(0, 100, 10);
 		
-		Angle_motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+		angleMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 		
-		Angle_motor.setSensorPhase(true);
-		Angle_motor.setInverted(false);
+		angleMotor.setSensorPhase(true);
+		angleMotor.setInverted(false);
 
-		Angle_motor.configNominalOutputForward(0, 10);
-		Angle_motor.configNominalOutputReverse(0, 10);
-		Angle_motor.configPeakOutputForward(1, 10);
-		Angle_motor.configPeakOutputReverse(-1, 10);
+		angleMotor.configNominalOutputForward(0, 10);
+		angleMotor.configNominalOutputReverse(0, 10);
+		angleMotor.configPeakOutputForward(1, 10);
+		angleMotor.configPeakOutputReverse(-1, 10);
 
 	}
 	
-		
-	
-
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new ExampleCommand());
 	}
-	public void shoot(double power){
-		L_motor.set(ControlMode.PercentOutput, power);
-		R_motor.set(ControlMode.PercentOutput, power);
-
+	public void shoot(double power) {
+		lMotor.set(ControlMode.PercentOutput, power);
+		rMotor.set(ControlMode.PercentOutput, power);
 	}
-	public void calibrate(boolean up){
-
-		if (up == true){
-			Angle_motor.setSelectedSensorPosition(upperBoundReset, 0, 10);
-		}
-		else{
-			Angle_motor.setSelectedSensorPosition(0, 0, 10);
+	public void calibrate(boolean up) {
+		if (up) {
+			angleMotor.setSelectedSensorPosition(upperBoundReset, 0, 10);
+		} else {
+			angleMotor.setSelectedSensorPosition(0, 0, 10);
 		}
 	}
 	
 	public void moveToPosition(double position) {
-
-		boolean upperLimit = upperlimit.get();
-		boolean lowerLimit = lowerlimit.get();
+		boolean upperLimitStatus = upperLimit.get();
+		boolean lowerLimitStatus = lowerLimit.get();
 		positionTarget = position;
-		if ((upperLimit == false) || (lowerLimit == false)) {
+		if ((!upperLimitStatus) || (!lowerLimitStatus)) {
 			
-			if (upperLimit == false){
-					if (positionTarget > Angle_motor.getSelectedSensorPosition(0)){
-						Angle_motor.set(ControlMode.Position, positionTarget);
+			if (!upperLimitStatus){
+					if (positionTarget > angleMotor.getSelectedSensorPosition(0)) {
+						angleMotor.set(ControlMode.Position, positionTarget);
+					} else {
+						angleMotor.set(ControlMode.PercentOutput, 0);
 					}
-					else{
-						Angle_motor.set(ControlMode.PercentOutput, 0);
-					}
-			}
-			else{
-					if (position < Angle_motor.getSelectedSensorPosition(0)){
-						Angle_motor.set(ControlMode.Position, positionTarget);
-					}
-					else{
-						Angle_motor.set(ControlMode.PercentOutput, 0);
+			} else {
+					if (position < angleMotor.getSelectedSensorPosition(0)) {
+						angleMotor.set(ControlMode.Position, positionTarget);
+					} else {
+						angleMotor.set(ControlMode.PercentOutput, 0);
 					}
 				}
 			
 		}
 		else {
-			Angle_motor.set(ControlMode.Position, positionTarget);
+			angleMotor.set(ControlMode.Position, positionTarget);
 		}
 		
 		
 	}
 	public void moveAngular(double position){
-		if ((upperlimit.get() == false) && (lowerlimit.get() == false)) {
-		
-		Angle_motor.set(ControlMode.Position, position);
-		System.out.println(Angle_motor.getSelectedSensorPosition(0));
+		if (!upperLimit.get() && !lowerLimit.get()) {			
+			angleMotor.set(ControlMode.Position, position);
+			System.out.println(angleMotor.getSelectedSensorPosition(0));
 		}
 	}
 	
 	public void moveAnglePower(double power){	//this is just power and needs to change
-		Angle_motor.set(ControlMode.PercentOutput, power);
+		angleMotor.set(ControlMode.PercentOutput, power);
 	}
 	public boolean isInPosition(){
-		return(Math.abs(Angle_motor.getSelectedSensorPosition(0)-positionTarget)<=20);
+		return(Math.abs(angleMotor.getSelectedSensorPosition(0) - positionTarget) <= 20);
 	}
 	public void moverpm(double rpm){
-		L_motor.set(ControlMode.Velocity, rpm);
-		R_motor.set(ControlMode.Velocity, rpm);
+		lMotor.set(ControlMode.Velocity, rpm);
+		rMotor.set(ControlMode.Velocity, rpm);
 	}
 }

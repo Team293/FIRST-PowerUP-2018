@@ -15,7 +15,7 @@ public class TankDriveDefault extends Command {
 	private double outleft;
 	private double outright;
     public TankDriveDefault() {
-    	requires(Robot.TrainofDriving);// Use requires() here to declare subsystem dependencies
+    	requires(Robot.driveTrain);// Use requires() here to declare subsystem dependencies
     }
 
     // Called just before this Command runs the first time
@@ -71,7 +71,7 @@ public class TankDriveDefault extends Command {
     	}
     	*/
     	//Robot.TrainofDriving.tankdrive((-1*left), (-1*right));
-    	Robot.TrainofDriving.feedForwardEncoderDrive((-1*left), (-1*right));
+    	Robot.driveTrain.feedForwardEncoderDrive((-1*left), (-1*right));
     	//Robot.TrainofDriving.encoderDrive(left, right);
 //    	Robot.TrainofDriving.encoderDrive(-1*(outright), -1*(outleft));
     	

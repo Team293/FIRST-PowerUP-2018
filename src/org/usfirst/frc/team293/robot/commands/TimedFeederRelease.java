@@ -11,7 +11,7 @@ public class TimedFeederRelease extends TimedCommand {
 	double rpm;
     public TimedFeederRelease(double timeout, double FeederCP100MS) {
         super(timeout);
-        requires(Robot.Feeder);
+        requires(Robot.feeder);
 		requires(Robot.FeedSensors);
 		rpm = FeederCP100MS;
     }
@@ -22,12 +22,12 @@ public class TimedFeederRelease extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.shoot(rpm);
+    	Robot.feeder.shoot(rpm);
     }
 
     // Called once after timeout
     protected void end() {
-    	Robot.Feeder.shoot(0);
+    	Robot.feeder.shoot(0);
     	
     }
 

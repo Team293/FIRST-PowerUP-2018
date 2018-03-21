@@ -47,28 +47,18 @@ public class Robot extends TimedRobot {
 	public String gameData;
 	public static boolean switchLeft;
 	public boolean scaleLeft;
-	public static final Afterburner AfterburnerShooter
-	= new Afterburner();
-	public static final FeederShooter Feeder
-	= new FeederShooter();
-	public static final Pincher Pinchy
-	= new Pincher();
-	public static final DriveTrain TrainofDriving
-	=new DriveTrain();
-	//public static final Tank Path
-	//=new Tank();
+	public static final Afterburner afterBurner = new Afterburner();
+	public static final FeederShooter feeder = new FeederShooter();
+	public static final Pincher pincher = new Pincher();
+	public static final DriveTrain driveTrain =new DriveTrain();
 
-	public static final FeederSensorsMonitor FeedSensors
-	=new FeederSensorsMonitor();
-	public static final PowerDistributionPanel pdp 
-	= new PowerDistributionPanel(62);
+	public static final FeederSensorsMonitor FeedSensors = new FeederSensorsMonitor();
+	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(62);
 	public static final Winch Climber = new Winch();
-//	public static final LEDs LED= new LEDs();
 	public static final ADIS16448_IMU imu = new ADIS16448_IMU();
 	public static final autoLogger DataLog = new autoLogger();
 	public boolean stop = false;
-	//public static final CameraServer DriverFPV
-	//=new CameraServer();
+
 	public static OI m_oi;
 	
 
@@ -199,11 +189,11 @@ public class Robot extends TimedRobot {
 	    SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
 		
 		// SmartDashboard.putBoolean("Photoswitch", FeedSensors.getPhotoSwitch());
-		 SmartDashboard.putBoolean("feederupper", Feeder.upperlimit.get());
-		 SmartDashboard.putBoolean("feederlower", Feeder.lowerlimit.get());
+		 SmartDashboard.putBoolean("feederupper", feeder.upperLimit.get());
+		 SmartDashboard.putBoolean("feederlower", feeder.lowerLimit.get());
 		 SmartDashboard.putBoolean("FeederLimit", FeedSensors.getFeederLimit());
 		 //SmartDashboard.putNumber("feederangle", (Robot.Feeder.Angle_motor.getSelectedSensorPosition(0)/2048.0*360.0));
-		 SmartDashboard.putNumber("feederangle", (Robot.Feeder.Angle_motor.getSelectedSensorPosition(0)));
+		 SmartDashboard.putNumber("feederangle", (Robot.feeder.angleMotor.getSelectedSensorPosition(0)));
 		 Scheduler.getInstance().run();
 		}
 	

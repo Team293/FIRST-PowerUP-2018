@@ -12,7 +12,7 @@ public class AfterburnerFullThrottle extends Command {
     public AfterburnerFullThrottle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.AfterburnerShooter);
+    	requires(Robot.afterBurner);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class AfterburnerFullThrottle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.AfterburnerShooter.move(-1);
+    	Robot.afterBurner.move(-1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,7 +31,7 @@ public class AfterburnerFullThrottle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.AfterburnerShooter.move(0);
+    	Robot.afterBurner.move(0);
     }
 
     // Called when another command which requires one or more of the same

@@ -19,51 +19,47 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * The afterburner allows the cube to shoot further
  */
 public class Afterburner extends Subsystem {
 	
-	private TalonSRX L_motor, R_motor;
+	private TalonSRX lMotor, rMotor;
 	
 	public Afterburner(){
-		L_motor = new TalonSRX(3);
-		L_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
-		L_motor.clearStickyFaults(10);
-		L_motor.setSensorPhase(false);
-		L_motor.config_kF(0, .0422, 10);
-		L_motor.config_kP(0, .15, 10);
-		L_motor.config_kD(0, .4, 0);
-		R_motor = new TalonSRX(2);
-		R_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
-		R_motor.setSensorPhase(false);
-		R_motor.clearStickyFaults(10);
-		R_motor.config_kF(0, .0422, 10);
-		R_motor.config_kP(0, .15, 10);
-		R_motor.config_kD(0, .4, 0);
+		lMotor = new TalonSRX(RobotMap.afterBurner);
+		lMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
+		lMotor.clearStickyFaults(10);
+		lMotor.setSensorPhase(false);
+		lMotor.config_kF(0, .0422, 10);
+		lMotor.config_kP(0, .15, 10);
+		lMotor.config_kD(0, .4, 0);
+		rMotor = new TalonSRX(2);
+		rMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
+		rMotor.setSensorPhase(false);
+		rMotor.clearStickyFaults(10);
+		rMotor.config_kF(0, .0422, 10);
+		rMotor.config_kP(0, .15, 10);
+		rMotor.config_kD(0, .4, 0);
 	}
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new ExampleCommand());
 	}
+	/**
+	 * The moves the afterburners with a percent output
+	 * @param The percentage power to run at
+	 */
 	public void move(double power){
-		//L_motor.set(power);
-		//R_motor.set((-1)*power);
-		L_motor.set(ControlMode.PercentOutput, -1*power);
-	//	SmartDashboard.putNumber("L_motor Current", );
-		//System.out.println("LeftpositionReadout" + L_motor.getSelectedSensorVelocity(0));
-	//	System.out.println("LeftVelocityReadout" + L_motor.getSelectedSensorVelocity(0));
-		R_motor.set(ControlMode.PercentOutput, power);
-	//	System.out.println("RightVelocityReadout" + R_motor.getSelectedSensorVelocity(0));
+		lMotor.set(ControlMode.PercentOutput, -1*power);
+		rMotor.set(ControlMode.PercentOutput, power);
 	}
+	/**
+	 * This moves the afterburners at an rpm
+	 * @param rpm The rpm speed from x to y???
+	 */
 	public void EncoderShoot(double rpm){
-		//L_motor.set(power);
-		//R_motor.set((-1)*power);
-		
-		L_motor.set(ControlMode.Velocity, rpm);
-		//System.out.println("LeftVelocityReadout" + L_motor.getSelectedSensorVelocity(0));
-		R_motor.set(ControlMode.Velocity, -rpm);
-		//System.out.println("RightVelocityReadout" + R_motor.getSelectedSensorVelocity(0));
-		//System.out.println("RPM Control!" );
+		lMotor.set(ControlMode.Velocity, rpm);
+		rMotor.set(ControlMode.Velocity, -rpm);
 	}
 }

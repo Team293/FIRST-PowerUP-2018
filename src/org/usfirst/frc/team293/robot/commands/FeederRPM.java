@@ -17,7 +17,7 @@ public class FeederRPM extends Command {
 	private double CodesPer100ms;
 	public FeederRPM(double rpm) {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Feeder);
+		requires(Robot.feeder);
 		CodesPer100ms = rpm*4096/600;
 	}
 
@@ -29,7 +29,7 @@ public class FeederRPM extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Feeder.moverpm(CodesPer100ms);
+		Robot.feeder.moverpm(CodesPer100ms);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

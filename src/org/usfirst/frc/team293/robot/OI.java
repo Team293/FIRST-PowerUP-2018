@@ -45,7 +45,7 @@ public class OI {
 	public static Joystick rightStick = new Joystick(1);
 	public static Joystick launchpad=new Joystick(2);
 	public static Joystick launchpad2=new Joystick(3);
-	public OI(){
+	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
 		// Note that index 0 is not assigned, so that the numbers match!
 		// When we extract these button press states, remember they are boolean: (true/false).

@@ -11,7 +11,7 @@ public class DriveStraightTimed extends TimedCommand {
 
     public DriveStraightTimed(double timeout) {
         super(timeout);
-        requires(Robot.TrainofDriving);
+        requires(Robot.driveTrain);
     }
     
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class DriveStraightTimed extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.TrainofDriving.tankdrive(.5, .5);
+    	Robot.driveTrain.tankdrive(.5, .5);
     }
 
     // Called once after timeout

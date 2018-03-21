@@ -1,27 +1,28 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The pincher opens and closes to grab a cube
  */
 public class Pincher extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	private Compressor comp;
-	private Solenoid l_cylinder_open;
-	private Solenoid l_cylinder_close;
-	private Solenoid r_cylinder_open;
-	private Solenoid r_cylinder_close;
-	public Pincher(){
-		comp = new Compressor(0);
-		l_cylinder_open = new Solenoid(0);
-		l_cylinder_close = new Solenoid(1);
-		r_cylinder_open = new Solenoid(2);
-		r_cylinder_close = new Solenoid(3);
+	private Solenoid lCylinderOpen;
+	private Solenoid lCylinderClose;
+	private Solenoid rCylinderOpen;
+	private Solenoid rCylinderClose;
+	
+	public Pincher() {
+		comp = new Compressor(RobotMap.compressor);
+		lCylinderOpen = new Solenoid(RobotMap.leftCylinderOpen);
+		lCylinderClose = new Solenoid(RobotMap.leftCylinderClose);
+		rCylinderOpen = new Solenoid(RobotMap.rightCylinderOpen);
+		rCylinderClose = new Solenoid(RobotMap.rightcylinderClose);
 		comp.setClosedLoopControl(true);
 	}
 
@@ -29,20 +30,23 @@ public class Pincher extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
-    public void pinch(){
-    	l_cylinder_open.set(true);
-    	//System.out.println("Extending!");
-    	l_cylinder_close.set(false);	
-    	r_cylinder_open.set(true);
-    	r_cylinder_close.set(false);
+    /**
+     * Pinches the cube
+     */
+    public void pinch() {
+    	lCylinderOpen.set(true);
+    	lCylinderClose.set(false);	
+    	rCylinderOpen.set(true);
+    	rCylinderClose.set(false);
     }
-    public void unpinch(){
-    	l_cylinder_open.set(false);
-    	l_cylinder_close.set(true);	
-    	r_cylinder_open.set(false);
-    	r_cylinder_close.set(true);	
-    	//System.out.println("Retracting");
+    /**
+     * Releases the cube
+     */
+    public void unpinch() {
+    	lCylinderOpen.set(false);
+    	lCylinderClose.set(true);	
+    	rCylinderOpen.set(false);
+    	rCylinderClose.set(true);	
     }
 }
 

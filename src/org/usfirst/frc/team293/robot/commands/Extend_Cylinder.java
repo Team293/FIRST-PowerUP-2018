@@ -12,7 +12,7 @@ public class Extend_Cylinder extends Command {
     public Extend_Cylinder() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Pinchy);
+    	requires(Robot.pincher);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class Extend_Cylinder extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Pinchy.pinch();
+    	Robot.pincher.pinch();
     }
 
     // Make this return true when this Command no longer needs to run execute()

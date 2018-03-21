@@ -15,15 +15,15 @@ public class CalibrateFeeder extends Command {
     public CalibrateFeeder() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
-    	requires(Robot.Pinchy);
+    	requires(Robot.feeder);
+    	requires(Robot.pincher);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	SmartDashboard.putBoolean("Calibrating", true);
-    	Robot.Pinchy.unpinch();
-    	Robot.Feeder.Angle_motor.set(ControlMode.PercentOutput, 0.2);
+    	Robot.pincher.unpinch();
+    	Robot.feeder.angleMotor.set(ControlMode.PercentOutput, 0.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,8 +36,8 @@ public class CalibrateFeeder extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (Robot.Feeder.upperlimit.get() == false){
-        Robot.Feeder.Angle_motor.set(ControlMode.PercentOutput, 0);	
+        if (Robot.feeder.upperLimit.get() == false){
+        Robot.feeder.angleMotor.set(ControlMode.PercentOutput, 0);	
     	return (true);
         }
         return false;
@@ -45,7 +45,7 @@ public class CalibrateFeeder extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Feeder.calibrate(true);
+    	Robot.feeder.calibrate(true);
     	SmartDashboard.putBoolean("Calibrating", false);
     }
 

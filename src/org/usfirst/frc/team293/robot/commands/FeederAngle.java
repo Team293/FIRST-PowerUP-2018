@@ -13,9 +13,9 @@ public class FeederAngle extends Command {
     public FeederAngle(double positionToRotateTo) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
+    	requires(Robot.feeder);
     	position = positionToRotateTo*1.0*2048.0/360.0;
-    	requires(Robot.Pinchy);
+    	requires(Robot.pincher);
     }
 
     // Called just before this Command runs the first time
@@ -24,13 +24,13 @@ public class FeederAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.moveToPosition(position);
-    	Robot.Pinchy.unpinch();
+    	Robot.feeder.moveToPosition(position);
+    	Robot.pincher.unpinch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.Feeder.isInPosition());
+        return (Robot.feeder.isInPosition());
     }
 
     // Called once after isFinished returns true

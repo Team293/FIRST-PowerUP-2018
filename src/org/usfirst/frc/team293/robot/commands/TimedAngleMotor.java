@@ -13,7 +13,7 @@ public class TimedAngleMotor extends TimedCommand {
         super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.Feeder);
+        requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +22,12 @@ public class TimedAngleMotor extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.moveAnglePower(-.2);
+    	Robot.feeder.moveAnglePower(-.2);
     }
 
     // Called once after timeout
     protected void end() {
-    	Robot.Feeder.moveAnglePower(0);
+    	Robot.feeder.moveAnglePower(0);
     }
 
     // Called when another command which requires one or more of the same

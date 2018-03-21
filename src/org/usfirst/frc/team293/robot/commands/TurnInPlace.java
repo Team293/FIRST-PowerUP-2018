@@ -14,19 +14,19 @@ public class TurnInPlace extends Command {
     	deltaTheta = angle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.TrainofDriving);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.TrainofDriving.resetGyro();
-    	Robot.TrainofDriving.resetEnc();
-    	Robot.TrainofDriving.resetInitialPower();
+    	Robot.driveTrain.resetGyro();
+    	Robot.driveTrain.resetEnc();
+    	Robot.driveTrain.resetInitialPower();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isFinished = Robot.TrainofDriving.newGyroTurnInPlace(deltaTheta);
+    	isFinished = Robot.driveTrain.newGyroTurnInPlace(deltaTheta);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +36,7 @@ public class TurnInPlace extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.TrainofDriving.tankdrive(0, 0);
+    	Robot.driveTrain.tankdrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

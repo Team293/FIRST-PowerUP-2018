@@ -54,9 +54,9 @@ public class autoLogger extends Subsystem {
 			writer.flush();
 			//writer.close();
     	}
-	catch(IOException e){
-		e.printStackTrace();
-	}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
     }
     public void writeFileLine() {
     	try {
@@ -70,24 +70,24 @@ public class autoLogger extends Subsystem {
 			writer.append(',');
 			writer.append(Double.toString(Robot.imu.getRate()));
 			writer.append(',');
-			writer.append(Double.toString(Robot.TrainofDriving.leftEncoder.getDistance()));
+			writer.append(Double.toString(Robot.driveTrain.leftEncoder.getDistance()));
 			writer.append(',');
-			writer.append(Double.toString(Robot.TrainofDriving.rightEncoder.getDistance()));
+			writer.append(Double.toString(Robot.driveTrain.rightEncoder.getDistance()));
 			writer.append(',');
-			writer.append(Double.toString(Robot.TrainofDriving.leftEncoder.getDistance()));
+			writer.append(Double.toString(Robot.driveTrain.leftEncoder.getDistance()));
 			writer.append(',');
-			writer.append(Double.toString(Robot.TrainofDriving.leftEncoder.getDistance()));
+			writer.append(Double.toString(Robot.driveTrain.leftEncoder.getDistance()));
 			writer.append('\n');
 	
 			writer.flush();
 			timestamp = timestamp+.02;
 			//writer.close();
     	}
-		catch(IOException e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
     }
-    public void closeFile(){
+    public void closeFile() {
     	try {
     		writer.close();
     	}  	

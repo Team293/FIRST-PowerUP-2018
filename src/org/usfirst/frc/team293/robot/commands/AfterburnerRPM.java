@@ -12,13 +12,13 @@ public class AfterburnerRPM extends Command {
 	private double CodesPer100ms;
     public AfterburnerRPM(double InputRPM) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.AfterburnerShooter);
+    	requires(Robot.afterBurner);
     	CodesPer100ms = (InputRPM*24400*4096/600);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.AfterburnerShooter.EncoderShoot(CodesPer100ms);
+    	Robot.afterBurner.EncoderShoot(CodesPer100ms);
     }
 
     // Called repeatedly when this Command is scheduled to run

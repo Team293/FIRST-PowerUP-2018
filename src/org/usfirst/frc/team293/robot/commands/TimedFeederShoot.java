@@ -13,7 +13,7 @@ public class TimedFeederShoot extends TimedCommand {
         super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.Feeder);
+        requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +22,12 @@ public class TimedFeederShoot extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.shoot(.4);
+    	Robot.feeder.shoot(.4);
     }
 
     // Called once after timeout
     protected void end() {
-    	Robot.Feeder.shoot(0);
+    	Robot.feeder.shoot(0);
     	
     }
 

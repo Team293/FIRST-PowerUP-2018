@@ -16,19 +16,19 @@ public class DriveStraight extends Command {
         // eg. requires(chassis);
     	deltaX = distance;
     	velocity = velocityPar;
-    	requires(Robot.TrainofDriving);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.TrainofDriving.resetEnc();
-    	Robot.TrainofDriving.resetInitialPower();
-    	Robot.TrainofDriving.resetGyro();
+    	Robot.driveTrain.resetEnc();
+    	Robot.driveTrain.resetInitialPower();
+    	Robot.driveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isFinished = Robot.TrainofDriving.goStraightDistanceVelocity(deltaX, velocity);
+    	isFinished = Robot.driveTrain.goStraightDistanceVelocity(deltaX, velocity);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +38,7 @@ public class DriveStraight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.TrainofDriving.tankdrive(0, 0);
+    	Robot.driveTrain.tankdrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

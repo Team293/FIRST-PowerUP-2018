@@ -13,7 +13,7 @@ public class AfterburnerHalfThrottle extends Command {
     	percentOut = -1*power;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.AfterburnerShooter);
+    	requires(Robot.afterBurner);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class AfterburnerHalfThrottle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.AfterburnerShooter.move(percentOut);
+    	Robot.afterBurner.move(percentOut);
     }
 
     // Make this return true when this Command no longer needs to run execute()

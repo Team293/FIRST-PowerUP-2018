@@ -19,24 +19,28 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+/**
+ * The Drivetrain class is a mess.  I believe we're using only one method in here?  Why is there walls of variables?
+ * @author Team293
+ *
+ */
 public class DriveTrain extends Subsystem {
 	private SpeedController leftMotorOne, leftMotorTwo, leftMotorThree, rightMotorOne, rightMotorTwo, rightMotorThree;
 
 	public PigeonIMU imu;
 	private DifferentialDrive drive;
 	public Encoder leftEncoder, rightEncoder;
-	public boolean reverseDirection=false;
+	public boolean reverseDirection = false;
 	double leftPowerinitial = 0;
 	double rightPowerinitial = 0;
 	double leftPower = 0;
 	double rightPower = 0;
-	double finalPower=.5;
-	double pValue=.05;
-	double dValue=-0;
-	double previousError=0;
+	double finalPower = .5;
+	double pValue = .05;
+	double dValue = -0;
+	double previousError = 0;
 	double error;
-	double setpoint=0;
+	double setpoint = 0;
 	double derivative;
 	double angle;
 	double offsetGyro;
@@ -58,22 +62,20 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain(){	//make drivetrain stuff
 		leftMotorOne = new VictorSP(RobotMap.leftDrive[0]);
-		leftMotorTwo= new VictorSP(RobotMap.leftDrive[1]);
-		leftMotorThree= new VictorSP(RobotMap.leftDrive[2]);
+		leftMotorTwo = new VictorSP(RobotMap.leftDrive[1]);
+		leftMotorThree = new VictorSP(RobotMap.leftDrive[2]);
 		SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorOne, leftMotorTwo, leftMotorThree);
 		
-		rightMotorOne= new VictorSP(RobotMap.rightDrive[0]);
-		rightMotorTwo= new VictorSP(RobotMap.rightDrive[1]);
-		rightMotorThree= new VictorSP(RobotMap.rightDrive[2]);
+		rightMotorOne = new VictorSP(RobotMap.rightDrive[0]);
+		rightMotorTwo = new VictorSP(RobotMap.rightDrive[1]);
+		rightMotorThree = new VictorSP(RobotMap.rightDrive[2]);
 		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorOne, rightMotorTwo, rightMotorThree);
 		
-		imu=new PigeonIMU(RobotMap.imu);
-    	//imu.EnableTemperatureCompensation(true);
-    	
+		imu = new PigeonIMU(RobotMap.imu);    	
 		drive = new DifferentialDrive(leftMotors, rightMotors);	
 		
-		leftEncoder= new Encoder(RobotMap.leftEncoder[0],RobotMap.leftEncoder[1], false, Encoder.EncodingType.k4X);	//creates encoder with fast sampling and true or false for direction
-		rightEncoder= new Encoder(RobotMap.rightEncoder[0],RobotMap.rightEncoder[1], false, Encoder.EncodingType.k4X);
+		leftEncoder = new Encoder(RobotMap.leftEncoder[0],RobotMap.leftEncoder[1], false, Encoder.EncodingType.k4X);	//creates encoder with fast sampling and true or false for direction
+		rightEncoder = new Encoder(RobotMap.rightEncoder[0],RobotMap.rightEncoder[1], false, Encoder.EncodingType.k4X);
 		
 		//leftEncoder.setDistancePerPulse(256/(3.14*4));//the amount of ticks to in...still have to find this from P
 		//rightEncoder.setDistancePerPulse(256/(3.14*4));//the amount of ticks to in...still have to find this from P
@@ -102,17 +104,10 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(-right,-left);
     }
     
-    public void squaredTankDrive(double left, double right){
-    	drive.tankDrive(left, right,true);
-    }
-    public void squaredReverseTankDrive(double left, double right){
-    	drive.tankDrive(-left, -right,true);
-    }
-
     public void kennyDrive(double leftStick ,double rightStick){
     	
-    	double leftRate=leftEncoder.getRate()/1000;
-    	double rightRate=-rightEncoder.getRate()/1000;
+    	double leftRate = leftEncoder.getRate()/1000;
+    	double rightRate = -rightEncoder.getRate()/1000;
     	//double leftRate=leftEncoder.getRate();
     	//double rightRate=-rightEncoder.getRate();
     	SmartDashboard.putNumber("leftEncoder", leftRate);
@@ -134,8 +129,8 @@ public class DriveTrain extends Subsystem {
     }
     public void encoderDrive(double leftStick ,double rightStick){	
     	
-    	double leftRate=leftEncoder.getRate();
-    	double rightRate=rightEncoder.getRate();
+    	double leftRate = leftEncoder.getRate();
+    	double rightRate = rightEncoder.getRate();
     	SmartDashboard.putNumber("leftEncoder", leftRate);
     	SmartDashboard.putNumber("rightEncoder", rightRate);
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
@@ -163,18 +158,15 @@ public class DriveTrain extends Subsystem {
     	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.002;
     	SmartDashboard.putNumber("leftoffset", leftpowerOffset);
     	SmartDashboard.putNumber("rightoffset", rightpowerOffset);
-    	if (Math.abs(leftpowerOffset+leftPowerinitial)>1){
-    		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1){
-    		leftPower = 1;
-    		}
-    		else{
-    		leftPower = -1;	
-    		}
-    		
-    		}
-    	else{
-    		leftPower = leftpowerOffset+leftPowerinitial;
-    	}
+    	if (Math.abs(leftpowerOffset+leftPowerinitial)>1) {
+    		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1) {
+    			leftPower = 1;
+    		} else {
+    			leftPower = -1;	
+    		}	
+		} else{
+			leftPower = leftpowerOffset+leftPowerinitial;
+		}
     	if (Math.abs(rightpowerOffset+rightPowerinitial)>1){
     		if (Math.signum(rightpowerOffset+rightPowerinitial) == 1){
     		rightPower = 1;

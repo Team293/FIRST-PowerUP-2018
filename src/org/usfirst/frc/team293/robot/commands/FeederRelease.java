@@ -13,7 +13,7 @@ public class FeederRelease extends Command {
     	double rpm;
     	public FeederRelease(double FeederCP100MS) {
     		// Use requires() here to declare subsystem dependencies
-    		requires(Robot.Feeder);
+    		requires(Robot.feeder);
     		requires(Robot.FeedSensors);
     		rpm = FeederCP100MS;
     	}
@@ -27,7 +27,7 @@ public class FeederRelease extends Command {
     	@Override
     	protected void execute() {
     		//Robot.Feeder.moverpm(OI.launchpad.getThrottle()*12200);
-    			Robot.Feeder.shoot(rpm);
+    			Robot.feeder.shoot(rpm);
     		}
     	
 
@@ -40,7 +40,7 @@ public class FeederRelease extends Command {
     	// Called once after isFinished returns true
     	@Override
     	protected void end() {
-    		Robot.Feeder.shoot(0);
+    		Robot.feeder.shoot(0);
     	}
 
     	// Called when another command which requires one or more of the same

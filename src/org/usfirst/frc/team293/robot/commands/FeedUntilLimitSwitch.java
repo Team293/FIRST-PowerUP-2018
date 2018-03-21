@@ -12,7 +12,7 @@ public class FeedUntilLimitSwitch extends Command {
     public FeedUntilLimitSwitch() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
+    	requires(Robot.feeder);
     	requires(Robot.FeedSensors);
     }
 
@@ -23,7 +23,7 @@ public class FeedUntilLimitSwitch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Feeder.moverpm(18000);
+    	Robot.feeder.moverpm(18000);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,7 +33,7 @@ public class FeedUntilLimitSwitch extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Feeder.moverpm(0);
+    	Robot.feeder.moverpm(0);
     }
 
     // Called when another command which requires one or more of the same

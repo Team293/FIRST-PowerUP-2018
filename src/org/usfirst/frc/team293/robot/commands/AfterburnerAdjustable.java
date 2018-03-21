@@ -13,7 +13,7 @@ public class AfterburnerAdjustable extends Command {
     public AfterburnerAdjustable() {
     	  // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.AfterburnerShooter);
+    	requires(Robot.afterBurner);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class AfterburnerAdjustable extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.AfterburnerShooter.move(OI.leftStick.getTwist());
+    	Robot.afterBurner.move(OI.leftStick.getTwist());
     }
 
     // Make this return true when this Command no longer needs to run execute()

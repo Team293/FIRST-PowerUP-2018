@@ -12,12 +12,12 @@ public class StopAngle extends Command {
     public StopAngle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.Feeder);
+    	requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.Feeder.moveAnglePower(0);
+    	Robot.feeder.moveAnglePower(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
