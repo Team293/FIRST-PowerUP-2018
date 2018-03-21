@@ -167,33 +167,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-	//	if(OI.switch4dn)
-	//	while ((OI.switch4dn.getRawValue()==false) && stop == false){
-			
-		
-		SmartDashboard.putNumber("Feeder Direction", OI.leftStick.getThrottle());
-		SmartDashboard.putNumber("LeftDrive1Current", pdp.getCurrent(15));
-		SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
-	    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
-	    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
-	    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
-	    
-	    SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
-	    SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
-	    SmartDashboard.putNumber("Accel-X", imu.getAccelX());
-	    SmartDashboard.putNumber("Pitch", imu.getPitch());
-	    SmartDashboard.putNumber("Roll", imu.getRoll());
-	    SmartDashboard.putNumber("Yaw", imu.getYaw());
-	    
-	    SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
-	    SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
-		
-		// SmartDashboard.putBoolean("Photoswitch", FeedSensors.getPhotoSwitch());
-		 SmartDashboard.putBoolean("feederupper", feeder.upperLimit.get());
-		 SmartDashboard.putBoolean("feederlower", feeder.lowerLimit.get());
-		 SmartDashboard.putBoolean("FeederLimit", FeedSensors.getFeederLimit());
-		 //SmartDashboard.putNumber("feederangle", (Robot.Feeder.Angle_motor.getSelectedSensorPosition(0)/2048.0*360.0));
-		 SmartDashboard.putNumber("feederangle", (Robot.feeder.angleMotor.getSelectedSensorPosition(0)));
+
 		 Scheduler.getInstance().run();
 		}
 	
