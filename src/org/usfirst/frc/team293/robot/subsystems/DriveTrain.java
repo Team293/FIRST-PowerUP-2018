@@ -2,7 +2,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
-import org.usfirst.frc.team293.robot.commands.TankDriveDefault;
+import org.usfirst.frc.team293.robot.commands.DriveTankDefault;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
@@ -137,79 +137,13 @@ public class DriveTrain extends Subsystem {
     	//double leftRate=leftEncoder.getRate()/1000;
     	//double rightRate=-rightEncoder.getRate()/1000;
     }
-<<<<<<< HEAD
     /**
      * Method for driving the robot based using 2 joystick inputs
      * using cumulative sums of proportional feedback with a hard limit
      * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1
      * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1
      */
-    public void encoderDrive(double leftStick ,double rightStick){	
-    	
-    	double leftRate = leftEncoder.getRate();
-    	double rightRate = rightEncoder.getRate();
-    	SmartDashboard.putNumber("leftEncoder", leftRate);
-    	SmartDashboard.putNumber("rightEncoder", rightRate);
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	SmartDashboard.putNumber("Pigeon", imu.getFusedHeading(fusionStatus));
-    	//SmartDashboard.putNumber("rightEncoderdpp", rightEncoder.getDistancePerPulse());
-    	//SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
-    	if (Math.abs(leftStick) < .1){
-    		leftRateSetpoint= 0; //125
-    	}
-    	else{
-    		leftRateSetpoint=leftStick*12; //125
-    	}
-    	if (Math.abs(rightStick) < .1){
-    		rightRateSetpoint= 0; //125
-    	}
-    	else{
-    		rightRateSetpoint=rightStick*12; //125
-    	}
-    	
-    	SmartDashboard.putNumber("leftRateSetpoint", leftRateSetpoint);
-    	
-    	
-    	SmartDashboard.putNumber("rightRateSetpoint", rightRateSetpoint);
-    	double rightpowerOffset = (rightRateSetpoint-rightRate)*0.002;
-    	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.002;
-    	SmartDashboard.putNumber("leftoffset", leftpowerOffset);
-    	SmartDashboard.putNumber("rightoffset", rightpowerOffset);
-    	if (Math.abs(leftpowerOffset+leftPowerinitial)>1) {
-    		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1) {
-    			leftPower = 1;
-    		} else {
-    			leftPower = -1;	
-    		}	
-		} else{
-			leftPower = leftpowerOffset+leftPowerinitial;
-		}
-    	if (Math.abs(rightpowerOffset+rightPowerinitial)>1){
-    		if (Math.signum(rightpowerOffset+rightPowerinitial) == 1){
-    		rightPower = 1;
-    		}
-    		else{
-    		rightPower = -1;	
-    		}
-    		
-    		}
-    	else{
-    		rightPower = rightpowerOffset+rightPowerinitial;
-    	}
-    	drive.tankDrive(leftStick,rightStick);
-    	leftPowerinitial = leftPower;
-    	rightPowerinitial = rightPower;
-    }
-    	//drive.tankDrive(-(leftRateSetpoint-leftRate)*0.319,-(rightRateSetpoint-rightRate)*0.319);
-    /**
-     * Method for driving the robot based using 2 joystick inputs
-     * using proportional feedback from encoders
-     * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
-     * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
-     */
-=======
 
->>>>>>> ba4c15b25863d8d77af638c79cc13d1e1d1b17f6
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
     	double leftRate=leftEncoder.getRate();
     	double rightRate=rightEncoder.getRate();
@@ -262,15 +196,8 @@ public class DriveTrain extends Subsystem {
     		}
     	else{
     		rightPower = rightpowerOffset+rightPowerinitial;
-    	}
-<<<<<<< HEAD
-    	
-    	drive.tankDrive(leftPower,rightPower);
-    	
-    	
-=======
-    	drive.tankDrive(leftPower,rightPower);    	
->>>>>>> ba4c15b25863d8d77af638c79cc13d1e1d1b17f6
+    	}    	
+    	drive.tankDrive(leftPower,rightPower);	
     }
 //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
