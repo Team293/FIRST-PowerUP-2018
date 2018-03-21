@@ -86,24 +86,33 @@ public class DriveTrain extends Subsystem {
 		leftEncoder.setSamplesToAverage(5);
 		rightEncoder.setSamplesToAverage(5);
 	}
- 
+	/**
+	 * This command seems to currently run feedFowardDrive
+	 */
     public void initDefaultCommand() {       
         setDefaultCommand(new TankDriveDefault());	// Set the default command for a subsystem here.
     }  
-    
-    
+    /**
+     * TankDrive the robot
+     * @param left power command
+     * @param right power command
+     */
     public void tankdrive(double left, double right){
     	drive.tankDrive(left, right);  
-    	double leftRate=leftEncoder.getRate();
-    	double rightRate=rightEncoder.getRate();
-    	SmartDashboard.putNumber("leftEncoder", leftRate);
-    	SmartDashboard.putNumber("rightEncoder", rightRate);
 	}
-    
+    /**
+     * Reverse TankDrive the robot
+     * @param left power command
+     * @param right power command
+     */
     public void reverseDrive(double left, double right){								//Switch Direction we're going
     	drive.tankDrive(-right,-left);
     }
-    
+    /**
+     * This is a wrecked version of my old drivetrain class
+     * @param leftStick input value -1 to 1
+     * @param rightStick input value -1 to 1
+     */
     public void kennyDrive(double leftStick ,double rightStick){
     	
     	double leftRate = leftEncoder.getRate()/1000;
@@ -280,19 +289,6 @@ public class DriveTrain extends Subsystem {
     	return inPosition;
     }
     
-    public void resetGyro(){
-    	imu.setFusedHeading(0.0, 0);
-    	imu.setYaw(0, 0);
-    	turning=false;
-    	setpoint=0;
-    	error=0;
-    	angle=0;
-    }
-    public void resetInitialPower(){
-    	initialL = 0;
-    	initialR = 0;
-    }
-    
     public void gyroStraight(double speed) {
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (imu.getState() != PigeonIMU.PigeonState.NoComm);
@@ -331,10 +327,27 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 	
+    public void resetGyro() {
+    	imu.setFusedHeading(0.0, 0);
+    	imu.setYaw(0, 0);
+    	turning = false;
+    	setpoint = 0;
+    	error = 0;
+    	angle = 0;
+    }
+    
+    public void resetInitialPower(){
+    	initialL = 0;
+    	initialR = 0;
+    }
+    /*
+     * This reads the distance traveled (accounts for wheel diameter)
+     * @return encoder array containing distances
+     */
 	public double[] readEnc() {
 		double leftDistance = Math.abs((leftEncoder.getRaw()*3.14*4)/1024);
 		double rightDistance = Math.abs((rightEncoder.getRaw()*3.14*4)/1024);
-		double[] encoders= {(leftDistance+rightDistance)/2,leftDistance, rightDistance};
+		double[] encoders = {(leftDistance+rightDistance)/2,leftDistance, rightDistance};
 		return encoders;
 	}
 
