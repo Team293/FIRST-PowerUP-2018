@@ -2,18 +2,15 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TimedFeederShoot extends TimedCommand {
+public class ClimberReverse extends Command {
 
-    public TimedFeederShoot(double timeout) {
-        super(timeout);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(Robot.feeder);
+    public ClimberReverse() {
+    	requires(Robot.Climber);
     }
 
     // Called just before this Command runs the first time
@@ -22,13 +19,16 @@ public class TimedFeederShoot extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.feeder.shoot(.4);
+    	Robot.Climber.move(-.5);
     }
 
-    // Called once after timeout
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
     protected void end() {
-    	Robot.feeder.shoot(0);
-    	
     }
 
     // Called when another command which requires one or more of the same

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot.commands;
 
+import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Retract_Cylinder extends Command {
+public class FeederMoveAnglePower extends Command {
 
-    public Retract_Cylinder() {
+    public FeederMoveAnglePower() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.pincher);
+    	requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +22,7 @@ public class Retract_Cylinder extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pincher.unpinch();
+    	Robot.feeder.moveAnglePower(OI.launchpad2.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

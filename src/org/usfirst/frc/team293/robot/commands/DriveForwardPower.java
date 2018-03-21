@@ -2,18 +2,18 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TimedAngleMotor extends TimedCommand {
 
-    public TimedAngleMotor(double timeout) {
-        super(timeout);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(Robot.feeder);
+
+public class DriveForwardPower extends Command {
+	
+    public DriveForwardPower() {
+        requires(Robot.driveTrain);
+    	setTimeout(4.5);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +22,16 @@ public class TimedAngleMotor extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.feeder.moveAnglePower(-.2);
+    	Robot.driveTrain.tankdrive(.5, .5);
     }
 
-    // Called once after timeout
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+    	return isTimedOut();
+    }
+
+    // Called once after isFinished returns true
     protected void end() {
-    	Robot.feeder.moveAnglePower(0);
     }
 
     // Called when another command which requires one or more of the same

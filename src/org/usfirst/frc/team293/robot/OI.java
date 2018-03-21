@@ -1,36 +1,29 @@
 package org.usfirst.frc.team293.robot;
 
 
-import org.usfirst.frc.team293.robot.commands.AfterburnerAdjustable;
-import org.usfirst.frc.team293.robot.commands.AfterburnerFullThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerRPM;
-import org.usfirst.frc.team293.robot.commands.AfterburnerShoot;
-import org.usfirst.frc.team293.robot.commands.CalibrateFeeder;
 import org.usfirst.frc.team293.robot.commands.Climb;
-import org.usfirst.frc.team293.robot.commands.Extend_Cylinder;
+import org.usfirst.frc.team293.robot.commands.PincherExtend;
 import org.usfirst.frc.team293.robot.commands.Feed;
 //import org.usfirst.frc.team293.robot.commands.FeedToExchange;
-import org.usfirst.frc.team293.robot.commands.FeedToUpperPosition;
 import org.usfirst.frc.team293.robot.commands.FeederAngle;
 import org.usfirst.frc.team293.robot.commands.FeederFullDown;
 import org.usfirst.frc.team293.robot.commands.FeederFullUp;
-import org.usfirst.frc.team293.robot.commands.FeederRPM;
 import org.usfirst.frc.team293.robot.commands.FeederRelease;
 import org.usfirst.frc.team293.robot.commands.FeederThrottle;
-import org.usfirst.frc.team293.robot.commands.FeedtoAfterburnerShoot;
-import org.usfirst.frc.team293.robot.commands.MoveAnglePower;
+import org.usfirst.frc.team293.robot.commands.FeederMoveAnglePower;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleUp;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleDown;
-import org.usfirst.frc.team293.robot.commands.Retract_Cylinder;
+import org.usfirst.frc.team293.robot.commands.PincherRetract;
 import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.StopAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.MoveServoJoystick;
-import org.usfirst.frc.team293.robot.commands.StopAfterburner;
-import org.usfirst.frc.team293.robot.commands.StopAngle;
-import org.usfirst.frc.team293.robot.commands.StopClimbing;
-import org.usfirst.frc.team293.robot.commands.StopFeeder;
-import org.usfirst.frc.team293.robot.commands.Unclimb;
+import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
+import org.usfirst.frc.team293.robot.commands.FeederAngleStop;
+import org.usfirst.frc.team293.robot.commands.ClimberStop;
+import org.usfirst.frc.team293.robot.commands.FeederStop;
+import org.usfirst.frc.team293.robot.commands.ClimberReverse;
 //import org.usfirst.frc.team293.robot.commands.TankDriveAutoReplay;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -145,48 +138,48 @@ public class OI {
 		// First operator joystick: ------------------------
 //		button1.whileHeld(new Extend_Cylinder());
 //		button1.whenReleased(new Retract_Cylinder());
-		launch1[1].whileHeld(new Extend_Cylinder());
-		launch1[1].whenReleased(new Retract_Cylinder());
+		launch1[1].whileHeld(new PincherExtend());
+		launch1[1].whenReleased(new PincherRetract());
 		
 
 		launch1[2].whenPressed(new FeederAngle(0));
 
 		//button3.whileHeld(new FeedToUpperPosition());
 		launch1[3].whileHeld(new FeederRelease(-.5));
-		launch1[3].whenReleased(new StopFeeder());
+		launch1[3].whenReleased(new FeederStop());
 
 		launch1[4].whenPressed(new FeederFullDown());
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
-		launch1[5].whenReleased(new StopFeeder());
+		launch1[5].whenReleased(new FeederStop());
 
 		launch1[6].whenPressed(new FeederFullUp());
 		
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
-		launch1[7].whileHeld(new Unclimb());
-		launch1[7].whenReleased(new StopClimbing());
+		launch1[7].whileHeld(new ClimberReverse());
+		launch1[7].whenReleased(new ClimberStop());
 
 		launch1[8].whileHeld(new Climb());	
-		launch1[8].whenReleased(new StopClimbing());
+		launch1[8].whenReleased(new ClimberStop());
 
 		launch1[9].whenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button10.whenPressed(new AfterburnerShoot());
 		launch1[10].whenPressed(new AfterburnerRPM(1));
-		launch1[10].whenReleased(new StopAfterburner());
+		launch1[10].whenReleased(new AfterburnerStop());
 
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
-		launch1[11].whenReleased(new StopAfterburner());
+		launch1[11].whenReleased(new AfterburnerStop());
 
 		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
-		launch1[12].whenReleased(new StopAfterburner());
+		launch1[12].whenReleased(new AfterburnerStop());
 
 		// Second operator joystick: ---------------------
-		launch2[1].whileHeld(new MoveAnglePower());
-		launch2[1].whenReleased(new StopAngle());
+		launch2[1].whileHeld(new FeederMoveAnglePower());
+		launch2[1].whenReleased(new FeederAngleStop());
 
 		launch2[11].toggleWhenPressed(new ClimberPoleUp());
 		launch2[12].toggleWhenPressed(new ClimberPoleDown());

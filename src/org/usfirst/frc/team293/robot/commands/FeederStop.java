@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AfterburnerAdjustable extends Command {
+public class FeederStop extends Command {
 
-    public AfterburnerAdjustable() {
-    	  // Use requires() here to declare subsystem dependencies
+    public FeederStop() {
+        // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.afterBurner);
+    	requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class AfterburnerAdjustable extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.afterBurner.move(OI.leftStick.getTwist());
+    	Robot.feeder.shoot(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +37,5 @@ public class AfterburnerAdjustable extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	new StopAfterburner();
     }
 }
