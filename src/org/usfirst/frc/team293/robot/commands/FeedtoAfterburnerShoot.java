@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FeedtoAfterburnerShoot extends CommandGroup {
 
     public FeedtoAfterburnerShoot() {
-    	addSequential(new Retract_Cylinder());
+    	addSequential(new PincherRetract());
     	addSequential(new FeederThrottle(1));
     	addSequential(new FeederFullUp());  	
     	/*addSequential(new FeederThrottle());

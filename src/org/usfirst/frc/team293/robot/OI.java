@@ -7,7 +7,7 @@ import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerRPM;
 import org.usfirst.frc.team293.robot.commands.AfterburnerShoot;
 import org.usfirst.frc.team293.robot.commands.Climb;
-import org.usfirst.frc.team293.robot.commands.Extend_Cylinder;
+import org.usfirst.frc.team293.robot.commands.PincherExtend;
 import org.usfirst.frc.team293.robot.commands.Feed;
 //import org.usfirst.frc.team293.robot.commands.FeedToExchange;
 import org.usfirst.frc.team293.robot.commands.FeedToUpperPosition;
@@ -18,15 +18,15 @@ import org.usfirst.frc.team293.robot.commands.FeederRPM;
 import org.usfirst.frc.team293.robot.commands.FeederRelease;
 import org.usfirst.frc.team293.robot.commands.FeederThrottle;
 import org.usfirst.frc.team293.robot.commands.FeedtoAfterburnerShoot;
-import org.usfirst.frc.team293.robot.commands.MoveAnglePower;
+import org.usfirst.frc.team293.robot.commands.FeederMoveAnglePower;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleUp;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleDown;
-import org.usfirst.frc.team293.robot.commands.Retract_Cylinder;
+import org.usfirst.frc.team293.robot.commands.PincherRetract;
 import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.StopAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.MoveServoJoystick;
 import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
-import org.usfirst.frc.team293.robot.commands.StopAngle;
+import org.usfirst.frc.team293.robot.commands.FeederAngleStop;
 import org.usfirst.frc.team293.robot.commands.ClimberStop;
 import org.usfirst.frc.team293.robot.commands.FeederStop;
 import org.usfirst.frc.team293.robot.commands.ClimberReverse;
@@ -144,8 +144,8 @@ public class OI {
 		// First operator joystick: ------------------------
 //		button1.whileHeld(new Extend_Cylinder());
 //		button1.whenReleased(new Retract_Cylinder());
-		launch1[1].whileHeld(new Extend_Cylinder());
-		launch1[1].whenReleased(new Retract_Cylinder());
+		launch1[1].whileHeld(new PincherExtend());
+		launch1[1].whenReleased(new PincherRetract());
 		
 
 		launch1[2].whenPressed(new FeederAngle(0));
@@ -184,8 +184,8 @@ public class OI {
 		launch1[12].whenReleased(new AfterburnerStop());
 
 		// Second operator joystick: ---------------------
-		launch2[1].whileHeld(new MoveAnglePower());
-		launch2[1].whenReleased(new StopAngle());
+		launch2[1].whileHeld(new FeederMoveAnglePower());
+		launch2[1].whenReleased(new FeederAngleStop());
 
 		launch2[11].toggleWhenPressed(new ClimberPoleUp());
 		launch2[12].toggleWhenPressed(new ClimberPoleDown());

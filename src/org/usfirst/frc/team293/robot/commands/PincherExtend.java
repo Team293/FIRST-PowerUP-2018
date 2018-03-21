@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Retract_Cylinder extends Command {
+public class PincherExtend extends Command {
 
-    public Retract_Cylinder() {
+    public PincherExtend() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.pincher);
@@ -21,7 +21,7 @@ public class Retract_Cylinder extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pincher.unpinch();
+    	Robot.pincher.pinch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,5 +36,6 @@ public class Retract_Cylinder extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	new PincherRetract();
     }
 }

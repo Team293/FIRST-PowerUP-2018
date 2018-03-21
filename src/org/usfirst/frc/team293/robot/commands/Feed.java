@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Feed extends CommandGroup {
 
     public Feed() {
-    	addSequential(new Retract_Cylinder());
+    	addSequential(new PincherRetract());
     	addSequential(new FeederFullDown());
        
         

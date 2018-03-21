@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot.commands;
 
+import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopAngle extends Command {
+public class FeederMoveAnglePower extends Command {
 
-    public StopAngle() {
+    public FeederMoveAnglePower() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.feeder);
@@ -17,16 +18,16 @@ public class StopAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.feeder.moveAnglePower(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.feeder.moveAnglePower(OI.launchpad2.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
