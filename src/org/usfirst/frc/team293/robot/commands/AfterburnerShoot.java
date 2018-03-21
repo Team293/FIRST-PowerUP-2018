@@ -11,7 +11,7 @@ public class AfterburnerShoot extends CommandGroup {
     	addParallel(new AfterburnerRPM(1));	
     	addSequential(new FeederFullUp());
     	addSequential(new TimedFeederRelease(5.0, -1.0));
-    	addSequential(new StopAfterburner());
+    	addSequential(new AfterburnerStop());
     		
     	// Add Commands here:
         // e.g. addSequential(new Command1());

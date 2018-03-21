@@ -2,7 +2,6 @@ package Autonomouses;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.commands.DriveStraight;
-import org.usfirst.frc.team293.robot.commands.TimedAngleMotor;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

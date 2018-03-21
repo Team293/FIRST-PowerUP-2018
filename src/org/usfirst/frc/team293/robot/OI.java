@@ -6,7 +6,6 @@ import org.usfirst.frc.team293.robot.commands.AfterburnerFullThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerRPM;
 import org.usfirst.frc.team293.robot.commands.AfterburnerShoot;
-import org.usfirst.frc.team293.robot.commands.CalibrateFeeder;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.Extend_Cylinder;
 import org.usfirst.frc.team293.robot.commands.Feed;
@@ -26,7 +25,7 @@ import org.usfirst.frc.team293.robot.commands.Retract_Cylinder;
 import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.StopAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.MoveServoJoystick;
-import org.usfirst.frc.team293.robot.commands.StopAfterburner;
+import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
 import org.usfirst.frc.team293.robot.commands.StopAngle;
 import org.usfirst.frc.team293.robot.commands.StopClimbing;
 import org.usfirst.frc.team293.robot.commands.StopFeeder;
@@ -175,14 +174,14 @@ public class OI {
 
 		//button10.whenPressed(new AfterburnerShoot());
 		launch1[10].whenPressed(new AfterburnerRPM(1));
-		launch1[10].whenReleased(new StopAfterburner());
+		launch1[10].whenReleased(new AfterburnerStop());
 
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
-		launch1[11].whenReleased(new StopAfterburner());
+		launch1[11].whenReleased(new AfterburnerStop());
 
 		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
-		launch1[12].whenReleased(new StopAfterburner());
+		launch1[12].whenReleased(new AfterburnerStop());
 
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new MoveAnglePower());
