@@ -5,7 +5,6 @@ import org.usfirst.frc.team293.robot.commands.AfterburnerAdjustable;
 import org.usfirst.frc.team293.robot.commands.AfterburnerFullThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerRPM;
-import org.usfirst.frc.team293.robot.commands.AfterburnerShoot;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.PincherExtend;
 import org.usfirst.frc.team293.robot.commands.Feed;

@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class CalibrateFeeder extends Command {
+public class FeederCalibrate extends Command {
 
-    public CalibrateFeeder() {
+    public FeederCalibrate() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.feeder);

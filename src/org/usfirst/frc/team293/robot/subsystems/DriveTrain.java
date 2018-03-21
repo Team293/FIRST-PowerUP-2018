@@ -2,7 +2,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
-import org.usfirst.frc.team293.robot.commands.TankDriveDefault;
+import org.usfirst.frc.team293.robot.commands.DriveTankDefault;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
@@ -90,7 +90,7 @@ public class DriveTrain extends Subsystem {
 	 * This command seems to currently run feedFowardDrive
 	 */
     public void initDefaultCommand() {       
-        setDefaultCommand(new TankDriveDefault());	// Set the default command for a subsystem here.
+        setDefaultCommand(new DriveTankDefault());	// Set the default command for a subsystem here.
     }  
     /**
      * TankDrive the robot

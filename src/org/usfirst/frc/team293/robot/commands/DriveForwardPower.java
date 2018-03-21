@@ -2,18 +2,18 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TimedFeederRelease extends TimedCommand {
-	double rpm;
-    public TimedFeederRelease(double timeout, double FeederCP100MS) {
-        super(timeout);
-        requires(Robot.feeder);
-		requires(Robot.FeedSensors);
-		rpm = FeederCP100MS;
+
+
+public class DriveForwardPower extends Command {
+	
+    public DriveForwardPower() {
+        requires(Robot.driveTrain);
+    	setTimeout(4.5);
     }
 
     // Called just before this Command runs the first time
@@ -22,18 +22,20 @@ public class TimedFeederRelease extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.feeder.shoot(rpm);
+    	Robot.driveTrain.tankdrive(.5, .5);
     }
 
-    // Called once after timeout
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+    	return isTimedOut();
+    }
+
+    // Called once after isFinished returns true
     protected void end() {
-    	Robot.feeder.shoot(0);
-    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	new FeederStop();
     }
 }
