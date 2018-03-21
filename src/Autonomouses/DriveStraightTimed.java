@@ -13,8 +13,6 @@ public class DriveStraightTimed extends TimedCommand {
         super(timeout);
         requires(Robot.TrainofDriving);
     }
-
-    
     
     // Called just before this Command runs the first time
     protected void initialize() {
