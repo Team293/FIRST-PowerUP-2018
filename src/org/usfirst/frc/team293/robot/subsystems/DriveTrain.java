@@ -59,7 +59,9 @@ public class DriveTrain extends Subsystem {
 	public boolean direction=false;
 	
 	public boolean turning=false;
-	
+	/**
+	 * 
+	 */
 	public DriveTrain(){	//make drivetrain stuff
 		leftMotorOne = new VictorSP(RobotMap.leftDrive[0]);
 		leftMotorTwo = new VictorSP(RobotMap.leftDrive[1]);
@@ -87,7 +89,7 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.setSamplesToAverage(5);
 	}
 	/**
-	 * This command seems to currently run feedFowardDrive
+	 * 
 	 */
     public void initDefaultCommand() {       
         setDefaultCommand(new TankDriveDefault());	// Set the default command for a subsystem here.
@@ -134,6 +136,12 @@ public class DriveTrain extends Subsystem {
     	//double leftRate=leftEncoder.getRate()/1000;
     	//double rightRate=-rightEncoder.getRate()/1000;
     }
+    /**
+     * Method for driving the robot based on 2 joystick inputs
+     * using cumulative sums of proportional feedback with a hard limit
+     * @param leftStick Output from left joystick processed within TankDriveDefault
+     * @param rightStick Output from right joystick processed within TankDriveDefault
+     */
     public void encoderDrive(double leftStick ,double rightStick){	
     	
     	double leftRate = leftEncoder.getRate();

@@ -21,20 +21,12 @@ public class TankDriveDefault extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	//Robot.driveTrain.squaredTankDrive(OI.rightStick.getY(), OI.leftStick.getY());
-    	// UGLY define of limit points
+    
+    public double[] stickCooker(double right, double left){
     	double in1 = 0.35;
     	double out1 = 0.25;
-        // Get raw stick values
-    	right = OI.rightStick.getY();
-    	left  = OI.leftStick.getY();
-    	// Get signs of each
     	double ls = Math.signum(left);
     	double rs = Math.signum(right);
-    	// Check each stick if below threshold
     	if ( Math.abs(right) < in1 ) {
     		outright = right * (out1 / in1 ); // low gain range
     	} else { 
@@ -46,6 +38,34 @@ public class TankDriveDefault extends Command {
     	} else { 
     		outleft = ls * (out1 + ( (ls * left)- in1 )*(1-out1)/(1-in1));
     	}
+		return new double[] {outright, outleft};
+    }
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	//Robot.driveTrain.squaredTankDrive(OI.rightStick.getY(), OI.leftStick.getY());
+    	// UGLY define of limit points
+    	//double in1 = 0.35;
+    	//double out1 = 0.25;
+        // Get raw stick values
+    	right = OI.rightStick.getY();
+    	left  = OI.leftStick.getY();
+    	double[] cookedValues = this.stickCooker(right, left);
+    	// Get signs of each
+    	//double ls = Math.signum(left);
+    	//double rs = Math.signum(right);
+    	// Check each stick if below threshold
+    	/*if ( Math.abs(right) < in1 ) {
+    		outright = right * (out1 / in1 ); // low gain range
+    	} else { 
+    		outright = rs * (out1 + ( (rs * right)- in1 )*(1-out1)/(1-in1));
+    	}
+    	// Same as left side
+    	if ( Math.abs(left) < in1 ) {
+    		outleft = left * (out1 / in1 ); // low gain range
+    	} else { 
+    		outleft = ls * (out1 + ( (ls * left)- in1 )*(1-out1)/(1-in1));
+    	}
+    	*/
     	right = outright;
     	left = outleft;
     	
