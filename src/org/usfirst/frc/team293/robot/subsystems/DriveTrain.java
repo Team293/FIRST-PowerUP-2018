@@ -214,8 +214,6 @@ public class DriveTrain extends Subsystem {
     	double rightRateSetpoint=speed*130;
 
     	drive.tankDrive(-(leftRateSetpoint-rightRate)*0.015+angle*.01,-(rightRateSetpoint-leftRate)*0.015-angle*.01);
-   
-    	
     }
     /**
      * Go straight a certain distance and at a certain velocity, uses the IMU and encoders
