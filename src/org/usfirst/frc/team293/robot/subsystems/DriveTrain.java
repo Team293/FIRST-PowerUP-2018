@@ -254,7 +254,10 @@ public class DriveTrain extends Subsystem {
     	
     }
 //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
-    
+    /**
+     * Drives straight using the encoders and a rate to drive 
+     * @param speed to drive at I believe from -1 to 1
+     */
     public void velocityStraight(double speed){	///NOT DONE YET speed=-1,1 
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	angle=imu.getFusedHeading(fusionStatus);
@@ -271,6 +274,12 @@ public class DriveTrain extends Subsystem {
    
     	
     }
+    /**
+     * Go straight a certain distance and at a certain velocity, uses the IMU and encoders
+     * @param distance to go in inches?
+     * @param velocity to go in I believe rotations?
+     * @return If it's done or not
+     */
     public boolean goStraightDistanceVelocity(double distance, double velocity){
     	inPosition = false;
     	
@@ -288,7 +297,10 @@ public class DriveTrain extends Subsystem {
     	}
     	return inPosition;
     }
-    
+    /**
+     * Drives straight using the gyro and a power command to one wheel
+     * @param speed The power to drive
+     */
     public void gyroStraight(double speed) {
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (imu.getState() != PigeonIMU.PigeonState.NoComm);
@@ -304,7 +316,12 @@ public class DriveTrain extends Subsystem {
     		tankdrive(speed,speed);
     	}
     }
-
+    /**
+     * This is from 2017, allows the robot to drive in place. 
+     * @param setangle the amount to turn
+     * @param rate the angular rate to turn at
+     * @return	if it's done or not
+     */
     public boolean gyroTurnInPlace(double setangle, double rate){
     	turning = false;
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
@@ -321,12 +338,16 @@ public class DriveTrain extends Subsystem {
     }
  
   //////////// ^Gyro Stuff  Encoder stuff--->>>  
-    
+    /**
+     * Resets the encoders to 0
+     */
 	public void resetEnc() {
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
-	
+	/**
+	 * Resets the gyro and related values
+	 */
     public void resetGyro() {
     	imu.setFusedHeading(0.0, 0);
     	imu.setYaw(0, 0);
@@ -335,12 +356,14 @@ public class DriveTrain extends Subsystem {
     	error = 0;
     	angle = 0;
     }
-    
+    /**
+     * Resets some initial power thing that?
+     */
     public void resetInitialPower(){
     	initialL = 0;
     	initialR = 0;
     }
-    /*
+    /**
      * This reads the distance traveled (accounts for wheel diameter)
      * @return encoder array containing distances
      */
