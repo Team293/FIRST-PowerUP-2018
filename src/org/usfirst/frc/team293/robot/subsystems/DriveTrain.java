@@ -108,20 +108,7 @@ public class DriveTrain extends Subsystem {
     public void squaredReverseTankDrive(double left, double right){
     	drive.tankDrive(-left, -right,true);
     }
-    /*
-    public void encoderDriveRedo(double leftStick ,double rightStick){
-    	double leftRate=leftEncoder.getRate();
-    	double rightRate=rightEncoder.getRate();
-    	SmartDashboard.putNumber("leftEncoder", leftRate);
-    	SmartDashboard.putNumber("rightEncoder", rightRate);
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	SmartDashboard.putNumber("Pigeon", imu.getFusedHeading(fusionStatus));
-    	SmartDashboard.putNumber("leftRateSetpoint", leftRateSetpoint);
-    	
-    	
-    	SmartDashboard.putNumber("rightRateSetpoint", rightRateSetpoint);
-    }
-    */
+
     public void kennyDrive(double leftStick ,double rightStick){
     	
     	double leftRate=leftEncoder.getRate()/1000;
@@ -316,10 +303,10 @@ public class DriveTrain extends Subsystem {
     	initialR = 0;
     }
     
-    public void gyroStraight(double speed){
+    public void gyroStraight(double speed) {
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (imu.getState() != PigeonIMU.PigeonState.NoComm);
-    	if (imuStatus){
+    	if (imuStatus) {
      	angle=imu.getFusedHeading(fusionStatus);
      	
     	error=(angle-setpoint);
@@ -328,7 +315,7 @@ public class DriveTrain extends Subsystem {
         drive.tankDrive(-speed,-finalPower);
  
     	}
-    	else{
+    	else {
     		tankdrive(speed,speed);
     	}
     }
@@ -378,10 +365,7 @@ public class DriveTrain extends Subsystem {
 
         return turning;
     }
-    
-   
-    
-    
+ 
   //////////// ^Gyro Stuff  Encoder stuff--->>>  
     
 	public void resetEnc(){

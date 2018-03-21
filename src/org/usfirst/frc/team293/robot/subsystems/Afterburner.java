@@ -22,15 +22,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class Afterburner extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-	//private VictorSP L_motor, R_motor;
 	
 	private TalonSRX L_motor, R_motor;
 	
 	public Afterburner(){
-		//L_motor = new VictorSP(RobotMap.L_Feeder);
-		//R_motor = new VictorSP(RobotMap.R_Feeder);
 		L_motor = new TalonSRX(3);
 		L_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
 		L_motor.clearStickyFaults(10);

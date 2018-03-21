@@ -8,11 +8,12 @@ package org.usfirst.frc.team293.robot;
  */
 public class RobotMap {
 	
-	public static int[]   
-			rightDrive={7,8,9}, 	//Victors
+	public static int[] 	//Victors for the Drivetrain
+			rightDrive={7,8,9}, 	
 			leftDrive={4,5,6};
 	
-	public static int[] leftEncoder={0, 1}, 	//Drivetrain Encoders
+	public static int[] 
+			leftEncoder={0, 1}, 	//Drivetrain Encoders
 			rightEncoder={2,3};
 	
 	public static int imu = 5;
@@ -23,21 +24,13 @@ public class RobotMap {
 	
 	public static int Release = 0;	
 	
-	public static int L_Feeder = 7,		//Feeder motors
+	public static int 
+			L_Feeder = 7,		//Feeder motors
 			R_Feeder = 4,
 			Angle_Feeder = 6;
 	
 	public static int L_Shooter = 3,
 			R_Shooter = 5;
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
 
 }
 

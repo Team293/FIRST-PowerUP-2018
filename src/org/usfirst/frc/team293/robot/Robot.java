@@ -88,7 +88,6 @@ public class Robot extends TimedRobot {
 		pdp.clearStickyFaults();
 		m_chooser.addDefault("Default Auto", m_autonomousCommand);
 		m_chooser.addObject("To Auto Line", new ToAutoLine());
-		m_chooser.addObject("Mid To Auto Line", new MiddleToAutoLine());
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		 //moves feeder to reference point (upper limit switch), gets offset angle from encoder
@@ -205,7 +204,7 @@ public class Robot extends TimedRobot {
 		 SmartDashboard.putBoolean("FeederLimit", FeedSensors.getFeederLimit());
 		 //SmartDashboard.putNumber("feederangle", (Robot.Feeder.Angle_motor.getSelectedSensorPosition(0)/2048.0*360.0));
 		 SmartDashboard.putNumber("feederangle", (Robot.Feeder.Angle_motor.getSelectedSensorPosition(0)));
-		Scheduler.getInstance().run();
+		 Scheduler.getInstance().run();
 		}
 	
 

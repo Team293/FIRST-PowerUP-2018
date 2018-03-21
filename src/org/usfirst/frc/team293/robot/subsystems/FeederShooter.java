@@ -26,7 +26,7 @@ public class FeederShooter extends Subsystem {
 	private int upperBoundReset = ((int)((1.0*105.0*2048.0/360.0)+.5));
 	//private TalonSRX L_motor, R_motor;
 	
-	public FeederShooter(){
+	public FeederShooter() {
 		upperlimit = new DigitalInput(9);
 		lowerlimit = new DigitalInput(8);
 		L_motor = new TalonSRX(0);
