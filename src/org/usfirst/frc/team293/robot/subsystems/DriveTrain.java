@@ -2,7 +2,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
-import org.usfirst.frc.team293.robot.commands.DriveTankDefault;
+import org.usfirst.frc.team293.robot.commands.TankDriveDefault;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
@@ -81,9 +81,10 @@ public class DriveTrain extends Subsystem {
 		
 		//leftEncoder.setDistancePerPulse(256/(3.14*4));//the amount of ticks to in...still have to find this from P
 		//rightEncoder.setDistancePerPulse(256/(3.14*4));//the amount of ticks to in...still have to find this from P
+	
 		
-		leftEncoder.setDistancePerPulse(3.14/(128.0*3.0));//the amount of ticks to in...still have to find this from P
-		rightEncoder.setDistancePerPulse(3.14/(128.0*3.0));//the amount of ticks to in...still have to find this from P
+		leftEncoder.setDistancePerPulse(3.14/(128.0*3.0));
+		rightEncoder.setDistancePerPulse(3.14/(128.0*3.0));
 		
 		leftEncoder.setSamplesToAverage(5);
 		rightEncoder.setSamplesToAverage(5);
@@ -137,10 +138,10 @@ public class DriveTrain extends Subsystem {
     	//double rightRate=-rightEncoder.getRate()/1000;
     }
     /**
-     * Method for driving the robot based on 2 joystick inputs
+     * Method for driving the robot based using 2 joystick inputs
      * using cumulative sums of proportional feedback with a hard limit
-     * @param leftStick Output from left joystick processed within TankDriveDefault
-     * @param rightStick Output from right joystick processed within TankDriveDefault
+     * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1
+     * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1
      */
     public void encoderDrive(double leftStick ,double rightStick){	
     	
@@ -199,38 +200,41 @@ public class DriveTrain extends Subsystem {
     	rightPowerinitial = rightPower;
     }
     	//drive.tankDrive(-(leftRateSetpoint-leftRate)*0.319,-(rightRateSetpoint-rightRate)*0.319);
+    /**
+     * Method for driving the robot based using 2 joystick inputs
+     * using proportional feedback from encoders
+     * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
+     * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
+     */
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
     	double leftRate=leftEncoder.getRate();
     	double rightRate=rightEncoder.getRate();
-    	SmartDashboard.putNumber("leftEncoder", leftRate);
-    	SmartDashboard.putNumber("rightEncoder", rightRate);
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	SmartDashboard.putNumber("Pigeon", imu.getFusedHeading(fusionStatus));
-    	//SmartDashboard.putNumber("rightEncoderdpp", rightEncoder.getDistancePerPulse());
-    	//SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
-    	if (Math.abs(leftStick) < .1){
-    		leftRateSetpoint= 0; //125
+    	
+    	//SmartDashboard.putNumber("leftEncoder", leftRate);
+    	//SmartDashboard.putNumber("rightEncoder", rightRate);
+    	
+    	if (Math.abs(leftStick) < .1){ 
+    		leftRateSetpoint= 0; //if within deadband, setpoint is set to 0
     	}
     	else{
-    		leftRateSetpoint=leftStick*10; //125
+    		leftRateSetpoint=leftStick*10; //multiplies leftstick input by full speed to obtain setpoint
     	}
-    	if (Math.abs(rightStick) < .1){
-    		rightRateSetpoint= 0; //125
+    	if (Math.abs(rightStick) < .1){ 
+    		rightRateSetpoint= 0; //if within deadband, setpoint is set to 0
     	}
     	else{
-    		rightRateSetpoint=rightStick*10; //125
+    		rightRateSetpoint=rightStick*10; //multiplies rightstick input by full speed to obtain setpoint
     	}
     	
-    	SmartDashboard.putNumber("leftRateSetpoint", leftRateSetpoint);
     	
+    	double rightpowerOffset = (rightRateSetpoint-rightRate)*0.05; //calculates offset percent power added to motor based on error between setpoint and current rate
+    	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.05;    //calculates offset percent power added to motor based on error between setpoint and current rate
     	
-    	SmartDashboard.putNumber("rightRateSetpoint", rightRateSetpoint);
-    	double rightpowerOffset = (rightRateSetpoint-rightRate)*0.05;
-    	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.05;
     	leftPowerinitial = 1.0*leftRateSetpoint/12.5;
     	rightPowerinitial = 1.0*rightRateSetpoint/10;
-    	SmartDashboard.putNumber("leftoffset", leftpowerOffset);
-    	SmartDashboard.putNumber("rightoffset", rightpowerOffset);
+    	
+    
+    	//used to limit output to between -1 and 1
     	if (Math.abs(leftpowerOffset+leftPowerinitial)>1){
     		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1){
     		leftPower = 1;
@@ -255,10 +259,9 @@ public class DriveTrain extends Subsystem {
     	else{
     		rightPower = rightpowerOffset+rightPowerinitial;
     	}
+    	
     	drive.tankDrive(leftPower,rightPower);
-    	//leftPowerinitial = leftPower;
-    	//rightPowerinitial = rightPower;
-    	//drive.tankDrive(-(leftRateSetpoint-leftRate)*0.319,-(rightRateSetpoint-rightRate)*0.319);
+    	
     	
     }
 //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
