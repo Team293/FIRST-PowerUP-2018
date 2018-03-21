@@ -1,22 +1,17 @@
 package org.usfirst.frc.team293.robot;
 
 
-import org.usfirst.frc.team293.robot.commands.AfterburnerAdjustable;
-import org.usfirst.frc.team293.robot.commands.AfterburnerFullThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
 import org.usfirst.frc.team293.robot.commands.AfterburnerRPM;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.PincherExtend;
 import org.usfirst.frc.team293.robot.commands.Feed;
 //import org.usfirst.frc.team293.robot.commands.FeedToExchange;
-import org.usfirst.frc.team293.robot.commands.FeedToUpperPosition;
 import org.usfirst.frc.team293.robot.commands.FeederAngle;
 import org.usfirst.frc.team293.robot.commands.FeederFullDown;
 import org.usfirst.frc.team293.robot.commands.FeederFullUp;
-import org.usfirst.frc.team293.robot.commands.FeederRPM;
 import org.usfirst.frc.team293.robot.commands.FeederRelease;
 import org.usfirst.frc.team293.robot.commands.FeederThrottle;
-import org.usfirst.frc.team293.robot.commands.FeedtoAfterburnerShoot;
 import org.usfirst.frc.team293.robot.commands.FeederMoveAnglePower;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleUp;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleDown;
