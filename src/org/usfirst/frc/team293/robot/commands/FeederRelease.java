@@ -46,6 +46,6 @@ public class FeederRelease extends Command {
     	// subsystems is scheduled to run
     	@Override
     	protected void interrupted() {
-    		new FeederStop();
+    		Robot.feeder.shoot(0);
     	}
     }

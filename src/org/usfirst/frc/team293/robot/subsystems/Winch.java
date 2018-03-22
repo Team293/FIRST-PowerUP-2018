@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.ClimberStop;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
@@ -27,7 +28,7 @@ public class Winch extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new ClimberStop());
     }
     /**
      * Move allows the climber to climb.

@@ -9,6 +9,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -44,7 +45,7 @@ public class Afterburner extends Subsystem {
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		//setDefaultCommand(new ExampleCommand());
+		setDefaultCommand(new AfterburnerStop());
 	}
 	/**
 	 * The moves the afterburners with a percent output

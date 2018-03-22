@@ -34,8 +34,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public static Joystick leftStick = new Joystick(0);
 	public static Joystick rightStick = new Joystick(1);
-	public static Joystick launchpad=new Joystick(2);
-	public static Joystick launchpad2=new Joystick(3);
+	public static Joystick annaLeft=new Joystick(2);
+	public static Joystick annaRight=new Joystick(3);
 	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
 		// Note that index 0 is not assigned, so that the numbers match!
@@ -67,32 +67,32 @@ public class OI {
 		// As such, we will do the same "vectorization" of their objects, as it helps
 		// with recording for use in autonomous replay.
 		JoystickButton[] launch1= {null, 
-		new JoystickButton(launchpad, 1),
-		new JoystickButton(launchpad, 2),
-		new JoystickButton(launchpad, 3),
-		new JoystickButton(launchpad, 4),
-		new JoystickButton(launchpad, 5),
-		new JoystickButton(launchpad, 6),
-		new JoystickButton(launchpad, 7),
-		new JoystickButton(launchpad, 8),
-		new JoystickButton(launchpad, 9),
-		new JoystickButton(launchpad, 10),
-		new JoystickButton(launchpad, 11),
-		new JoystickButton(launchpad, 12) };
+		new JoystickButton(annaLeft, 1),
+		new JoystickButton(annaLeft, 2),
+		new JoystickButton(annaLeft, 3),
+		new JoystickButton(annaLeft, 4),
+		new JoystickButton(annaLeft, 5),
+		new JoystickButton(annaLeft, 6),
+		new JoystickButton(annaLeft, 7),
+		new JoystickButton(annaLeft, 8),
+		new JoystickButton(annaLeft, 9),
+		new JoystickButton(annaLeft, 10),
+		new JoystickButton(annaLeft, 11),
+		new JoystickButton(annaLeft, 12) };
 
 		JoystickButton[] launch2= {null, 
-		new JoystickButton(launchpad2, 1),
-		new JoystickButton(launchpad2, 2),
-		new JoystickButton(launchpad2, 3),
-		new JoystickButton(launchpad2, 4),
-		new JoystickButton(launchpad2, 5),
-		new JoystickButton(launchpad2, 6),
-		new JoystickButton(launchpad2, 7),
-		new JoystickButton(launchpad2, 8),
-		new JoystickButton(launchpad2, 9),
-		new JoystickButton(launchpad2, 10),
-		new JoystickButton(launchpad2, 11),
-		new JoystickButton(launchpad2, 12) };
+		new JoystickButton(annaRight, 1),
+		new JoystickButton(annaRight, 2),
+		new JoystickButton(annaRight, 3),
+		new JoystickButton(annaRight, 4),
+		new JoystickButton(annaRight, 5),
+		new JoystickButton(annaRight, 6),
+		new JoystickButton(annaRight, 7),
+		new JoystickButton(annaRight, 8),
+		new JoystickButton(annaRight, 9),
+		new JoystickButton(annaRight, 10),
+		new JoystickButton(annaRight, 11),
+		new JoystickButton(annaRight, 12) };
 
 		
 		launch1[1].whileHeld(new PincherExtend());
@@ -100,35 +100,29 @@ public class OI {
 		
 		//button3.whileHeld(new FeedToUpperPosition());
 		launch1[3].whileHeld(new FeederRelease(-.5));
-		launch1[3].whenReleased(new FeederStop());
 
-		launch1[4].whenPressed(new FeederSetAngle(4));
+		launch1[4].whenPressed(new FeederSetAngle(3));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
 
 		launch1[6].whenPressed(new FeederSetAngle(0));
- 		
+ 		launch2[8].whenPressed(new FeederSetAngle(1));
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
 		launch1[7].whileHeld(new ClimberReverse());
-		launch1[7].whenReleased(new ClimberStop());
 
 		launch1[8].whileHeld(new Climb());	
-		launch1[8].whenReleased(new ClimberStop());
 
 		launch1[9].whenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button10.whenPressed(new AfterburnerShoot());
 		launch1[10].whenPressed(new AfterburnerRPM(1));
-		launch1[10].whenReleased(new AfterburnerStop());
 
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
-		launch1[11].whenReleased(new AfterburnerStop());
 
 		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
-		launch1[12].whenReleased(new AfterburnerStop());
 
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new FeederMoveAnglePower());

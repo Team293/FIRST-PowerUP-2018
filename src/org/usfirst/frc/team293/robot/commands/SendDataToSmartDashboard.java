@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * This command logs various data to the smartdashboard and always runs
  */
 public class SendDataToSmartDashboard extends Command {
 
