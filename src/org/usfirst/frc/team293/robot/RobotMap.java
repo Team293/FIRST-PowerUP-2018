@@ -22,12 +22,12 @@ public class RobotMap {
 	//////////Digital Inputs///////
 			leftEncoder[] = {0, 1}, 	//Drivetrain Encoders
 			rightEncoder[] = {2,3},
-			winchPoleLimit = 5,
+			winchPoleLimit = 6,
 			imu = 5,
 			feederUpperLimit = 9,
 			feederLowerLimit = 8,
 			feederBoxLimit = 7,
-			angleEncoder[] = {10,11},
+			angleEncoder[] = {4,5},
 	////////Pneumatics/////////
 			compressor = 0,
 			leftCylinderOpen = 0,

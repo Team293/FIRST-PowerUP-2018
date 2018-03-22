@@ -45,7 +45,7 @@ public class Afterburner extends Subsystem {
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new AfterburnerStop());
+		//setDefaultCommand(new AfterburnerStop());
 	}
 	/**
 	 * The moves the afterburners with a percent output

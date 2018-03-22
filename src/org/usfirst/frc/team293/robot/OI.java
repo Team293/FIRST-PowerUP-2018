@@ -63,6 +63,7 @@ public class OI {
 				   new JoystickButton(rightStick,8), 
 				   new JoystickButton(rightStick,9), 
 				   new JoystickButton(rightStick,10),};
+	
 		// Note that for 2018, the launchpad(s) were replaced by 2 more joysticks.
 		// As such, we will do the same "vectorization" of their objects, as it helps
 		// with recording for use in autonomous replay.
@@ -93,9 +94,9 @@ public class OI {
 		new JoystickButton(annaRight, 10),
 		new JoystickButton(annaRight, 11),
 		new JoystickButton(annaRight, 12) };
-
+	
 		
-		launch1[1].whileHeld(new PincherExtend());
+		//launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whenReleased(new PincherRetract());
 		
 		launch1[3].whileHeld(new FeederRelease(-.9));
@@ -132,7 +133,7 @@ public class OI {
 //		button22.toggleWhenPressed(new RunAutoLogger());
 		
 		// Test button options! Remove prior to match play! ----------------
-		left[2].toggleWhenPressed(new RunAutoLogger());
+	//	left[2].toggleWhenPressed(new RunAutoLogger());
 		//left[3].whenPressed(new StopAutoLogger());
 		
 		//right[2].whenPressed(new TankDriveAutoReplay());
@@ -140,6 +141,7 @@ public class OI {
 		//right[1].whileHeld(new MoveServoJoystick());
 		
 	}
+}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -172,4 +174,4 @@ public class OI {
 	// stop it cold when the button is pressed a second time (<cmd>.interrupted).
 	// button.toggleWhenPressed(new ExampleCommand());
 	// Yeah, that info is kinda hidden in the docs!
-}
+

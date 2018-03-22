@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.FeederSetAngle;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,19 +22,20 @@ public class FeederAngle extends Subsystem {
 	private DigitalInput lowerLimit;
 	private TalonSRX angleMotor;
 
-	private final double[] positionTarget = {-10,50,100,250};	//THESE ARE TEMP
+	private final double[] positionTarget = {1,50,50,110};	//THESE ARE TEMP
 	private double setpoint;
-	private double kP = 0.0002;
+	private double kP = 0.01;
 	public Encoder angleEncoder;
 	public FeederAngle(){
 		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);
 		lowerLimit = new DigitalInput(RobotMap.feederLowerLimit);
 		angleMotor = new TalonSRX(RobotMap.feederShooterAngle);
 		angleEncoder = new Encoder(RobotMap.angleEncoder[0],RobotMap.angleEncoder[1], false, Encoder.EncodingType.k4X);
+		angleEncoder.setReverseDirection(true);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+       // setDefaultCommand(new FeederSetAngle(1));
     }
     /**
      * This runs at the init of the robot and brings the arm up to the top limit
@@ -61,7 +63,7 @@ public class FeederAngle extends Subsystem {
 		} else if (lowerLimit.get() && index == 3) {
 			angleMotor.set(ControlMode.PercentOutput, 0);
 		} else {
-			angleMotor.set(ControlMode.PercentOutput, (setpoint - angleEncoder.getRaw())* kP);	//I assume a positive is an up
+			angleMotor.set(ControlMode.PercentOutput,  (angleEncoder.getRaw()-setpoint)* kP);	//I assume a positive is an up
 		}
 	}
 	

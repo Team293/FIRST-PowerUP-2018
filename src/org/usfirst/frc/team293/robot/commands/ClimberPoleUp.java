@@ -15,12 +15,12 @@ public class ClimberPoleUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.Climber.Up();
+    	Robot.winch.Up();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	sensorDetect = Robot.Climber.windOut();
+    	sensorDetect = Robot.winch.windOut();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,12 +30,12 @@ public class ClimberPoleUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Climber.stopWind();
+    	Robot.winch.stopWind();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.Climber.stopWind();
+    	Robot.winch.stopWind();
     }
 }
