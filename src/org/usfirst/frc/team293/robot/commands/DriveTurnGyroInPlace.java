@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveTurnInPlace extends Command {
-		double deltaTheta;
+public class DriveTurnGyroInPlace extends Command {
+		double angle;
+		double rate;
 		boolean isFinished = false;
-    public DriveTurnInPlace(double angle) {
-    	deltaTheta = angle;
+    public DriveTurnGyroInPlace(double angle, double rate) {
+    	this.angle = angle;
+    	this.rate = rate;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
@@ -25,7 +27,7 @@ public class DriveTurnInPlace extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    //	isFinished = Robot.driveTrain.newGyroTurnInPlace(deltaTheta);
+    	isFinished = Robot.driveTrain.gyroTurnInPlace(angle, rate);
     }
 
     // Make this return true when this Command no longer needs to run execute()

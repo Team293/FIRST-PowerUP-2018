@@ -3,16 +3,18 @@ package org.usfirst.frc.team293.robot.commands;
 import org.usfirst.frc.team293.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class SendDataToSmartDashboard extends Command {
-
-    public SendDataToSmartDashboard() {
+public class DriveStraightChristian extends Command {
+	double speed;
+	double distanceToTravel;
+    public DriveStraightChristian(double speed, double distanceToTravel) {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+      	requires(Robot.driveTrain);
+      	this.speed = speed;
+      	this.distanceToTravel = distanceToTravel;
     }
 
     // Called just before this Command runs the first time
@@ -21,20 +23,17 @@ public class SendDataToSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.leftEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.rightEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.imu.getFusedHeading());
-    	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
-    	SmartDashboard.putNumber("Auto Distance Driven", Robot.driveTrain.readEnc()[0]);
+    	Robot.driveTrain.feedForwardEncoderDrive(.25, .25);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.driveTrain.readEnc()[0]>distanceToTravel;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.tankdrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

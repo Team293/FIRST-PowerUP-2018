@@ -1,16 +1,13 @@
-package org.usfirst.frc.team293.robot.commands;
-
-import org.usfirst.frc.team293.robot.Robot;
+package Autonomouses;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class SendDataToSmartDashboard extends Command {
+public class LeftSide extends Command {
 
-    public SendDataToSmartDashboard() {
+    public LeftSide() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,11 +18,6 @@ public class SendDataToSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.leftEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.rightEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.imu.getFusedHeading());
-    	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
-    	SmartDashboard.putNumber("Auto Distance Driven", Robot.driveTrain.readEnc()[0]);
     }
 
     // Make this return true when this Command no longer needs to run execute()

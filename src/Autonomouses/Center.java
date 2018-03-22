@@ -1,30 +1,31 @@
 package Autonomouses;
 
-import org.usfirst.frc.team293.robot.Robot;
-
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveStraightTimed extends TimedCommand {
+public class Center extends Command {
 
-    public DriveStraightTimed(double timeout) {
-        super(timeout);
-        requires(Robot.driveTrain);
+    public Center() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.tankdrive(.5, .5);
     }
 
-    // Called once after timeout
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
     protected void end() {
     }
 

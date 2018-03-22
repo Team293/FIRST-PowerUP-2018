@@ -23,7 +23,6 @@ import org.usfirst.frc.team293.robot.subsystems.autoLogger;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
-import Autonomouses.MiddleToAutoLine;
 import Autonomouses.ToAutoLine;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -145,7 +144,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		SmartDashboard.putBoolean("switchLeft?", switchLeft);
 		Scheduler.getInstance().run();
 	}
 

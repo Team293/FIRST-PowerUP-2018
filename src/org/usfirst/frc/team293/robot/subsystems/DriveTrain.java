@@ -225,7 +225,7 @@ public class DriveTrain extends Subsystem {
     /**
      * This is from 2017, allows the robot to drive in place. 
      * @param setangle the amount to turn
-     * @param rate the angular rate to turn at
+     * @param rate the angular rate to turn at per loop (rate < 3 please)
      * @return	if it's done or not
      */
     public boolean gyroTurnInPlace(double setangle, double rate){
