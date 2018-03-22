@@ -143,10 +143,7 @@ public class DriveTrain extends Subsystem {
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
     	double leftRate=leftEncoder.getRate();
     	double rightRate=rightEncoder.getRate();
-    	
-    	//SmartDashboard.putNumber("leftEncoder", leftRate);
-    	//SmartDashboard.putNumber("rightEncoder", rightRate);
-    	
+
     	if (Math.abs(leftStick) < .1){ 
     		leftRateSetpoint= 0; //if within deadband, setpoint is set to 0
     	}
@@ -196,7 +193,12 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(leftPower,rightPower);	
 
     }
-//////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
+
+    
+    
+    
+    
+    //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
      * Drives straight using the encoders and a rate to drive 
      * @param speed to drive at I believe from -1 to 1
