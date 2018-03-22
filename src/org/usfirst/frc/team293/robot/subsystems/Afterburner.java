@@ -26,14 +26,14 @@ public class Afterburner extends Subsystem {
 	private TalonSRX lMotor, rMotor;
 	
 	public Afterburner(){
-		lMotor = new TalonSRX(RobotMap.afterBurner);
+		lMotor = new TalonSRX(RobotMap.afterBurnerLeft);
 		lMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
 		lMotor.clearStickyFaults(10);
 		lMotor.setSensorPhase(false);
 		lMotor.config_kF(0, .0422, 10);
 		lMotor.config_kP(0, .15, 10);
 		lMotor.config_kD(0, .4, 0);
-		rMotor = new TalonSRX(2);
+		rMotor = new TalonSRX(RobotMap.afterBurnerRight);
 		rMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 1000);
 		rMotor.setSensorPhase(false);
 		rMotor.clearStickyFaults(10);

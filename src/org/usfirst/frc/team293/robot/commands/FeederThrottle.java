@@ -49,14 +49,13 @@ public class FeederThrottle extends Command {
 	@Override
 	protected void end() {
 		Robot.feeder.shoot(0);
-		//Command FeedUp = new FeederFullUp();
-		//FeedUp.start();
+
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		new FeederStop();
+    	Robot.feeder.shoot(0);
 	}
 }

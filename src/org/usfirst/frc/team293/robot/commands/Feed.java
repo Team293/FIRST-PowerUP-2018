@@ -9,7 +9,7 @@ public class Feed extends CommandGroup {
 
     public Feed() {
     	addSequential(new PincherRetract());
-    	addSequential(new FeederFullDown());
+    	addSequential(new FeederSetAngle(3));
        
         
     }

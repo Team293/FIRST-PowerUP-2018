@@ -15,7 +15,7 @@ public class FeederSensorsMonitor extends Subsystem {
 	DigitalInput Feederlimit;
 	
 	public FeederSensorsMonitor(){
-		Feederlimit = new DigitalInput(7);
+		Feederlimit = new DigitalInput(RobotMap.feederBoxLimit);
 	//	PinchPhotoSwitch = new DigitalInput(RobotMap.PinchPhotoSwitch);
 	}
 
@@ -26,8 +26,8 @@ public class FeederSensorsMonitor extends Subsystem {
    // public boolean getPhotoSwitch(){
     	//return(PinchPhotoSwitch.get());
    // }
-    public boolean getFeederLimit(){
+/*    public boolean getFeederLimit(){
     	return(Feederlimit.get());
-    }
+    }*/
 }
 

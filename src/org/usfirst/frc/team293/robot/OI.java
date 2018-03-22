@@ -7,10 +7,8 @@ import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.PincherExtend;
 import org.usfirst.frc.team293.robot.commands.Feed;
 //import org.usfirst.frc.team293.robot.commands.FeedToExchange;
-import org.usfirst.frc.team293.robot.commands.FeederAngle;
-import org.usfirst.frc.team293.robot.commands.FeederFullDown;
-import org.usfirst.frc.team293.robot.commands.FeederFullUp;
 import org.usfirst.frc.team293.robot.commands.FeederRelease;
+import org.usfirst.frc.team293.robot.commands.FeederSetAngle;
 import org.usfirst.frc.team293.robot.commands.FeederThrottle;
 import org.usfirst.frc.team293.robot.commands.FeederMoveAnglePower;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleUp;
@@ -95,66 +93,21 @@ public class OI {
 		new JoystickButton(launchpad2, 10),
 		new JoystickButton(launchpad2, 11),
 		new JoystickButton(launchpad2, 12) };
-		// The launchpad buttons are "special" as they are identified by explicit name
 
-/*		JoystickButton button1=new JoystickButton(launchpad, 1);
-		JoystickButton button2=new JoystickButton(launchpad, 2);
-		JoystickButton button3=new JoystickButton(launchpad, 3);
-		JoystickButton button4=new JoystickButton(launchpad, 4);
-		JoystickButton button5=new JoystickButton(launchpad, 5);
-		JoystickButton button6=new JoystickButton(launchpad, 6);
-		JoystickButton button7=new JoystickButton(launchpad, 7);
-		JoystickButton button8=new JoystickButton(launchpad, 8);
-		JoystickButton button9=new JoystickButton(launchpad, 9);	
-		JoystickButton button10=new JoystickButton(launchpad, 10);
-		JoystickButton button11=new JoystickButton(launchpad, 11);
-		JoystickButton button12=new JoystickButton(launchpad, 12);
-		JoystickButton button21=new JoystickButton(launchpad2, 1);
-		JoystickButton button22=new JoystickButton(launchpad2, 2);
-		JoystickButton button23=new JoystickButton(launchpad2, 3);
-		JoystickButton button24=new JoystickButton(launchpad2, 4);
-		JoystickButton button25=new JoystickButton(launchpad2, 5);
-		JoystickButton button26=new JoystickButton(launchpad2, 6);
-		JoystickButton button27=new JoystickButton(launchpad2, 7);
-		JoystickButton button28=new JoystickButton(launchpad2, 8);
-		JoystickButton button29=new JoystickButton(launchpad2, 9);	
-		JoystickButton button210=new JoystickButton(launchpad2, 10);
-		JoystickButton button211=new JoystickButton(launchpad2, 11);
-		JoystickButton button212=new JoystickButton(launchpad2, 12);
-*/		
-		// OK, everything is defined, now do some command assignments!
 		
-		// Driver joystick assignments: ---------------------------
-		//left[1].whenReleased(new StopFeeder());
-		//left[2].toggleWhenPressed(new AfterburnerFullThrottle());
-		//left[2].whenReleased(new StopAfterburner());
-		//left[3].whileHeld(new AfterburnerAdjustable());
-		//left[3].whenReleased(new StopAfterburner());
-		//left[4].whileHeld(new AfterburnerRPM(3574.2));
-		//left[4].whenReleased(new StopAfterburner());
-		//left[5].whenPressed(new CalibrateFeeder());
-		//button1.whenPressed(new FeedToExchange());
-		
-		// First operator joystick: ------------------------
-//		button1.whileHeld(new Extend_Cylinder());
-//		button1.whenReleased(new Retract_Cylinder());
 		launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whenReleased(new PincherRetract());
 		
-
-		launch1[2].whenPressed(new FeederAngle(0));
-
 		//button3.whileHeld(new FeedToUpperPosition());
 		launch1[3].whileHeld(new FeederRelease(-.5));
 		launch1[3].whenReleased(new FeederStop());
 
-		launch1[4].whenPressed(new FeederFullDown());
+		launch1[4].whenPressed(new FeederSetAngle(4));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
-		launch1[5].whenReleased(new FeederStop());
 
-		launch1[6].whenPressed(new FeederFullUp());
-		
+		launch1[6].whenPressed(new FeederSetAngle(0));
+ 		
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
 		launch1[7].whileHeld(new ClimberReverse());

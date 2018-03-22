@@ -12,7 +12,8 @@ public class RobotMap {
 			rightDrive[] = {7,8,9}, 	
 			leftDrive[] = {4,5,6},
 			climbMotors[] = {1,2},
-			afterBurner = 3,
+			afterBurnerLeft = 3,
+			afterBurnerRight = 2,
 			feederShooterLeft = 0,
 			feederShooterRight = 1,
 			feederShooterAngle = 5,
@@ -25,6 +26,8 @@ public class RobotMap {
 			imu = 5,
 			feederUpperLimit = 9,
 			feederLowerLimit = 8,
+			feederBoxLimit = 7,
+			angleEncoder[] = {10,11},
 	////////Pneumatics/////////
 			compressor = 0,
 			leftCylinderOpen = 0,

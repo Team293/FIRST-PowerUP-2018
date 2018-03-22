@@ -34,16 +34,16 @@ public class Winch extends Subsystem {
      * @param pwm Is the speed to set the climber motors
      */
     public void move(double pwm) {
-    	Climber1.set(pwm);
-    	Climber2.set(pwm);
+    	Climber1.set(1);
+    	Climber2.set(1);
     }
     /**
      * Move allows the climber to reverse inward.
      * @param pwm Is the speed to set the climber motors
      */
     public void reverse(double pwm) {
-    	Climber1.set(-pwm);
-    	Climber2.set(-pwm);
+    	Climber1.set(-1);
+    	Climber2.set(-1);
     }  
     /**
      * This raises the pole with the hook
