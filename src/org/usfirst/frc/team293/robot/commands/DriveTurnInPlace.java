@@ -21,7 +21,6 @@ public class DriveTurnInPlace extends Command {
     protected void initialize() {
     	Robot.driveTrain.resetGyro();
     	Robot.driveTrain.resetEnc();
-    	Robot.driveTrain.resetInitialPower();
     }
 
     // Called repeatedly when this Command is scheduled to run

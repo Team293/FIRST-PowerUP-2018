@@ -141,8 +141,8 @@ public class DriveTrain extends Subsystem {
      */
 
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
-    	double leftRate=leftEncoder.getRate();
-    	double rightRate=rightEncoder.getRate();
+    	double leftRate = leftEncoder.getRate();
+    	double rightRate = rightEncoder.getRate();
 
     	if (Math.abs(leftStick) < .1){ 
     		leftRateSetpoint= 0; //if within deadband, setpoint is set to 0
@@ -161,42 +161,28 @@ public class DriveTrain extends Subsystem {
     	double rightpowerOffset = (rightRateSetpoint-rightRate)*0.05; //calculates offset percent power added to motor based on error between setpoint and current rate
     	double leftpowerOffset = (leftRateSetpoint-leftRate)*0.05;    //calculates offset percent power added to motor based on error between setpoint and current rate
     	
-    	leftPowerinitial = 1.0*leftRateSetpoint/12.5;
-    	rightPowerinitial = 1.0*rightRateSetpoint/10;
+    	leftPowerinitial = leftRateSetpoint/10;
+    	rightPowerinitial = rightRateSetpoint/10;
     	
-    
-    	//used to limit output to between -1 and 1
-    	if (Math.abs(leftpowerOffset+leftPowerinitial)>1){
-    		if (Math.signum(leftpowerOffset+leftPowerinitial) == 1){
+    	leftPower = leftpowerOffset+leftPowerinitial; //used to limit output to between -1 and 1
+    	
+    	if (leftPower>1) {
     		leftPower = 1;
-    		}
-    		else{
-    		leftPower = -1;	
-    		}
-    		
-    		}
-    	else{
-    		leftPower = leftpowerOffset+leftPowerinitial;
+    	} else if (leftPower < -1) {
+    		leftPower = -1;
     	}
-    	if (Math.abs(rightpowerOffset+rightPowerinitial)>1){
-    		if (Math.signum(rightpowerOffset+rightPowerinitial) == 1){
-    		rightPower = 1;
-    		}
-    		else{
+    	
+    	rightPower = rightpowerOffset+rightPowerinitial;
+    	if (rightPower > 1) {
+			rightPower = 1;
+    	} else if (rightPower < -1) {
     		rightPower = -1;	
-    		}
-    		
-    		}
-    	else{
-    		rightPower = rightpowerOffset+rightPowerinitial;
-    	}    	
+		}
+    		   	
     	drive.tankDrive(leftPower,rightPower);	
 
     }
 
-    
-    
-    
     
     //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
@@ -276,13 +262,7 @@ public class DriveTrain extends Subsystem {
     	error = 0;
     	angle = 0;
     }
-    /**
-     * Resets some initial power thing that?
-     */
-    public void resetInitialPower(){
-    	initialL = 0;
-    	initialR = 0;
-    }
+
     /**
      * This reads the distance traveled (accounts for wheel diameter)
      * @return encoder array containing distances
