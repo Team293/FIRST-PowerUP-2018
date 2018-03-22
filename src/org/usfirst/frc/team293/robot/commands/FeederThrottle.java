@@ -21,7 +21,6 @@ public class FeederThrottle extends Command {
 	public FeederThrottle(double FeederCP100MS) {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.feeder);
-		requires(Robot.FeedSensors);
 		rpm = FeederCP100MS;
 	}
 
@@ -42,7 +41,7 @@ public class FeederThrottle extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() { 
-		return (!(Robot.FeedSensors.getFeederLimit()));
+		return (!(Robot.feeder.getFeederLimit()));
 	}
 
 	// Called once after isFinished returns true

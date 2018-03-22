@@ -14,7 +14,7 @@ import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 import org.usfirst.frc.team293.robot.subsystems.Afterburner;
 //import org.usfirst.frc.team293.robot.subsystems.ClimberRelease;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team293.robot.subsystems.FeederSensorsMonitor;
+import org.usfirst.frc.team293.robot.subsystems.FeederAngle;
 import org.usfirst.frc.team293.robot.subsystems.FeederShooter;
 //import org.usfirst.frc.team293.robot.subsystems.LEDs;
 import org.usfirst.frc.team293.robot.subsystems.Pincher;
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 	public static final Pincher pincher = new Pincher();
 	public static final DriveTrain driveTrain =new DriveTrain();
 
-	public static final FeederSensorsMonitor FeedSensors = new FeederSensorsMonitor();
+	public static final FeederAngle feederAngle = new FeederAngle();
 	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(62);
 	public static final Winch Climber = new Winch();
 	public static final ADIS16448_IMU imu = new ADIS16448_IMU();
@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
 		m_oi = new OI();
 		CameraServer.getInstance().startAutomaticCapture();
 		pdp.clearStickyFaults();
@@ -81,6 +82,8 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		 //moves feeder to reference point (upper limit switch), gets offset angle from encoder
+		calibrationCommand = new FeederCalibrate();
+		calibrationCommand.start();
 	}
 
 	/**
@@ -152,8 +155,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		calibrationCommand = new FeederCalibrate();
-		calibrationCommand.start();
+
 		//log = new RunAutoLogger();
 		//log.start();
 		if (m_autonomousCommand != null) {

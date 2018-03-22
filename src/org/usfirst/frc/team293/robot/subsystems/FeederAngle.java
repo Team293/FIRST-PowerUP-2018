@@ -34,15 +34,33 @@ public class FeederAngle extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    /**
+     * This runs at the init of the robot and brings the arm up to the top limit
+     * @return
+     */
 	public boolean calibrate() {
 		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
 		return upperLimit.get();
 	}
-	
-	public void setAngleSetpoint(int index){
+	/**
+	 * Once it hits the top limit, then reset the encoder.
+	 */
+	public void resetEncoder(){
+		angleEncoder.reset();
+	}
+	/**
+	 * Unless we're at the designated position and at the limit, then go to the specified angle
+	 * @param index to go to
+	 */
+	public void setAngleSetpoint(int index) {
 		setpoint = positionTarget[index];
-		
-		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
+		if (upperLimit.get() && index == 0) {
+			angleMotor.set(ControlMode.PercentOutput, 0);
+		} else if (lowerLimit.get() && index == 3) {
+			angleMotor.set(ControlMode.PercentOutput, 0);
+		} else {
+			angleMotor.set(ControlMode.PercentOutput, (setpoint - angleEncoder.getRaw())* kP);	//I assume a positive is an up
+		}
 	}
 	
 	public void moveAnglePower(double power){	//this is just power and needs to change

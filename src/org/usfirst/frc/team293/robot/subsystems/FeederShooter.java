@@ -21,25 +21,17 @@ public class FeederShooter extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private TalonSRX lMotor, rMotor;
-	public TalonSRX angleMotor;
-	public DigitalInput upperLimit;
-	public DigitalInput lowerLimit;
+	private DigitalInput Feederlimit;
 	///below is variables for angle
-	private final double[] positionTarget = {-10,50,100,250};	//THESE ARE TEMP
-	private double setpoint;
-	private double kP = 0.0002;
-	public Encoder angleEncoder;
+
 	public FeederShooter() {
-		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);
-		lowerLimit = new DigitalInput(RobotMap.feederLowerLimit);
-		
+		Feederlimit = new DigitalInput(RobotMap.feederBoxLimit);
 		
 		lMotor = new TalonSRX(RobotMap.feederShooterLeft);
 		lMotor.setSensorPhase(true);
 		rMotor = new TalonSRX(RobotMap.feederShooterRight);
 		rMotor.setSensorPhase(false);
-		angleMotor = new TalonSRX(RobotMap.feederShooterAngle);
-		angleEncoder = new Encoder(RobotMap.angleEncoder[0],RobotMap.angleEncoder[1], false, Encoder.EncodingType.k4X);
+
 		
 		lMotor.config_kF(0, .08, 10);
 		lMotor.config_kP(0, 0.1, 10);
@@ -72,18 +64,7 @@ public class FeederShooter extends Subsystem {
 	/**
 	 * 
 	 */
-	public boolean calibrate() {
-		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
-		return upperLimit.get();
-	}
-	
-	public void setAngleSetpoint(int index){
-		setpoint = positionTarget[index];
-		
-		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
-	}
-	
-	public void moveAnglePower(double power){	//this is just power and needs to change
-		angleMotor.set(ControlMode.PercentOutput, power);
-	}
+    public boolean getFeederLimit(){
+    	return(Feederlimit.get());
+    }
 }
