@@ -200,7 +200,7 @@ public class DriveTrain extends Subsystem {
     
     //////////////////////////////Gyro Stuff-->>>///////////////////////////////////////////////
     /**
-     * Drives straight using the encoders and a rate to drive 
+     * Drives straight using the encoders and a rate to drive with gyro
      * @param speed to drive at I believe from -1 to 1
      */
     public void velocityStraight(double speed){	///NOT DONE YET speed=-1,1 
@@ -218,30 +218,7 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(-(leftRateSetpoint-rightRate)*0.015+angle*.01,-(rightRateSetpoint-leftRate)*0.015-angle*.01);
     }
     /**
-     * Go straight a certain distance and at a certain velocity, uses the IMU and encoders
-     * @param distance to go in inches?
-     * @param velocity to go in I believe rotations?
-     * @return If it's done or not
-     */
-    public boolean goStraightDistanceVelocity(double distance, double velocity){
-    	inPosition = false;
-    	
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	angle=imu.getFusedHeading(fusionStatus);
-    	velocityOffsetL = -(velocity - leftEncoder.getRate())*0.01;
-    	velocityOffsetR = (velocity - rightEncoder.getRate())*0.01;//(rightEncoder.getRate() + velocity)*.01;
-    	angleOffset = angle*.05;
-    	offset = (angle-setpoint)*.02;
-    	drive.tankDrive(initialL + velocityOffsetL + angleOffset ,initialR + velocityOffsetR);
-    	initialL = initialL + velocityOffsetL;
-    	initialR = initialR + velocityOffsetR;
-    	if (Math.signum(leftEncoder.getDistance()-distance) == 1){
-    	inPosition = false;	
-    	}
-    	return inPosition;
-    }
-    /**
-     * Drives straight using the gyro and a power command to one wheel
+     * Drives straight using just the gyro and a power command to one wheel
      * @param speed The power to drive
      */
     public void gyroStraight(double speed) {
