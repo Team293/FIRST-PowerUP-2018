@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class DriveStraightTimed extends TimedCommand {
+public class DriveStraightDumbTimed extends TimedCommand {
 
-    public DriveStraightTimed(double timeout) {
+    public DriveStraightDumbTimed(double timeout) {
         super(timeout);
         requires(Robot.driveTrain);
     }

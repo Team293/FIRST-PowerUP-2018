@@ -23,6 +23,9 @@ import org.usfirst.frc.team293.robot.subsystems.autoLogger;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import Autonomouses.Center;
+import Autonomouses.LeftSide;
+import Autonomouses.RightSide;
 import Autonomouses.ToAutoLine;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -58,31 +61,34 @@ public class Robot extends TimedRobot {
 	public static final autoLogger DataLog = new autoLogger();
 	public boolean stop = false;
 
-	public static OI m_oi;
+	public static OI oi;
 	
 
-	Command m_autonomousCommand;
+	String autonomousChoice;
 	Command calibrationCommand;
-	//Command log;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	Command chosenCommand;
+	SendableChooser<String> autoChooser;	//remember auto chooser accepts any object as its type
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
+	 * In this case the sendable chooser is used with Strings and that's used in auto init
 	 */
 	@Override
-	public void robotInit() {
-		
-		m_oi = new OI();
-		CameraServer.getInstance().startAutomaticCapture();
+	public void robotInit() {	
+		oi = new OI();
 		pdp.clearStickyFaults();
-		m_chooser.addDefault("Default Auto", m_autonomousCommand);
-		m_chooser.addObject("To Auto Line", new ToAutoLine());
+		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
+		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
 		
-		SmartDashboard.putData("Auto mode", m_chooser);
-		 //moves feeder to reference point (upper limit switch), gets offset angle from encoder
-		calibrationCommand = new FeederCalibrate();
-		calibrationCommand.start();
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Dumb Auto", "Dumb Auto");
+		autoChooser.addObject("Start Left", "Start Left");
+		autoChooser.addObject("Start Center", "Start Center");
+		autoChooser.addObject("Start Right", "Start Right");
+		
+		SmartDashboard.putData("Auto mode", autoChooser);
+
 	}
 
 	/**
@@ -103,40 +109,29 @@ public class Robot extends TimedRobot {
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * chooser code works with the Java SmartDashboard.
+	 * The user selects their starting position and that command is run 
+	 * along with the game data grabbed in autoInit()
 	 */
 	@Override
 	public void autonomousInit() {
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.length() > 0){
-			if (gameData.charAt(0) == 'L'){
-				switchLeft = true;	
+			autonomousChoice = autoChooser.getSelected();
+			if (autonomousChoice == "Dumb Auto"){
+				chosenCommand = new ToAutoLine();
+			} else if (autonomousChoice == "Start Left") {
+				chosenCommand = new LeftSide(gameData);
+			} else if (autonomousChoice == "Start Center") {
+				chosenCommand = new Center(gameData);
+			} else if (autonomousChoice == "Start Right") {
+				chosenCommand = new RightSide(gameData);
 			}
-			else{
-				switchLeft = true;	
-			}
-		}
-		m_autonomousCommand = m_chooser.getSelected();
-		/*
-		
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
-		//new CalibrateFeeder();
+		} else {
+			chosenCommand = new ToAutoLine();
+		}	
+		chosenCommand.start();
 	}
 
 	/**
@@ -156,8 +151,8 @@ public class Robot extends TimedRobot {
 
 		//log = new RunAutoLogger();
 		//log.start();
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		if (chosenCommand != null) {
+			chosenCommand.cancel();
 		}
 		
 	}

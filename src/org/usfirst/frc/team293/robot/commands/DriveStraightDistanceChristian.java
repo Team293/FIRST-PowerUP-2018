@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveStraightChristian extends Command {
+public class DriveStraightDistanceChristian extends Command {
 	double speed;
 	double distanceToTravel;
-    public DriveStraightChristian(double speed, double distanceToTravel) {
+    public DriveStraightDistanceChristian(double speed, double distanceToTravel) {
         // Use requires() here to declare subsystem dependencies
       	requires(Robot.driveTrain);
       	this.speed = speed;
