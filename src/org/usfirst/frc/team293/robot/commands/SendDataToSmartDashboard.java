@@ -21,11 +21,14 @@ public class SendDataToSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Drive Encoder Left", Robot.driveTrain.leftEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive Encoder Right", Robot.driveTrain.rightEncoder.getRaw());
+    	SmartDashboard.putNumber("Drive Encoder Left Rate", Robot.driveTrain.leftEncoder.getRaw());
+    	SmartDashboard.putNumber("Drive Encoder Right Rate", Robot.driveTrain.rightEncoder.getRaw());
     	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.imu.getFusedHeading());
     	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
-    	SmartDashboard.putNumber("Auto Distance Driven", Robot.driveTrain.readEnc()[0]);
+    	SmartDashboard.putNumber("Encoder Distance Driven", Robot.driveTrain.readEnc()[0]);
+    	
+    	SmartDashboard.putNumber("Left Velocity Afterburner", Robot.afterBurner.lMotor.getSensorCollection().getPulseWidthVelocity());
+    	SmartDashboard.putNumber("Right Velocity Afterburner", Robot.afterBurner.rMotor.getSensorCollection().getPulseWidthPosition());
     }
 
     // Make this return true when this Command no longer needs to run execute()

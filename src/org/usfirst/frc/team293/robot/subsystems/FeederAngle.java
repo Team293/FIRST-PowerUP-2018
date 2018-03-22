@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -54,6 +55,7 @@ public class FeederAngle extends Subsystem {
 	 */
 	public void setAngleSetpoint(int index) {
 		setpoint = positionTarget[index];
+		SmartDashboard.putNumber("Angle Setpoint", setpoint);
 		if (upperLimit.get() && index == 0) {
 			angleMotor.set(ControlMode.PercentOutput, 0);
 		} else if (lowerLimit.get() && index == 3) {

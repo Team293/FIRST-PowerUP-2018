@@ -98,10 +98,9 @@ public class OI {
 		launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whenReleased(new PincherRetract());
 		
-		//button3.whileHeld(new FeedToUpperPosition());
-		launch1[3].whileHeld(new FeederRelease(-.5));
+		launch1[3].whileHeld(new FeederRelease(-.9));
 
-		launch1[4].whenPressed(new FeederSetAngle(3));
+		launch1[4].toggleWhenPressed(new FeederSetAngle(3));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
 
@@ -113,16 +112,16 @@ public class OI {
 
 		launch1[8].whileHeld(new Climb());	
 
-		launch1[9].whenPressed(new Feed());
+		launch1[9].toggleWhenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button10.whenPressed(new AfterburnerShoot());
-		launch1[10].whenPressed(new AfterburnerRPM(1));
+		launch1[10].toggleWhenPressed(new AfterburnerRPM(1));
 
 		//button11.whenPressed(new LEDsTest());
-		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
+		launch1[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
-		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
+		launch1[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new FeederMoveAnglePower());
