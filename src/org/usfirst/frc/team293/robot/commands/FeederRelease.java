@@ -25,15 +25,14 @@ public class FeederRelease extends Command {
     	// Called repeatedly when this Command is scheduled to run
     	@Override
     	protected void execute() {
-    		//Robot.Feeder.moverpm(OI.launchpad.getThrottle()*12200);
     			Robot.feeder.shoot(rpm);
-    		}
+    	}
     	
 
     	// Make this return true when this Command no longer needs to run execute()
     	@Override
     	protected boolean isFinished() { 
-    		return (!(Robot.feeder.getFeederLimit()));
+    		return false;
     	}
 
     	// Called once after isFinished returns true

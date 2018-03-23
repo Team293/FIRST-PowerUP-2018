@@ -1,5 +1,7 @@
 package Autonomouses;
 
+import org.usfirst.frc.team293.robot.commands.DriveStraightDistanceChristian;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,7 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Center extends CommandGroup {
 
     public Center(String choice) {
-    	if (choice.charAt(2) == 'L'){
+    	addSequential(new DriveStraightDistanceChristian(.5,50));
+    	if (choice.charAt(1) == 'L'){
+
     	}
         // Add Commands here:
         // e.g. addSequential(new Command1());

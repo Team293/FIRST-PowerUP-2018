@@ -6,6 +6,7 @@ import org.usfirst.frc.team293.robot.commands.DriveTankDefault;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.MotorSafety;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTrain extends Subsystem {
 	private SpeedController leftMotorOne, leftMotorTwo, leftMotorThree, rightMotorOne, rightMotorTwo, rightMotorThree;
 
-	public PigeonIMU imu;
+	public PigeonIMU pigeonImu;
 	private DifferentialDrive drive;
 	public Encoder leftEncoder, rightEncoder;
 	public boolean reverseDirection = false;
@@ -67,7 +68,7 @@ public class DriveTrain extends Subsystem {
 		rightMotorThree = new VictorSP(RobotMap.rightDrive[2]);
 		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorOne, rightMotorTwo, rightMotorThree);
 		
-		imu = new PigeonIMU(RobotMap.imu);    	
+		pigeonImu = new PigeonIMU(RobotMap.imu);    	
 		
 		drive = new DifferentialDrive(leftMotors, rightMotors);	
 		
@@ -83,6 +84,7 @@ public class DriveTrain extends Subsystem {
 		
 		leftEncoder.setSamplesToAverage(5);
 		rightEncoder.setSamplesToAverage(5);
+		drive.setSafetyEnabled(false);
 	}
 	/**
 	 * 
@@ -111,7 +113,7 @@ public class DriveTrain extends Subsystem {
      * @param leftStick input value -1 to 1
      * @param rightStick input value -1 to 1
      */
-    public void kennyDrive(double leftStick ,double rightStick){
+ /*   public void kennyDrive(double leftStick ,double rightStick){
     	
     	double leftRate = leftEncoder.getRate()/1000;
     	double rightRate = -rightEncoder.getRate()/1000;
@@ -131,10 +133,10 @@ public class DriveTrain extends Subsystem {
     	
     	//double leftRate=leftEncoder.getRate()/1000;
     	//double rightRate=-rightEncoder.getRate()/1000;
-    }
+    }*/
   
     /**
-     * Method for driving the robot based using 2 joystick inputs
+     * Method for driving the robot based using 2 joystick inputs positive is forward
      * using proportional feedback from encoders
      * @param leftStick Output from left joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
      * @param rightStick Output from right joystick processed within TankDriveDefault, input value -1 to 1. Serves as a percentage of full speed
@@ -191,7 +193,7 @@ public class DriveTrain extends Subsystem {
      */
     public void velocityStraight(double speed){	///NOT DONE YET speed=-1,1 
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	angle=imu.getFusedHeading(fusionStatus);
+    	angle=pigeonImu.getFusedHeading(fusionStatus);
      	
     	error=(angle-setpoint);
     	
@@ -209,9 +211,9 @@ public class DriveTrain extends Subsystem {
      */
     public void gyroStraight(double speed) {
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	imuStatus = (imu.getState() != PigeonIMU.PigeonState.NoComm);
+    	imuStatus = (pigeonImu.getState() != PigeonIMU.PigeonState.NoComm);
     	if (imuStatus) {
-	     	angle = imu.getFusedHeading(fusionStatus);
+	     	angle = pigeonImu.getFusedHeading(fusionStatus);
 	     	
 	    	error = (angle-setpoint);
 	        
@@ -231,7 +233,7 @@ public class DriveTrain extends Subsystem {
     public boolean gyroTurnInPlace(double setangle, double rate){
     	turning = false;
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	angle=imu.getFusedHeading(fusionStatus); ///Gets the angle
+    	angle=pigeonImu.getFusedHeading(fusionStatus); ///Gets the angle
     	setpoint+=rate;  //adds the rate into the setpoint to gradually change it
     	error=(angle-setpoint); //finds how far you are off from the setpoint
         
@@ -255,8 +257,8 @@ public class DriveTrain extends Subsystem {
 	 * Resets the gyro and related values
 	 */
     public void resetGyro() {
-    	imu.setFusedHeading(0.0, 0);
-    	imu.setYaw(0, 0);
+    	pigeonImu.setFusedHeading(0.0, 0);
+    	pigeonImu.setYaw(0, 0);
     	turning = false;
     	setpoint = 0;
     	error = 0;
@@ -268,10 +270,9 @@ public class DriveTrain extends Subsystem {
      * @return encoder array containing distances
      */
 	public double[] readEnc() {
-		double leftDistance = Math.abs((leftEncoder.getRaw()*3.14*4)/1024);
-		double rightDistance = Math.abs((rightEncoder.getRaw()*3.14*4)/1024);
+		double leftDistance = Math.abs((leftEncoder.getRaw()*3.14*4)/512);
+		double rightDistance = Math.abs((rightEncoder.getRaw()*3.14*4)/512);
 		double[] encoders = {(leftDistance+rightDistance)/2,leftDistance, rightDistance};
 		return encoders;
 	}
-
 }

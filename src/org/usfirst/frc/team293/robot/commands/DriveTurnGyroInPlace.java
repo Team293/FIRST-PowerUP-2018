@@ -11,6 +11,11 @@ public class DriveTurnGyroInPlace extends Command {
 		double angle;
 		double rate;
 		boolean isFinished = false;
+		/**
+		 * 
+		 * @param angle the total angle to travel
+		 * @param rate Is the amount of degrees per iteration
+		 */
     public DriveTurnGyroInPlace(double angle, double rate) {
     	this.angle = angle;
     	this.rate = rate;

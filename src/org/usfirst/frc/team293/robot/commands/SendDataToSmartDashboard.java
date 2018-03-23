@@ -23,7 +23,7 @@ public class SendDataToSmartDashboard extends Command {
     protected void execute() {
     	SmartDashboard.putNumber("Drive Encoder Left Rate", Robot.driveTrain.leftEncoder.getRaw());
     	SmartDashboard.putNumber("Drive Encoder Right Rate", Robot.driveTrain.rightEncoder.getRaw());
-    	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.imu.getFusedHeading());
+    	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.pigeonImu.getFusedHeading());
     	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
     	SmartDashboard.putNumber("Encoder Distance Driven", Robot.driveTrain.readEnc()[0]);
     	

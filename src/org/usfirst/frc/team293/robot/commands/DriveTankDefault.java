@@ -28,6 +28,14 @@ public class DriveTankDefault extends Command {
      * @return Array containing processed left and right inputs 
      */
     public double[] stickCooker(double right, double left){
+    	
+		return new double[] {outright, outleft};
+    }
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+
+    	right = OI.rightStick.getY();
+    	left  = OI.leftStick.getY();
     	double in1 = 0.35;
     	double out1 = 0.25;
     	
@@ -43,18 +51,8 @@ public class DriveTankDefault extends Command {
     	} else { 
     		outleft = ls * (out1 + ( (ls * left)- in1 )*(1-out1)/(1-in1));
     	}
-		return new double[] {outright, outleft};
-    }
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-
-    	right = OI.rightStick.getY();
-    	left  = OI.leftStick.getY();
-    	double[] cookedValues = this.stickCooker(right, left);
-    	right = cookedValues[0];
-    	left = cookedValues[1];
-
-    	Robot.driveTrain.feedForwardEncoderDrive((-1*left), (-1*right));
+    	
+    	Robot.driveTrain.feedForwardEncoderDrive((-1*outleft), (-1*outright));
     }
 
     // Make this return true when this Command no longer needs to run execute()
