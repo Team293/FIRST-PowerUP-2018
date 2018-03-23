@@ -19,6 +19,7 @@ import org.usfirst.frc.team293.robot.subsystems.FeederAngle;
 import org.usfirst.frc.team293.robot.subsystems.FeederShooter;
 //import org.usfirst.frc.team293.robot.subsystems.LEDs;
 import org.usfirst.frc.team293.robot.subsystems.Pincher;
+import org.usfirst.frc.team293.robot.subsystems.SmartDashboardMonitorOutputs;
 import org.usfirst.frc.team293.robot.subsystems.Winch;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
 	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(62);
 
 	
-	//public String gameData;
+	public String gameData;
 	public static boolean switchLeft;
 	public boolean scaleLeft;
 	public static final Pincher pincher = new Pincher();
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 	public static final FeederAngle feederAngle = new FeederAngle();
 	public static final Winch winch = new Winch();
 //	public static final ADIS16448_IMU imu = new ADIS16448_IMU();
+	public static final SmartDashboardMonitorOutputs monitor = new SmartDashboardMonitorOutputs();
 	public static final AutoLogger dataLogger = new AutoLogger();
 	public boolean stop = false;
 
@@ -118,7 +120,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
-		/*
+		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.length() > 0){
 			autonomousChoice = autoChooser.getSelected();
@@ -134,7 +136,7 @@ public class Robot extends TimedRobot {
 		} else {
 			chosenCommand = new ToAutoLine();
 		}	
-		chosenCommand.start();*/
+		chosenCommand.start();
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class FeederAngle extends Subsystem {
 		} else if (lowerLimit.get() && index == 3) {
 			angleMotor.set(ControlMode.PercentOutput, 0);
 		} else {
-			angleMotor.set(ControlMode.PercentOutput,  (angleEncoder.getRaw()-setpoint)* kP);	//I assume a positive is an up
+			angleMotor.set(ControlMode.PercentOutput,  (setpoint - angleEncoder.get() )* kP);	//I assume a positive is an up
 		}
 	}
 	
