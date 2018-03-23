@@ -15,6 +15,9 @@ import org.usfirst.frc.team293.robot.commands.ClimberPoleUp;
 import org.usfirst.frc.team293.robot.commands.ClimberPoleDown;
 import org.usfirst.frc.team293.robot.commands.PincherRetract;
 import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
+
+import Autonomouses.ButtonLogic;
+
 //import org.usfirst.frc.team293.robot.commands.StopAutoLogger;
 //import org.usfirst.frc.team293.robot.commands.MoveServoJoystick;
 import org.usfirst.frc.team293.robot.commands.AfterburnerStop;
@@ -38,6 +41,8 @@ public class OI {
 	public static Joystick annaRight=new Joystick(3);
 	public static JoystickButton[] launch1;
 	public static JoystickButton[] launch2;
+	public static ButtonLogic[] theButtons = new ButtonLogic[30];
+	public static int numButtonFunctions = 0;
 	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
 		// Note that index 0 is not assigned, so that the numbers match!
@@ -100,47 +105,64 @@ public class OI {
 		
 		//launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whenReleased(new PincherRetract());
+		theButtons[1].whenReleased(new PincherRetract());
 		
 		launch1[3].whileHeld(new FeederRelease(-.9));
+		theButtons[3].whileHeld(new FeederRelease(-.9));
 
 		launch1[4].toggleWhenPressed(new FeederSetAngle(3));
+		theButtons[4].toggleWhenPressed(new FeederSetAngle(3));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
+		theButtons[5].whileHeld(new FeederThrottle(.5));
 
 		launch1[6].whenPressed(new FeederSetAngle(0));
- 		launch2[8].whenPressed(new FeederSetAngle(1));
+		theButtons[6].whenPressed(new FeederSetAngle(0));
+
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
 		launch1[7].whileHeld(new ClimberReverse());
+		theButtons[7].whileHeld(new ClimberReverse());
 
 		launch1[8].whileHeld(new Climb());	
+		theButtons[8].whileHeld(new Climb());	
 
 		launch1[9].toggleWhenPressed(new Feed());
+		theButtons[9].toggleWhenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button10.whenPressed(new AfterburnerShoot());
 		launch1[10].toggleWhenPressed(new AfterburnerRPM(1));
+		theButtons[10].toggleWhenPressed(new AfterburnerRPM(1));
 
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
+		theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
 		launch1[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
+		theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new FeederMoveAnglePower());
+		theButtons[13].whileHeld(new FeederMoveAnglePower());
 		launch2[1].whenReleased(new FeederAngleStop());
+		// NOTE! We don't mimic this in the autonomous button feature (2nd assignment!)
+		
+		launch2[8].whenPressed(new FeederSetAngle(1));
+		theButtons[14].whenPressed(new FeederSetAngle(1));
 
 		launch2[11].toggleWhenPressed(new ClimberPoleUp());
 		launch2[12].toggleWhenPressed(new ClimberPoleDown());
-//		button22.toggleWhenPressed(new RunAutoLogger());
+
+		numButtonFns = 15; // includes 0 (null) ops
 		
 		// Test button options! Remove prior to match play! ----------------
 	//	left[2].toggleWhenPressed(new RunAutoLogger());
-		//left[3].whenPressed(new StopAutoLogger());
+	//	left[3].whenPressed(new StopAutoLogger());
 		
-		//right[2].whenPressed(new TankDriveAutoReplay());
+	//	right[2].whenPressed(new TankDriveAutoReplay());
 		
-		//right[1].whileHeld(new MoveServoJoystick());
+	//	right[1].whileHeld(new MoveServoJoystick());
 		
 	}
 }
