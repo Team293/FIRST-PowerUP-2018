@@ -51,7 +51,7 @@ public class FeederShooter extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new FeederStop());
+		//setDefaultCommand(new FeederStop());
 	}
 	/**
 	 * Shoots the cube

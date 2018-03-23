@@ -12,6 +12,7 @@ import org.usfirst.frc.team293.robot.commands.FeederThrottle;
 import org.usfirst.frc.team293.robot.commands.DriveForwardPower;
 import org.usfirst.frc.team293.robot.commands.RunAutoLogger;
 import org.usfirst.frc.team293.robot.subsystems.Afterburner;
+import org.usfirst.frc.team293.robot.subsystems.AutoLogger;
 //import org.usfirst.frc.team293.robot.subsystems.ClimberRelease;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.FeederAngle;
@@ -19,7 +20,6 @@ import org.usfirst.frc.team293.robot.subsystems.FeederShooter;
 //import org.usfirst.frc.team293.robot.subsystems.LEDs;
 import org.usfirst.frc.team293.robot.subsystems.Pincher;
 import org.usfirst.frc.team293.robot.subsystems.Winch;
-import org.usfirst.frc.team293.robot.subsystems.autoLogger;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
@@ -46,22 +46,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public String gameData;
+	public static final DriveTrain driveTrain =new DriveTrain();
+	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(62);
+
+	
+	//public String gameData;
 	public static boolean switchLeft;
 	public boolean scaleLeft;
+	public static final Pincher pincher = new Pincher();
 	public static final Afterburner afterBurner = new Afterburner();
 	public static final FeederShooter feeder = new FeederShooter();
-	public static final Pincher pincher = new Pincher();
-	public static final DriveTrain driveTrain =new DriveTrain();
+
 
 	public static final FeederAngle feederAngle = new FeederAngle();
-	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(62);
-	public static final Winch Climber = new Winch();
-	public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-	public static final autoLogger DataLog = new autoLogger();
+	public static final Winch winch = new Winch();
+//	public static final ADIS16448_IMU imu = new ADIS16448_IMU();
+	public static final AutoLogger dataLogger = new AutoLogger();
 	public boolean stop = false;
 
-	public static OI oi;
+	public static OI oi = new OI();
 	
 
 	String autonomousChoice;
@@ -76,7 +79,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {	
-		oi = new OI();
 		pdp.clearStickyFaults();
 		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
 		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
@@ -116,6 +118,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
+		/*
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.length() > 0){
 			autonomousChoice = autoChooser.getSelected();
@@ -131,7 +134,7 @@ public class Robot extends TimedRobot {
 		} else {
 			chosenCommand = new ToAutoLine();
 		}	
-		chosenCommand.start();
+		chosenCommand.start();*/
 	}
 
 	/**
@@ -162,7 +165,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-
+		SmartDashboard.putNumber("Angle of Feeder", Robot.feederAngle.angleEncoder.get());
 		 Scheduler.getInstance().run();
 		}
 	
