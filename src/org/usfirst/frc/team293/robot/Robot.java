@@ -82,8 +82,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {	
 		pdp.clearStickyFaults();
-		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
-		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
 		
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Dumb Auto", "Dumb Auto");
@@ -108,6 +106,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+	}
+	
+	public void enabledInit(){
+		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
+		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
 	}
 
 	/**

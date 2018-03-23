@@ -104,14 +104,14 @@ public class OI {
 	
 		
 		//launch1[1].whileHeld(new PincherExtend());
-		launch1[1].whenReleased(new PincherRetract());
-		theButtons[1].whenReleased(new PincherRetract());
+		launch1[1].whileHeld(new PincherExtend());
+		theButtons[1].whileHeld(new PincherExtend());
 		
 		launch1[3].whileHeld(new FeederRelease(-.9));
 		theButtons[3].whileHeld(new FeederRelease(-.9));
 
-		launch1[4].toggleWhenPressed(new FeederSetAngle(3));
-		theButtons[4].toggleWhenPressed(new FeederSetAngle(3));
+		launch1[4].whenPressed(new FeederSetAngle(3));
+		theButtons[4].whenPressed(new FeederSetAngle(3));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
 		theButtons[5].whileHeld(new FeederThrottle(.5));
@@ -131,10 +131,6 @@ public class OI {
 		theButtons[9].toggleWhenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
-		//button10.whenPressed(new AfterburnerShoot());
-		launch1[10].toggleWhenPressed(new AfterburnerRPM(1));
-		theButtons[10].toggleWhenPressed(new AfterburnerRPM(1));
-
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 		theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
@@ -145,6 +141,7 @@ public class OI {
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new FeederMoveAnglePower());
 		theButtons[13].whileHeld(new FeederMoveAnglePower());
+		
 		launch2[1].whenReleased(new FeederAngleStop());
 		// NOTE! We don't mimic this in the autonomous button feature (2nd assignment!)
 		
@@ -154,7 +151,7 @@ public class OI {
 		launch2[11].toggleWhenPressed(new ClimberPoleUp());
 		launch2[12].toggleWhenPressed(new ClimberPoleDown());
 
-		numButtonFns = 15; // includes 0 (null) ops
+		//numButtonFns = 15; // includes 0 (null) ops
 		
 		// Test button options! Remove prior to match play! ----------------
 	//	left[2].toggleWhenPressed(new RunAutoLogger());

@@ -1,5 +1,12 @@
 package Autonomouses;
 
+import org.usfirst.frc.team293.robot.commands.AfterburnerHalfThrottle;
+import org.usfirst.frc.team293.robot.commands.DriveStraightDistanceChristian;
+import org.usfirst.frc.team293.robot.commands.DriveStraightTimeChristian;
+import org.usfirst.frc.team293.robot.commands.DriveTurnGyroInPlace;
+import org.usfirst.frc.team293.robot.commands.FeederRelease;
+import org.usfirst.frc.team293.robot.commands.FeederSetAngle;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,6 +15,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightSide extends CommandGroup {
 
     public RightSide(String choice) {
+    	if (choice.charAt(0) == 'R'){
+    		addSequential(new DriveStraightDistanceChristian(.5,13.5*12));
+    		addSequential(new DriveTurnGyroInPlace(-90,-1));
+    		addParallel(new FeederSetAngle(2));
+    		addSequential(new DriveStraightTimeChristian(.5, 2));
+    		addSequential(new FeederRelease(-1));
+    	} else if(choice.charAt(1) == 'L'){
+    		addSequential(new DriveStraightDistanceChristian(.5,25*12));
+    		addSequential(new DriveTurnGyroInPlace(90,1));
+    		addParallel(new AfterburnerHalfThrottle(.7));
+    		addSequential(new DriveStraightDistanceChristian(.3, 6));
+    		addSequential(new FeederRelease(-1));
+    	} else {
+    		addSequential(new DriveStraightTimeChristian(.6, 4.5));
+    	}
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

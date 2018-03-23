@@ -24,7 +24,7 @@ public class FeederAngle extends Subsystem {
 
 	private final double[] positionTarget = {1,50,50,110};	//THESE ARE TEMP
 	private double setpoint;
-	private double kP = 0.01;
+	private double kP = 0.005;
 	public Encoder angleEncoder;
 	public FeederAngle(){
 		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);
@@ -34,15 +34,15 @@ public class FeederAngle extends Subsystem {
 		angleEncoder.setReverseDirection(true);
 	}
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-       // setDefaultCommand(new FeederSetAngle(1));
+    	
     }
     /**
      * This runs at the init of the robot and brings the arm up to the top limit
      * @return
      */
 	public boolean calibrate() {
-		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
+		angleMotor.set(ControlMode.PercentOutput, .15);	//I assume a positive is an up
+		SmartDashboard.putBoolean("UpperLimit", upperLimit.get());
 		return upperLimit.get();
 	}
 	/**
