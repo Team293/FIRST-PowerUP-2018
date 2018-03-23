@@ -112,7 +112,7 @@ public class AutoLogger extends Subsystem {
     	dataChans[0] = timestamp/1000.; // use seconds
     	dataChans[1] = 1.0*OI.leftStick.getY(); 
     	dataChans[2] = 1.0*OI.rightStick.getY(); 
-    	dataChans[3] = Robot.driveTrain.imu.getFusedHeading() - startYaw; // RELATIVE yaw angle
+    	dataChans[3] = Robot.driveTrain.pigeonImu.getFusedHeading() - startYaw; // RELATIVE yaw angle
     	dataChans[4] = 0.0; // yaw rate
     	dataChans[5] = Robot.driveTrain.leftEncoder.getDistance(); 
     	dataChans[6] = Robot.driveTrain.rightEncoder.getDistance(); 
@@ -121,7 +121,7 @@ public class AutoLogger extends Subsystem {
     	// then recast that integer to a double for storage as data that gets dumped onto the auto log.
     	// Hey, at least I explained this, instead of just being clever.
     	for (int i=0; i<12; i++ ) {
-//    		dataChans[7+i] =  (double) (OI.launch1[i+1].get() ? 1 : 0);
+    		dataChans[7+i] =  (double) (OI.launch1[i+1].get() ? 1 : 0);
     	}
     	// The second joystick/launchpad only uses 4 buttons, so we'll limit ourselves to just those.
   //  	dataChans[19] = (double) (OI.launch2[1].get() ? 1 : 0);
@@ -327,8 +327,6 @@ class simpleCsvLogger {
         return 0;
 
     }
-
-
 
     /**
      * Closes the log file and ensures everything is written to disk. init() must be called again in

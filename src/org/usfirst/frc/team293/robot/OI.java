@@ -36,6 +36,8 @@ public class OI {
 	public static Joystick rightStick = new Joystick(1);
 	public static Joystick annaLeft=new Joystick(2);
 	public static Joystick annaRight=new Joystick(3);
+	public static JoystickButton[] launch1;
+	public static JoystickButton[] launch2;
 	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
 		// Note that index 0 is not assigned, so that the numbers match!
@@ -67,7 +69,7 @@ public class OI {
 		// Note that for 2018, the launchpad(s) were replaced by 2 more joysticks.
 		// As such, we will do the same "vectorization" of their objects, as it helps
 		// with recording for use in autonomous replay.
-		JoystickButton[] launch1= {null, 
+		launch1 = new JoystickButton[] {null, 
 		new JoystickButton(annaLeft, 1),
 		new JoystickButton(annaLeft, 2),
 		new JoystickButton(annaLeft, 3),
@@ -81,7 +83,7 @@ public class OI {
 		new JoystickButton(annaLeft, 11),
 		new JoystickButton(annaLeft, 12) };
 
-		JoystickButton[] launch2= {null, 
+		launch2 = new JoystickButton[] {null, 
 		new JoystickButton(annaRight, 1),
 		new JoystickButton(annaRight, 2),
 		new JoystickButton(annaRight, 3),
