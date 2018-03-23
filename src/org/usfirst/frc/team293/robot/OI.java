@@ -41,7 +41,7 @@ public class OI {
 	public static Joystick annaRight=new Joystick(3);
 	public static JoystickButton[] launch1;
 	public static JoystickButton[] launch2;
-	public static ButtonLogic[] theButtons = new ButtonLogic[30];
+	//public static ButtonLogic[] theButtons = new ButtonLogic[30];
 	public static int numButtonFunctions = 0;
 	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
@@ -49,7 +49,7 @@ public class OI {
 		// When we extract these button press states, remember they are boolean: (true/false).
 		// For storing in a file, we have to record them as doubles: (0.,1.).
 		// The button arrays are thus:
-		// org.usfirst.frc.team293.robot.oi.left[], <bla bla>.right[], <bla bla>.launch1[], <bla bla>.launch2[]
+		// org.usfirst.frc.team293.robot.oi.left[], <bla bla>.right[], <bla bla>.launch1[], <bla bla>.launch2[
 		JoystickButton[] left= {null,new JoystickButton(leftStick,1), 
 				   new JoystickButton(leftStick,2), 
 				   new JoystickButton(leftStick,3), 
@@ -101,52 +101,53 @@ public class OI {
 		new JoystickButton(annaRight, 10),
 		new JoystickButton(annaRight, 11),
 		new JoystickButton(annaRight, 12) };
-	
+		//theButtons[1] = new ButtonLogic(null, 0, 0);
+		
 		
 		//launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whileHeld(new PincherExtend());
-		theButtons[1].whileHeld(new PincherExtend());
+		//theButtons[1].whileHeld(new PincherExtend());
 		
 		launch1[3].whileHeld(new FeederRelease(-.9));
-		theButtons[3].whileHeld(new FeederRelease(-.9));
+		//theButtons[3].whileHeld(new FeederRelease(-.9));
 
 		launch1[4].whenPressed(new FeederSetAngle(3));
-		theButtons[4].whenPressed(new FeederSetAngle(3));
+		//theButtons[4].whenPressed(new FeederSetAngle(3));
 
 		launch1[5].whileHeld(new FeederThrottle(.5));
-		theButtons[5].whileHeld(new FeederThrottle(.5));
+		//theButtons[5].whileHeld(new FeederThrottle(.5));
 
 		launch1[6].whenPressed(new FeederSetAngle(0));
-		theButtons[6].whenPressed(new FeederSetAngle(0));
+		//theButtons[6].whenPressed(new FeederSetAngle(0));
 
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
 		launch1[7].whileHeld(new ClimberReverse());
-		theButtons[7].whileHeld(new ClimberReverse());
+		//theButtons[7].whileHeld(new ClimberReverse());
 
 		launch1[8].whileHeld(new Climb());	
-		theButtons[8].whileHeld(new Climb());	
+		//theButtons[8].whileHeld(new Climb());	
 
 		launch1[9].toggleWhenPressed(new Feed());
-		theButtons[9].toggleWhenPressed(new Feed());
+		//theButtons[9].toggleWhenPressed(new Feed());
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button11.whenPressed(new LEDsTest());
 		launch1[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
-		theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
+		//theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
 		launch1[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
-		theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
+		//theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 
 		// Second operator joystick: ---------------------
 		launch2[1].whileHeld(new FeederMoveAnglePower());
-		theButtons[13].whileHeld(new FeederMoveAnglePower());
+		//theButtons[13].whileHeld(new FeederMoveAnglePower());
 		
 		launch2[1].whenReleased(new FeederAngleStop());
 		// NOTE! We don't mimic this in the autonomous button feature (2nd assignment!)
 		
 		launch2[8].whenPressed(new FeederSetAngle(1));
-		theButtons[14].whenPressed(new FeederSetAngle(1));
+		//theButtons[14].whenPressed(new FeederSetAngle(1));
 
 		launch2[11].toggleWhenPressed(new ClimberPoleUp());
 		launch2[12].toggleWhenPressed(new ClimberPoleDown());

@@ -26,7 +26,7 @@ public class ButtonLogic {
 	public final static int TOGGLEWHENPRESSED = 4;
 
 	// Creator assigns internal variables
-	public void ButtonLogic( Command theCmd, int theLogic, int theButton ) {
+	public ButtonLogic( Command theCmd, int theLogic, int theButton ) {
 		assignedButton = theButton;
 		logicType = theLogic;
 		cmd = theCmd;

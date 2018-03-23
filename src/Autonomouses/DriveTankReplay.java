@@ -87,7 +87,7 @@ public class DriveTankReplay extends Command {
     	
     	// Button button who's got the button?  Time to make the other stuff move.
     	for (int i=1; i< OI.numButtonFunctions; i++) {
-    		OI.theButtons[i].applyButton( (int) replayFile.chanValues[6+i] );
+    		//OI.theButtons[i].applyButton( (int) replayFile.chanValues[6+i] );
     	}
     }
 

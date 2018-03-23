@@ -108,10 +108,6 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 	
-	public void enabledInit(){
-		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
-		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
-	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -122,7 +118,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
+		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.length() > 0){
@@ -152,6 +149,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		calibrationCommand = new FeederCalibrate();		 //moves feeder to reference point 
+		calibrationCommand.start();						//(upper limit switch), gets offset angle from encoder		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
