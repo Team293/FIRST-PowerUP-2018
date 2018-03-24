@@ -28,7 +28,7 @@ public class FeederAngle extends Subsystem {
 
 	private final double[] positionTarget = {-7,35,35,110};	//THESE ARE TEMP
 	private double setpoint;
-	private double kP = 0.03;
+	private double kP = 0.035;
 	public Encoder angleEncoder;
 	public FeederAngle(){
 		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);

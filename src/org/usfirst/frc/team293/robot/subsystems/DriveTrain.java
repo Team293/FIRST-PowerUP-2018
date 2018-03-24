@@ -98,7 +98,9 @@ public class DriveTrain extends Subsystem {
      * @param right power command
      */
     public void tankdrive(double left, double right){
-    	drive.tankDrive(left, right);  
+    	drive.tankDrive(left, right); 
+    	SmartDashboard.putNumber("leftEncRate", leftEncoder.getRate());
+    	SmartDashboard.putNumber("rightEncRate", rightEncoder.getRate());
 	}
     /**
      * Reverse TankDrive the robot
@@ -218,6 +220,10 @@ public class DriveTrain extends Subsystem {
      * @param speed The power to drive
      */
     public void gyroStraight(double speed) {
+    	SmartDashboard.putNumber("Average of drive encoder", readEnc()[0]);
+    	SmartDashboard.putNumber("Left drive encoder", readEnc()[1]);
+    	SmartDashboard.putNumber("Right drive encoder", readEnc()[2]);
+    	SmartDashboard.putNumber("Distance of Drive of encoder", leftEncoder.getDistance());
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (pigeonImu.getState() != PigeonIMU.PigeonState.NoComm);
     	if (imuStatus) {
@@ -239,6 +245,7 @@ public class DriveTrain extends Subsystem {
      * @return	if it's done or not
      */
     public boolean gyroTurnInPlace(double setangle, double rate){
+
     	turning = false;
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	angle=pigeonImu.getFusedHeading(fusionStatus); ///Gets the angle
@@ -249,13 +256,13 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("Error of IMU!!!!", error);
         finalPower=(error*pValue);
         
-        if (finalPower>.5){
-        	finalPower = .5;
-        } else if (finalPower < -.5){
-        	finalPower = -.5;
+        if (finalPower>.9){
+        	finalPower = .9;
+        } else if (finalPower < -.9){
+        	finalPower = -.9;
         }
         drive.tankDrive(finalPower,-finalPower);
-        if (Math.abs(setpoint)>=Math.abs(setangle)){
+        if (Math.abs(angle)>=Math.abs(setangle)){
         	turning = true;
         }
         return turning;

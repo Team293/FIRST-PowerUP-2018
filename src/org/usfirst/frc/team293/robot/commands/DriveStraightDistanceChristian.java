@@ -25,13 +25,16 @@ public class DriveStraightDistanceChristian extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.velocityStraight(speed);
+    	if (distanceToTravel - Robot.driveTrain.readEnc()[0] < 8){  //if we're at the last 8 inches
+    		Robot.driveTrain.gyroStraight(-.35*speed);
+    	} else {
+    		Robot.driveTrain.gyroStraight(-speed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
-        //return Robot.driveTrain.readEnc()[0]>distanceToTravel;
+        return Robot.driveTrain.readEnc()[0]>(distanceToTravel - speed*10);
     }
 
     // Called once after isFinished returns true

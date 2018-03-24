@@ -14,14 +14,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Center extends CommandGroup {
 
     public Center(String choice) {
-    	addSequential(new DriveStraightDistanceChristian(.5,8*12));
+    	addSequential(new DriveStraightDistanceChristian(.5,24.5));
     	if (choice.charAt(1) == 'L'){
-    		addSequential(new DriveTurnGyroInPlace(-45,-1));
+    		addSequential(new DriveTurnGyroInPlace(45, 0.75));
     	} else {
-    		addSequential(new DriveTurnGyroInPlace(45, 1));
+    		addSequential(new DriveTurnGyroInPlace(-45, -0.75));
     	}
     	addParallel(new FeederSetAngle(1));
-    	addSequential(new DriveStraightDistanceChristian(.5,50));
+    	addSequential(new DriveStraightDistanceChristian(.5,78));
+    	if (choice.charAt(1) == 'L'){
+    		addSequential(new DriveTurnGyroInPlace(-45,-0.75));
+    	} else {
+    		addSequential(new DriveTurnGyroInPlace(45, 0.75));
+    	}
+    	addSequential(new DriveStraightTimeChristian(.5,3.5));
 		addSequential(new FeederRelease(-1));
         // Add Commands here:
         // e.g. addSequential(new Command1());
