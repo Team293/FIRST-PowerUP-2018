@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Winch has an extension rod for the hook that stops on a banner sensor
@@ -50,19 +51,22 @@ public class Winch extends Subsystem {
      * This raises the pole with the hook
      */
     public void Up() {
-    	Release.set(.1);
+    	Release.set(1);
+    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**
      * This lowers the pole with the hook
      */
     public void down() {
-    	Release.set(-.1);
+    	Release.set(-.5);
+    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**
      * This allows the hook to extend correctly
      * @return The value of the sensor
      */
-    public boolean windOut() {  	
+    public boolean windOut() {  
+    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     	return forwardLimitSwitch.get();
     }
     /**

@@ -157,8 +157,8 @@ public class OI {
 		launch2[8].whenPressed(new FeederSetAngle(1));
 		//theButtons[14].whenPressed(new FeederSetAngle(1));
 
-		launch2[11].toggleWhenPressed(new ClimberPoleUp());
-		launch2[12].toggleWhenPressed(new ClimberPoleDown());
+		launch2[11].toggleWhenPressed(new ClimberPoleDown());
+		launch2[12].toggleWhenPressed(new ClimberPoleUp());
 
 		//numButtonFns = 15; // includes 0 (null) ops
 		
