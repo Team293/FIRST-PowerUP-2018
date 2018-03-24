@@ -106,7 +106,10 @@ public class OI {
 		
 		//launch1[1].whileHeld(new PincherExtend());
 		launch1[1].whileHeld(new PincherExtend());
+		launch1[1].whenReleased(new PincherRetract());
 		//theButtons[1].whileHeld(new PincherExtend());
+		
+		launch1[2].whenPressed(new FeederSetAngle(1));
 		
 		launch1[3].whileHeld(new FeederRelease(-.9));
 		//theButtons[3].whileHeld(new FeederRelease(-.9));
@@ -123,9 +126,12 @@ public class OI {
 		//button7.whileHeld(new Climb());
 		//button7.toggleWhenPressed(new AfterburnerFullThrottle());
 		launch1[7].whileHeld(new ClimberReverse());
+		launch1[7].whenReleased(new ClimberStop());
+
 		//theButtons[7].whileHeld(new ClimberReverse());
 
 		launch1[8].whileHeld(new Climb());	
+		launch1[8].whenReleased(new ClimberStop());
 		//theButtons[8].whileHeld(new Climb());	
 
 		launch1[9].toggleWhenPressed(new Feed());
@@ -133,10 +139,12 @@ public class OI {
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button11.whenPressed(new LEDsTest());
-		launch1[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
+		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
+		launch1[11].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
-		launch1[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
+		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
+		launch1[12].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 
 		// Second operator joystick: ---------------------

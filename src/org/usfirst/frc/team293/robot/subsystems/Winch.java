@@ -5,6 +5,7 @@ import org.usfirst.frc.team293.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,13 +16,13 @@ public class Winch extends Subsystem {
 
 		private Spark Climber1;
 		private Spark Climber2;
-		private Relay Release;	
+		private VictorSP Release;	
 		private DigitalInput forwardLimitSwitch;
 		
 	public Winch() {
 		Climber1 = new Spark(RobotMap.climbMotors[0]);
 		Climber2 = new Spark(RobotMap.climbMotors[1]);
-		Release = new Relay(RobotMap.poleVexMotor);
+		Release = new VictorSP(RobotMap.poleMotor);
 		forwardLimitSwitch = new DigitalInput(RobotMap.winchPoleLimit);
 	}
 
@@ -34,28 +35,28 @@ public class Winch extends Subsystem {
      * @param pwm Is the speed to set the climber motors
      */
     public void move(double pwm) {
-    	Climber1.set(1);
-    	Climber2.set(1);
+    	Climber1.set(pwm);
+    	Climber2.set(pwm);
     }
     /**
      * Move allows the climber to reverse inward.
      * @param pwm Is the speed to set the climber motors
      */
     public void reverse(double pwm) {
-    	Climber1.set(-1);
-    	Climber2.set(-1);
+    	Climber1.set(pwm);
+    	Climber2.set(pwm);
     }  
     /**
      * This raises the pole with the hook
      */
     public void Up() {
-    	Release.set(Relay.Value.kReverse);
+    	Release.set(.1);
     }
     /**
      * This lowers the pole with the hook
      */
     public void down() {
-    	Release.set(Relay.Value.kForward);
+    	Release.set(-.1);
     }
     /**
      * This allows the hook to extend correctly
@@ -68,7 +69,7 @@ public class Winch extends Subsystem {
      * This stops the motor from winding.
      */
     public void stopWind() {
-    	Release.set(Relay.Value.kOff);
+    	Release.set(0);
     }
 }
 
