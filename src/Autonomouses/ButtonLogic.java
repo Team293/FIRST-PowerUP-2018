@@ -19,17 +19,13 @@ public class ButtonLogic {
 	int opState = 0; // records operating (1) or dormant (0) state of associated command for toggles
 	Command cmd = null; // operating command for execution (or not) from recorded button state
 	int logicType; // stored operational mode for executing this command
-	int assignedButton;
 	public final static int WHILEHELD = 1;
 	public final static int WHENPRESSED = 2;
 	public final static int WHENRELEASED = 3;
 	public final static int TOGGLEWHENPRESSED = 4;
 
 	// Creator assigns internal variables
-	public ButtonLogic( Command theCmd, int theLogic, int theButton ) {
-		assignedButton = theButton;
-		logicType = theLogic;
-		cmd = theCmd;
+	public ButtonLogic() {
 	}
 
 	// "Workalike" methods for assigning functionality that look like JoystickButton methods
@@ -84,7 +80,7 @@ public class ButtonLogic {
 					cmd.start();
 					opState = 1;
 				} else {
-	//				cmd.interrupt();
+					cmd.cancel();
 					opState = 0;
 				}
 			}
