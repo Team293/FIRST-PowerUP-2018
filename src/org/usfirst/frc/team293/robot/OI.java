@@ -111,13 +111,15 @@ public class OI {
 		
 		launch1[2].whenPressed(new FeederSetAngle(1));
 		
-		launch1[3].whileHeld(new FeederRelease(-.9));
+		//launch1[3].whileHeld(new FeederRelease(-.5)); ////Original setup
+		launch1[3].whileHeld(new FeederThrottle(-.5));
 		//theButtons[3].whileHeld(new FeederRelease(-.9));
 
 		launch1[4].whenPressed(new FeederSetAngle(3));
 		//theButtons[4].whenPressed(new FeederSetAngle(3));
 
-		launch1[5].whileHeld(new FeederThrottle(.5));
+		//launch1[5].whileHeld(new FeederThrottle(.5));	//Original setup
+		launch1[5].whileHeld(new FeederRelease(.5));
 		//theButtons[5].whileHeld(new FeederThrottle(.5));
 
 		launch1[6].whenPressed(new FeederSetAngle(0));
