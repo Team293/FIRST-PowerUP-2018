@@ -19,11 +19,14 @@ public class DriveTankReplay extends Command {
 	private double outleft;
 	private double outright;
 	private int fnum;
-	private int yaw0;
+	private double yaw0;
+	
 	public ReplayFile replayFile = new ReplayFile();
 	
-    public DriveTankReplay() {
+    public DriveTankReplay( int fileNum) {
+    	fnum = fileNum;
     	requires(Robot.driveTrain);// Use requires() here to declare subsystem dependencies
+    	
     }
 
     // Called just before this Command runs the first time
@@ -34,6 +37,7 @@ public class DriveTankReplay extends Command {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // opens file for auto following, gets first two text lines
+    	yaw0 = Robot.driveTrain.pigeonImu.getFusedHeading();
     }
     
     /**
@@ -87,7 +91,7 @@ public class DriveTankReplay extends Command {
     	
     	// Button button who's got the button?  Time to make the other stuff move.
     	for (int i=1; i< OI.numButtonFunctions; i++) {
-    		//OI.theButtons[i].applyButton( (int) replayFile.chanValues[6+i] );
+    		OI.theButtons[i].applyButton( (int) replayFile.chanValues[6+i] );
     	}
     }
 
