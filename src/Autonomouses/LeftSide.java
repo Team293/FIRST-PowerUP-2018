@@ -27,7 +27,7 @@ public class LeftSide extends CommandGroup {
     		
     		addSequential(new DriveTurnGyroInPlace(-90,-.9));
     		addParallel(new FeederSetAngle(2));
-    		addSequential(new DriveStraightTimeChristian(-.75, 2));	
+    		addSequential(new DriveStraightTimeChristian(.75, 2));	
     		addSequential(new FeederRelease(.45));
     	} else if(choice.charAt(1) == 'L'){
     		
