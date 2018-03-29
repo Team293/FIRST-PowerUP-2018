@@ -41,7 +41,7 @@ public class OI {
 	public static Joystick annaRight=new Joystick(3);
 	public static JoystickButton[] launch1;
 	public static JoystickButton[] launch2;
-	//public static ButtonLogic[] theButtons = new ButtonLogic[30];
+	public static ButtonLogic[] theButtons = new ButtonLogic[30];
 	public static int numButtonFunctions = 0;
 	public OI() {
 		// Assign a reference to each joystick's buttons as a vector map by index
@@ -141,11 +141,11 @@ public class OI {
 		//button9.whenReleased(new FeedtoAfterburnerShoot());
 
 		//button11.whenPressed(new LEDsTest());
-		launch1[11].whenPressed(new AfterburnerHalfThrottle(.9));
+		launch1[11].whenPressed(new AfterburnerRPM(.9));
 		launch1[11].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
-		launch1[12].whenPressed(new AfterburnerHalfThrottle(.7));
+		launch1[12].whenPressed(new AfterburnerRPM(.7));
 		launch1[12].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 

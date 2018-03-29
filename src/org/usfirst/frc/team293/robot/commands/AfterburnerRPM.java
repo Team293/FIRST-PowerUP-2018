@@ -13,7 +13,7 @@ public class AfterburnerRPM extends Command {
     public AfterburnerRPM(double InputRPM) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.afterBurner);
-    	CodesPer100ms = (InputRPM*24400*4096/600);
+    	CodesPer100ms = (InputRPM*30000*4096/600);
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +28,7 @@ public class AfterburnerRPM extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -39,6 +39,6 @@ public class AfterburnerRPM extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
+    	Robot.afterBurner.move(0);
     }
 }
