@@ -15,7 +15,7 @@ public class FeederSetAngle extends Command {
     public FeederSetAngle(int value) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.feeder);
+    	requires(Robot.feederAngle);
     	indexValue = value;
     }
 

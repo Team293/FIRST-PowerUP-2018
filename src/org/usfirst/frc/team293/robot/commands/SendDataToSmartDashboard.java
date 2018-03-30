@@ -13,6 +13,7 @@ public class SendDataToSmartDashboard extends Command {
     public SendDataToSmartDashboard() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.monitor);
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +25,6 @@ public class SendDataToSmartDashboard extends Command {
     	SmartDashboard.putNumber("Drive Encoder Left Rate", Robot.driveTrain.leftEncoder.getRaw());
     	SmartDashboard.putNumber("Drive Encoder Right Rate", Robot.driveTrain.rightEncoder.getRaw());
     	SmartDashboard.putNumber("Drive IMU", Robot.driveTrain.pigeonImu.getFusedHeading());
-    	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
     	SmartDashboard.putNumber("Encoder Distance Driven", Robot.driveTrain.readEnc()[0]);
     	
     	SmartDashboard.putNumber("Left Velocity Afterburner", Robot.afterBurner.lMotor.getSensorCollection().getPulseWidthVelocity());

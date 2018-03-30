@@ -1,6 +1,9 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.DriveTankDefault;
+import org.usfirst.frc.team293.robot.commands.FeederCalibrate;
 import org.usfirst.frc.team293.robot.commands.FeederSetAngle;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -21,10 +24,11 @@ public class FeederAngle extends Subsystem {
 	private DigitalInput upperLimit;
 	private DigitalInput lowerLimit;
 	private TalonSRX angleMotor;
+	private boolean needCal = true;
 
-	private final double[] positionTarget = {1,50,50,110};	//THESE ARE TEMP
+	private final double[] positionTarget = {-7,35,35,110};	//THESE ARE TEMP
 	private double setpoint;
-	private double kP = 0.01;
+	private double kP = 0.035;
 	public Encoder angleEncoder;
 	public FeederAngle(){
 		upperLimit = new DigitalInput(RobotMap.feederUpperLimit);
@@ -34,15 +38,15 @@ public class FeederAngle extends Subsystem {
 		angleEncoder.setReverseDirection(true);
 	}
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-       // setDefaultCommand(new FeederSetAngle(1));
+    	setDefaultCommand(new FeederCalibrate());
     }
     /**
      * This runs at the init of the robot and brings the arm up to the top limit
      * @return
      */
 	public boolean calibrate() {
-		angleMotor.set(ControlMode.PercentOutput, .1);	//I assume a positive is an up
+		angleMotor.set(ControlMode.PercentOutput, .15);	//I assume a positive is an up
+		SmartDashboard.putBoolean("UpperLimit", upperLimit.get());
 		return upperLimit.get();
 	}
 	/**
@@ -56,14 +60,23 @@ public class FeederAngle extends Subsystem {
 	 * @param index to go to
 	 */
 	public void setAngleSetpoint(int index) {
-		setpoint = positionTarget[index];
+    	SmartDashboard.putNumber("Feeder Angle Encoder from reset", Robot.feederAngle.angleEncoder.get());
+		SmartDashboard.putBoolean("Feeder Top Limit",upperLimit.get());
+    	setpoint = positionTarget[index];
 		SmartDashboard.putNumber("Angle Setpoint", setpoint);
-		if (upperLimit.get() && index == 0) {
+		if (!upperLimit.get() && index == 0) {
+			resetEncoder();
 			angleMotor.set(ControlMode.PercentOutput, 0);
-		} else if (lowerLimit.get() && index == 3) {
+		} else if (!lowerLimit.get() && index == 3) {
 			angleMotor.set(ControlMode.PercentOutput, 0);
 		} else {
-			angleMotor.set(ControlMode.PercentOutput,  (setpoint - angleEncoder.get() )* kP);	//I assume a positive is an up
+			double outputtoAngle = (angleEncoder.get()-setpoint)* kP;
+			if (outputtoAngle>.85){
+				outputtoAngle = .85;
+			} else if (outputtoAngle < -.85){
+				outputtoAngle = -.85;
+			}
+			angleMotor.set(ControlMode.PercentOutput, outputtoAngle);	//I assume a positive is an up
 		}
 	}
 	
