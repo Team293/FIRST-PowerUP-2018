@@ -102,7 +102,8 @@ public class AutoLogger extends Subsystem {
     	// Calls simpleCsvLogger to open a file, and write first 2 lines
     	logObj.init(names,units);
     	startTime = System.currentTimeMillis();
-    	startYaw = Robot.driveTrain.pigeonImu.getFusedHeading(); // initial yaw angle
+    	//startYaw = Robot.imu.getAngleX(); // initial yaw angle
+    	startYaw = 0.0;
     }
     
     public void writeFileLine(){
@@ -123,9 +124,9 @@ public class AutoLogger extends Subsystem {
     		dataChans[7+i] =  (double) (OI.launch1[i+1].get() ? 1 : 0);
     	}
     	// The second joystick/launchpad only uses 4 buttons, so we'll limit ourselves to just those.
-    	dataChans[19] = (double) (OI.launch2[1].get() ? 1 : 0);
-    	dataChans[20] = (double) (OI.launch2[11].get() ? 1 : 0);
-    	dataChans[21] = (double) (OI.launch2[12].get() ? 1 : 0);
+  //  	dataChans[19] = (double) (OI.launch2[1].get() ? 1 : 0);
+   // 	dataChans[20] = (double) (OI.launch2[11].get() ? 1 : 0);
+   // 	dataChans[21] = (double) (OI.launch2[12].get() ? 1 : 0);
     // All done for the 2018 robot.  Write all these doubles now!
     	logObj.writeData( dataChans );
     }
@@ -326,8 +327,6 @@ class simpleCsvLogger {
         return 0;
 
     }
-
-
 
     /**
      * Closes the log file and ensures everything is written to disk. init() must be called again in

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightTimeChristian extends Command {
 		double timeout;
-		private double speed;
+		double speed;
 	/**
 	 * @param speed The speed from -1 to 1 that gets converted to encoders
 	 * @param seconds the time in seconds to drive
@@ -24,12 +24,11 @@ public class DriveStraightTimeChristian extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(timeout);
-    	Robot.driveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.gyroStraight(speed);
+    	Robot.driveTrain.feedForwardEncoderDrive(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

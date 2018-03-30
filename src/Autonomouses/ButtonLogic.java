@@ -25,7 +25,10 @@ public class ButtonLogic {
 	public final static int TOGGLEWHENPRESSED = 4;
 
 	// Creator assigns internal variables
-	public ButtonLogic() {
+	public void ButtonLogic( Command theCmd, int theLogic, int theButton ) {
+		assignedButton = theButton;
+		logicType = theLogic;
+		cmd = theCmd;
 	}
 
 	// "Workalike" methods for assigning functionality that look like JoystickButton methods
@@ -80,7 +83,7 @@ public class ButtonLogic {
 					cmd.start();
 					opState = 1;
 				} else {
-					cmd.cancel();
+					cmd.interrupt();
 					opState = 0;
 				}
 			}

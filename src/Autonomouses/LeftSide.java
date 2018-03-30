@@ -5,7 +5,6 @@ import org.usfirst.frc.team293.robot.commands.DriveStraightDistanceChristian;
 import org.usfirst.frc.team293.robot.commands.DriveStraightTimeChristian;
 import org.usfirst.frc.team293.robot.commands.DriveTurnGyroInPlace;
 import org.usfirst.frc.team293.robot.commands.FeederRelease;
-import org.usfirst.frc.team293.robot.commands.FeederSetAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,32 +14,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LeftSide extends CommandGroup {
 
     public LeftSide(String choice) {
-    	if (choice.charAt(0) == 'L'){ //Closer is on our side
-    		//addSequential(new DriveStraightDistanceChristian(.75,164)); do this but a bit of a strafe
-    		addSequential(new DriveStraightDistanceChristian(.75, 40));
-    		addSequential(new DriveTurnGyroInPlace(30, .75));		
-    		addSequential(new DriveStraightDistanceChristian(.75, 16));
-    		addSequential(new DriveTurnGyroInPlace(-30, -.75));		
-    		addSequential(new DriveStraightDistanceChristian(.75, 85));
-    		 		
-    		addSequential(new DriveStraightTimeChristian(-.3,.25));//slowdown
-    		
-    		addSequential(new DriveTurnGyroInPlace(-90,-.9));
-    		addParallel(new FeederSetAngle(2));
-    		addSequential(new DriveStraightTimeChristian(-.75, 2));	
-    		addSequential(new FeederRelease(.45));
+    	addSequential(new DriveStraightDistanceChristian(.5,50));
+    	if (choice.charAt(0) == 'L'){
+    		addSequential(new DriveStraightDistanceChristian(.5,13.5*12));
+    		addSequential(new DriveTurnGyroInPlace(90,1));
+    		addSequential(new DriveStraightTimeChristian(.5, 2));
+    		//addSequential(new FeederSetAngle(2));
+    		//addSequential(new FeederRelease());
     	} else if(choice.charAt(1) == 'L'){
-    		
-    		addSequential(new DriveStraightDistanceChristian(.75,284));//this is small on purpose from 304
-
-    		addSequential(new DriveStraightTimeChristian(-.2,.25));
-    		addSequential(new DriveTurnGyroInPlace(80, .75));
-    		//addSequential(new DriveStraightDistanceChristian(.5, 6));
-    		addParallel(new AfterburnerHalfThrottle(.7));
-    		addSequential(new FeederRelease(1));
+    		addSequential(new DriveStraightDistanceChristian(.5,25*12));
+    		addSequential(new DriveTurnGyroInPlace(-90,-1));
+    		addSequential(new AfterburnerHalfThrottle(.7));
+    		addSequential(new DriveStraightDistanceChristian(.3, 6));
+    		addSequential(new FeederRelease(-1));
     	} else {
-    		addSequential(new DriveStraightDistanceChristian(.5,164));
-    		//addSequential(new DriveTurnGyroInPlace(-90,-.75));
+    		addSequential(new DriveStraightTimeChristian(.6, 4.5));
     	}
         // Add Commands here:
         // e.g. addSequential(new Command1());

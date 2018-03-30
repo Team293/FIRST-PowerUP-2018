@@ -1,6 +1,4 @@
-package Autonomouses;
-
-import java.io.FileNotFoundException;
+package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
@@ -18,26 +16,16 @@ public class DriveTankReplay extends Command {
 	private double right;
 	private double outleft;
 	private double outright;
-	private int fnum;
-	private double yaw0;
 	
 	public ReplayFile replayFile = new ReplayFile();
 	
-    public DriveTankReplay( int fileNum) {
-    	fnum = fileNum;
+    public DriveTankReplay() {
     	requires(Robot.driveTrain);// Use requires() here to declare subsystem dependencies
-    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	try {
-			replayFile.init(fnum);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // opens file for auto following, gets first two text lines
-    	yaw0 = Robot.driveTrain.pigeonImu.getFusedHeading();
+    	replayFile.init(fnum); // opens file for auto following, gets first two text lines
     }
     
     /**
@@ -85,7 +73,7 @@ public class DriveTankReplay extends Command {
     	double Kp = 0.0; // make nonzero for feedback!
     	double Ka = 0.0;
     	outleft  += (Kp * l_enc_err) + (Ka * ang_error/2.);
-    	outright += (Kp * r_enc_err) - (Ka * ang_error/2.);
+    	outright += (Kp * r_end_err) - (Ka * ang_error/2.);
     	// Baby won't you drive my car? Yes, I'm going to be a star!
     	Robot.driveTrain.feedForwardEncoderDrive((-1*outleft), (-1*outright));
     	

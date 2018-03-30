@@ -5,9 +5,7 @@ import org.usfirst.frc.team293.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Winch has an extension rod for the hook that stops on a banner sensor
@@ -17,13 +15,13 @@ public class Winch extends Subsystem {
 
 		private Spark Climber1;
 		private Spark Climber2;
-		private VictorSP Release;	
+		private Relay Release;	
 		private DigitalInput forwardLimitSwitch;
 		
 	public Winch() {
 		Climber1 = new Spark(RobotMap.climbMotors[0]);
 		Climber2 = new Spark(RobotMap.climbMotors[1]);
-		Release = new VictorSP(RobotMap.poleMotor);
+		Release = new Relay(RobotMap.poleVexMotor);
 		forwardLimitSwitch = new DigitalInput(RobotMap.winchPoleLimit);
 	}
 
@@ -36,44 +34,41 @@ public class Winch extends Subsystem {
      * @param pwm Is the speed to set the climber motors
      */
     public void move(double pwm) {
-    	Climber1.set(pwm);
-    	Climber2.set(pwm);
+    	Climber1.set(1);
+    	Climber2.set(1);
     }
     /**
      * Move allows the climber to reverse inward.
      * @param pwm Is the speed to set the climber motors
      */
     public void reverse(double pwm) {
-    	Climber1.set(pwm);
-    	Climber2.set(pwm);
+    	Climber1.set(-1);
+    	Climber2.set(-1);
     }  
     /**
      * This raises the pole with the hook
      */
     public void Up() {
-    	Release.set(1);
-    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
+    	Release.set(Relay.Value.kReverse);
     }
     /**
      * This lowers the pole with the hook
      */
     public void down() {
-    	Release.set(-.5);
-    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
+    	Release.set(Relay.Value.kForward);
     }
     /**
      * This allows the hook to extend correctly
      * @return The value of the sensor
      */
-    public boolean windOut() {  
-    	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
+    public boolean windOut() {  	
     	return forwardLimitSwitch.get();
     }
     /**
      * This stops the motor from winding.
      */
     public void stopWind() {
-    	Release.set(0);
+    	Release.set(Relay.Value.kOff);
     }
 }
 

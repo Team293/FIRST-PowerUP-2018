@@ -9,7 +9,7 @@ package org.usfirst.frc.team293.robot;
 public class RobotMap {
 	//////////Motor Controllers//////////////
 	public static final int 	//Victors for the Drivetrain
-			rightDrive[] = {7,9}, 	
+			rightDrive[] = {7,8,9}, 	
 			leftDrive[] = {4,5,6},
 			climbMotors[] = {1,2},
 			afterBurnerLeft = 3,
@@ -17,7 +17,8 @@ public class RobotMap {
 			feederShooterLeft = 0,
 			feederShooterRight = 1,
 			feederShooterAngle = 5,
-			poleMotor = 8,
+	//////////Relay///////////////
+			poleVexMotor = 0,
 	//////////Digital Inputs///////
 			leftEncoder[] = {0, 1}, 	//Drivetrain Encoders
 			rightEncoder[] = {2,3},

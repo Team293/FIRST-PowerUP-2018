@@ -61,12 +61,12 @@ public class DriveTrain extends Subsystem {
 		leftMotorOne = new VictorSP(RobotMap.leftDrive[0]);
 		leftMotorTwo = new VictorSP(RobotMap.leftDrive[1]);
 		leftMotorThree = new VictorSP(RobotMap.leftDrive[2]);
-		SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorOne, leftMotorTwo);
+		SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorOne, leftMotorTwo, leftMotorThree);
 		
 		rightMotorOne = new VictorSP(RobotMap.rightDrive[0]);
 		rightMotorTwo = new VictorSP(RobotMap.rightDrive[1]);
-		//rightMotorThree = new VictorSP(RobotMap.rightDrive[2]);
-		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorOne, rightMotorTwo);
+		rightMotorThree = new VictorSP(RobotMap.rightDrive[2]);
+		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorOne, rightMotorTwo, rightMotorThree);
 		
 		pigeonImu = new PigeonIMU(RobotMap.imu);    	
 		
@@ -98,9 +98,7 @@ public class DriveTrain extends Subsystem {
      * @param right power command
      */
     public void tankdrive(double left, double right){
-    	drive.tankDrive(left, right); 
-    	SmartDashboard.putNumber("leftEncRate", leftEncoder.getRate());
-    	SmartDashboard.putNumber("rightEncRate", rightEncoder.getRate());
+    	drive.tankDrive(left, right);  
 	}
     /**
      * Reverse TankDrive the robot
@@ -145,11 +143,6 @@ public class DriveTrain extends Subsystem {
      */
 
     public void feedForwardEncoderDrive(double leftStick ,double rightStick){
-    	
-    	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-    	double angle=pigeonImu.getFusedHeading(fusionStatus); ///Gets the angle
-    	SmartDashboard.putNumber("angle of IMU!!!", angle);
-    	
     	double leftRate = leftEncoder.getRate();
     	double rightRate = rightEncoder.getRate();
 
@@ -198,32 +191,25 @@ public class DriveTrain extends Subsystem {
      * Drives straight using the encoders and a rate to drive with gyro
      * @param speed to drive at I believe from -1 to 1
      */
-    public void velocityStraight(double speed){
+    public void velocityStraight(double speed){	///NOT DONE YET speed=-1,1 
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	angle=pigeonImu.getFusedHeading(fusionStatus);
      	
-    	//error=(angle-setpoint);
-    	error = angle;
+    	error=(angle-setpoint);
     	
-    	//double leftRate=(leftEncoder.getRate()/500);
-    	//double rightRate=(-rightEncoder.getRate()/500);
-    	double leftRate=(leftEncoder.getRate());
-    	double rightRate=(rightEncoder.getRate());
+    	double leftRate=(leftEncoder.getRate()/1000);
+    	double rightRate=(-rightEncoder.getRate()/1000);
     	
-    	double leftRateSetpoint=speed*10;
-    	double rightRateSetpoint=speed*10;
+    	double leftRateSetpoint=speed*130;
+    	double rightRateSetpoint=speed*130;
 
-    	drive.tankDrive((leftRateSetpoint-leftRate)*0.015+leftRateSetpoint/10.5+angle*.01,(rightRateSetpoint-rightRate)*0.015+rightRateSetpoint/10.5-angle*.01);
+    	drive.tankDrive(-(leftRateSetpoint-rightRate)*0.015+angle*.01,-(rightRateSetpoint-leftRate)*0.015-angle*.01);
     }
     /**
      * Drives straight using just the gyro and a power command to one wheel
      * @param speed The power to drive
      */
     public void gyroStraight(double speed) {
-    	SmartDashboard.putNumber("Average of drive encoder", readEnc()[0]);
-    	SmartDashboard.putNumber("Left drive encoder", readEnc()[1]);
-    	SmartDashboard.putNumber("Right drive encoder", readEnc()[2]);
-    	SmartDashboard.putNumber("Distance of Drive of encoder", leftEncoder.getDistance());
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	imuStatus = (pigeonImu.getState() != PigeonIMU.PigeonState.NoComm);
     	if (imuStatus) {
@@ -245,22 +231,13 @@ public class DriveTrain extends Subsystem {
      * @return	if it's done or not
      */
     public boolean gyroTurnInPlace(double setangle, double rate){
-
     	turning = false;
     	PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
     	angle=pigeonImu.getFusedHeading(fusionStatus); ///Gets the angle
-    	SmartDashboard.putNumber("angle of IMU!!!", angle);
     	setpoint+=rate;  //adds the rate into the setpoint to gradually change it
-    	SmartDashboard.putNumber("IMU setpoint", setpoint);
     	error=(angle-setpoint); //finds how far you are off from the setpoint
-        SmartDashboard.putNumber("Error of IMU!!!!", error);
-        finalPower=(error*pValue);
         
-        if (finalPower>.9){
-        	finalPower = .9;
-        } else if (finalPower < -.9){
-        	finalPower = -.9;
-        }
+        finalPower=(error*pValue);
         drive.tankDrive(finalPower,-finalPower);
         if (Math.abs(angle)>=Math.abs(setangle)){
         	turning = true;
