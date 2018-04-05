@@ -51,14 +51,14 @@ public class Winch extends Subsystem {
      * This raises the pole with the hook
      */
     public void Up() {
-    	Release.set(1);
+    	Release.set(.1);
     	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**
      * This lowers the pole with the hook
      */
     public void down() {
-    	Release.set(-.5);
+    	Release.set(-.1);
     	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**

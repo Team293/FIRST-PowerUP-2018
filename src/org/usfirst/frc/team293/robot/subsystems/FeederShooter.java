@@ -28,22 +28,22 @@ public class FeederShooter extends Subsystem {
 		Feederlimit = new DigitalInput(RobotMap.feederBoxLimit);
 		
 		lMotor = new TalonSRX(RobotMap.feederShooterLeft);
-		lMotor.setSensorPhase(true);
+		lMotor.setSensorPhase(false);
 		rMotor = new TalonSRX(RobotMap.feederShooterRight);
-		rMotor.setSensorPhase(false);
+		rMotor.setSensorPhase(true);
 
 		
-		lMotor.config_kF(0, .08, 10);
-		lMotor.config_kP(0, 0.1, 10);
-		lMotor.config_kI(0, 0.05 , 10);
-		lMotor.config_kD(0, 0.5, 10);		
+		lMotor.config_kF(0, 1023.0/13653.0, 10);
+		lMotor.config_kP(0, 0.04, 10);
+		lMotor.config_kI(0, 0 , 10);
+		lMotor.config_kD(0, 0, 10);		
 		lMotor.config_IntegralZone(0, 20, 10);
 		lMotor.configMaxIntegralAccumulator(0, 400, 10);
 		
-		rMotor.config_kF(0, .084, 10);
-		rMotor.config_kP(0, 0.1, 10);
-		rMotor.config_kI(0, .05 , 10);
-		rMotor.config_kD(0, .5, 10);
+		rMotor.config_kF(0, 1023.0/13653.0, 10);
+		rMotor.config_kP(0, 0.04, 10);
+		rMotor.config_kI(0, 0 , 10);
+		rMotor.config_kD(0, 0, 10);
 		
 		rMotor.config_IntegralZone(0, 20, 10);
 		rMotor.configMaxIntegralAccumulator(0, 400, 10);
@@ -60,6 +60,10 @@ public class FeederShooter extends Subsystem {
 	public void shoot(double power) {
 		lMotor.set(ControlMode.PercentOutput, power);
 		rMotor.set(ControlMode.PercentOutput, power);
+	}
+	public void shootRPM(double cp100ms) {
+		lMotor.set(ControlMode.Velocity, cp100ms);
+		rMotor.set(ControlMode.Velocity, cp100ms);
 	}
 	/**
 	 * 

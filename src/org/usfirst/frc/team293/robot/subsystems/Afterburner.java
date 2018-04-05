@@ -31,9 +31,9 @@ public class Afterburner extends Subsystem {
 		lMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		lMotor.clearStickyFaults(10);
 		lMotor.setSensorPhase(false);
-		lMotor.config_kF(0, 1023.0/30000.0, 10);
-		lMotor.config_kP(0, .07, 10);
-		lMotor.config_kD(0, 1.4, 10);
+		lMotor.config_kF(0, 1023.0/31500.0, 10);
+		lMotor.config_kP(0, .06, 10);
+		lMotor.config_kD(0, 0, 10);
 		lMotor.config_IntegralZone(0, 600, 10);
 		lMotor.configMaxIntegralAccumulator(0, 600, 10);
 		lMotor.configAllowableClosedloopError(0, 20, 10);
@@ -42,9 +42,9 @@ public class Afterburner extends Subsystem {
 		rMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		rMotor.setSensorPhase(false);
 		rMotor.clearStickyFaults(10);
-		rMotor.config_kF(0, 1023.0/30000.0, 10);
-		rMotor.config_kP(0, .07, 10);
-		rMotor.config_kD(0, 1.4, 10);
+		rMotor.config_kF(0, 1023.0/31500.0, 10);
+		rMotor.config_kP(0, .06, 10);
+		rMotor.config_kD(0, 0, 10);
 		rMotor.configVelocityMeasurementWindow(200, 10);
 	}
 

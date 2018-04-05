@@ -34,7 +34,8 @@ public class LeftSide extends CommandGroup {
     		addSequential(new DriveStraightDistanceChristian(.75,284));//this is small on purpose from 304
 
     		addSequential(new DriveStraightTimeChristian(-.2,.25));
-    		addSequential(new DriveTurnGyroInPlace(80, .75));
+    		addSequential(new DriveTurnGyroInPlace(90, 1));
+    		addSequential(new DriveStraightTimeChristian(.2,.5));
     		//addSequential(new DriveStraightDistanceChristian(.5, 6));
     		addParallel(new AfterburnerHalfThrottle(.7));
     		addSequential(new FeederRelease(1));

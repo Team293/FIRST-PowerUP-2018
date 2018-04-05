@@ -21,7 +21,7 @@ public class FeederThrottle extends Command {
 	public FeederThrottle(double FeederCP100MS) {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.feeder);
-		rpm = FeederCP100MS;
+		rpm = FeederCP100MS*13653;
 	}
 
 	// Called just before this Command runs the first time
@@ -34,7 +34,7 @@ public class FeederThrottle extends Command {
 	protected void execute() {
 		//Robot.Feeder.moverpm(OI.launchpad.getThrottle()*12200);
 		if (Robot.feeder.getFeederLimit()==true){
-			Robot.feeder.shoot(rpm);
+			Robot.feeder.shootRPM(rpm);
 		}
 	}
 

@@ -9,23 +9,46 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClimberPoleUp extends Command {
 	boolean sensorDetect;
+	private boolean detectingSensor;
     public ClimberPoleUp() {
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	detectingSensor = false;
     	Robot.winch.Up();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	sensorDetect = Robot.winch.windOut();
+    	if (detectingSensor == false && sensorDetect == false){
+    		detectingSensor = true;
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return sensorDetect;
+       /* if (detectingSensor == true && sensorDetect == true){
+        	return true;
+        }
+        else if (detectingSensor == false && sensorDetect == true){
+        	return false;
+        }
+        else if (detectingSensor == false && sensorDetect == false){
+        	detectingSensor = true;
+        	return false;
+        }
+        else {
+        	return false;
+        }*/
+    	if (detectingSensor == true) {
+    		return sensorDetect;
+    	}
+    	else{
+    		return false;
+    	}	
     }
 
     // Called once after isFinished returns true

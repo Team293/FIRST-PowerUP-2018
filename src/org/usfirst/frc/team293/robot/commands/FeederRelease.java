@@ -14,7 +14,7 @@ public class FeederRelease extends Command {
     	public FeederRelease(double FeederCP100MS) {
     		// Use requires() here to declare subsystem dependencies
     		requires(Robot.feeder);
-    		rpm = FeederCP100MS;
+    		rpm = FeederCP100MS*13653;
     	}
 
     	// Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class FeederRelease extends Command {
     	// Called repeatedly when this Command is scheduled to run
     	@Override
     	protected void execute() {
-    			Robot.feeder.shoot(rpm);
+    			Robot.feeder.shootRPM(rpm);
     	}
     	
 
