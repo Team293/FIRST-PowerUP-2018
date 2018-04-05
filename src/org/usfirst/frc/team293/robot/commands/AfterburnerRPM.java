@@ -13,7 +13,12 @@ public class AfterburnerRPM extends Command {
     public AfterburnerRPM(double InputRPM) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.afterBurner);
+<<<<<<< HEAD
     	CodesPer100ms = (InputRPM*31500);
+=======
+    	//CodesPer100ms = (InputRPM*30000*4096/600);
+    	CodesPer100ms = (InputRPM*30000);
+>>>>>>> 7b9f5350db3cc2dc75c3b7391638f638ab18076c
     }
 
     // Called just before this Command runs the first time
