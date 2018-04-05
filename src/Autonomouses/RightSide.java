@@ -34,7 +34,7 @@ public class RightSide extends CommandGroup {
     	} else if(choice.charAt(1) == 'R'){
     		addSequential(new DriveStraightDistanceChristian(.75,284));//this is small on purpose should be 304
     		addSequential(new DriveStraightTimeChristian(-.2,.25));	//braking
-    		addSequential(new DriveTurnGyroInPlace(-80,-.75));//to the right
+    		addSequential(new DriveTurnGyroInPlace(-90,-1.0));//to the right
     		//addSequential(new DriveStraightDistanceChristian(.5, 6));
     		addParallel(new AfterburnerHalfThrottle(.7));
     		addSequential(new FeederRelease(1));
