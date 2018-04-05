@@ -17,6 +17,7 @@ public class ClimberStop extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.move(0);
+    	Robot.winch.stopWind();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -145,7 +145,7 @@ public class OI {
 		launch1[11].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[11].toggleWhenPressed(new AfterburnerHalfThrottle(.9));
 
-		launch1[12].whenPressed(new AfterburnerRPM(.7));
+		launch1[12].whenPressed(new AfterburnerRPM(.6));
 		launch1[12].whenReleased(new AfterburnerHalfThrottle(0));
 		//theButtons[12].toggleWhenPressed(new AfterburnerHalfThrottle(.7));
 
@@ -160,7 +160,8 @@ public class OI {
 		//theButtons[14].whenPressed(new FeederSetAngle(1));
 
 		launch2[11].toggleWhenPressed(new ClimberPoleDown());
-		launch2[12].toggleWhenPressed(new ClimberPoleUp());
+		launch2[12].whenPressed(new ClimberPoleUp());
+		launch2[2].whenPressed(new ClimberStop());
 
 		//numButtonFns = 15; // includes 0 (null) ops
 		

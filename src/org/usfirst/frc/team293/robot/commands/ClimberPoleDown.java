@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ClimberPoleDown extends Command {
-	boolean sensorDetect;
+	private boolean sensorDetect;
 	private boolean detectingSensor;
     public ClimberPoleDown() {
         // Use requires() here to declare subsystem dependencies
@@ -45,11 +45,11 @@ public class ClimberPoleDown extends Command {
     else {
     	return false;
     }*/
-    	if (detectingSensor == true) {
-    		return sensorDetect;
+    	if (detectingSensor == false) {
+    		return false;
     	}
     	else{
-    		return false;
+    		return sensorDetect;
     	}	
     }
 

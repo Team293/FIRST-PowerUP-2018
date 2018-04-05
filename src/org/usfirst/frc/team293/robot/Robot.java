@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		SmartDashboard.putNumber("Angle of Feeder", Robot.feederAngle.angleEncoder.get());
 		SmartDashboard.putBoolean("FeederLimit", Robot.feeder.getFeederLimit());
+		SmartDashboard.putBoolean("PoleLimit", Robot.winch.forwardLimitSwitch.get());
 		 Scheduler.getInstance().run();
 		}
 	

@@ -18,7 +18,7 @@ public class Winch extends Subsystem {
 		private Spark Climber1;
 		private Spark Climber2;
 		private VictorSP Release;	
-		private DigitalInput forwardLimitSwitch;
+		public DigitalInput forwardLimitSwitch;
 		
 	public Winch() {
 		Climber1 = new Spark(RobotMap.climbMotors[0]);
@@ -51,14 +51,14 @@ public class Winch extends Subsystem {
      * This raises the pole with the hook
      */
     public void Up() {
-    	Release.set(.1);
+    	Release.set(-.7);
     	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**
      * This lowers the pole with the hook
      */
     public void down() {
-    	Release.set(-.1);
+    	Release.set(.45);
     	SmartDashboard.putBoolean("PoleLimit", forwardLimitSwitch.get());
     }
     /**

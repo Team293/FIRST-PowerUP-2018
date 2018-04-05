@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ClimberPoleUp extends Command {
-	boolean sensorDetect;
+	private boolean sensorDetect;
 	private boolean detectingSensor;
     public ClimberPoleUp() {
     	
@@ -43,11 +43,11 @@ public class ClimberPoleUp extends Command {
         else {
         	return false;
         }*/
-    	if (detectingSensor == true) {
-    		return sensorDetect;
+    	if (detectingSensor == false) {
+    		return false;
     	}
     	else{
-    		return false;
+    		return sensorDetect;
     	}	
     }
 

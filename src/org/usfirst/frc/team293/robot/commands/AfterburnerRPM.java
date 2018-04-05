@@ -15,7 +15,7 @@ public class AfterburnerRPM extends Command {
     	requires(Robot.afterBurner);
     	CodesPer100ms = (InputRPM*31500);
     	//CodesPer100ms = (InputRPM*30000*4096/600);
-    	CodesPer100ms = (InputRPM*30000);
+    	//CodesPer100ms = (InputRPM*31500);
     }
 
     // Called just before this Command runs the first time
